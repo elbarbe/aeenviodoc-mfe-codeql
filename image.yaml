@@ -1,0 +1,11 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: aeenviodoc-mfe
+  labels:
+    app: aeenviodoc-mfe
+    app.kubernetes.io/component: aeenviodoc-mfe
+    app.kubernetes.io/instance: aeenviodoc-mfe
+    app.kubernetes.io/name: aeenviodoc-mfe
+    app.kubernetes.io/part-of: ae-app-frontend
+    app.openshift.io/runtime: aeenviodoc-mfe

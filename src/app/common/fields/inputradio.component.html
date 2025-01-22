@@ -1,0 +1,14 @@
+<div class="form-group radioButtons" *ngIf="field.visible" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <ng-container *ngFor="let option of field.options">
+        <ng-container *ngIf="option.value != ''">
+            <span class="inputRadio">
+                <p-radioButton [name]="field.nameInRequest" [value]="option.key" [label]="option.value" [(ngModel)]="field.value"
+                    [disabled]="!field.enabled" (ngModelChange)="onFieldChange()"></p-radioButton>
+            </span>
+        </ng-container>
+    </ng-container>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

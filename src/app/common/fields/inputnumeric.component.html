@@ -1,0 +1,9 @@
+<div class="form-group" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <input #inputNumeric type="text" class="form-control" [value]="getFormattedValue()" [disabled]="!field.enabled"
+        [required]="field.mandatory" autocomplete="off" (change)="onInputNumberChange($event)"
+        (blur)="onInputNumberChange($event)" (keydown)="onKeyDown($event)"/>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

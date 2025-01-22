@@ -1,0 +1,41 @@
+﻿<waitDialog [showWait]="showWait"></waitDialog> 
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <h2 class="title">{{title}}</h2>
+        <div class="siuRegion" [ngClass]="cssClasses">
+            <div class="card argumentGroup" *ngIf="isGroupVisible('0')">
+                <div class="card-header">{{getGroupAlias('0')}}</div>
+                <div class="card-body">
+                    <imes-input-radio [field]="puPrevisualizar" *ngIf="puPrevisualizar.visible" (valueChanged)="onpuprevisualizarChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puEnviar" *ngIf="puEnviar.visible" (valueChanged)="onpuenviarChange()"></imes-input-radio>
+                </div>
+            </div>
+            <div class="card argumentGroup" *ngIf="isGroupVisible('1')">
+                <div class="card-header">{{getGroupAlias('1')}}</div>
+                <div class="card-body">
+                    <imes-input-radio [field]="puContrato" *ngIf="puContrato.visible" (valueChanged)="onpucontratoChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puCarnets" *ngIf="puCarnets.visible" (valueChanged)="onpucarnetsChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puCartaPre" *ngIf="puCartaPre.visible" (valueChanged)="onpucartapreChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puSolicitud" *ngIf="puSolicitud.visible" (valueChanged)="onpusolicitudChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puCondicionesBB" *ngIf="puCondicionesBB.visible" (valueChanged)="onpucondicionesbbChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puAnexosIncl" *ngIf="puAnexosIncl.visible" (valueChanged)="onpuanexosinclChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puDocMaternidad" *ngIf="puDocMaternidad.visible" (valueChanged)="onpudocmaternidadChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puDocNeonatal" *ngIf="puDocNeonatal.visible" (valueChanged)="onpudocneonatalChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puCuesMedico" *ngIf="puCuesMedico.visible" (valueChanged)="onpucuesmedicoChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puCartaEntrevista" *ngIf="puCartaEntrevista.visible" (valueChanged)="onpucartaentrevistaChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puProteccionDatos" *ngIf="puProteccionDatos.visible" (valueChanged)="onpuprotecciondatosChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puDiferenciasLiq" *ngIf="puDiferenciasLiq.visible" (valueChanged)="onpudiferenciasliqChange()"></imes-input-radio>
+                    <imes-input-radio [field]="puMarcarTodos" *ngIf="puMarcarTodos.visible" (valueChanged)="onpumarcartodosChange()"></imes-input-radio>
+                </div>
+            </div>
+            <imes-lensesearch [field]="puthisSolicitud" *ngIf="puthisSolicitud.visible"
+                (selected)="processputhissolicitudSelected($event)" (cleared)="cleanputhissolicitud()"
+                (keypressLenseSearch)="onKeypressLenseSearch('onputhissolicitudChange')"
+                (searched)="doSearchAction('puthisSolicitud')"></imes-lensesearch>
+        </div>
+        <div class="col-12 siuButtons">
+            <button type="button" class="btnOk btn btn-primary" (click)="saveChanges()">{{langMng.translateText('app_SIU_BTNOK', '')}}</button>
+            <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_SIU_BTNCANCEL', '')}}</button>
+        </div>
+    </ng-container>
+</form>

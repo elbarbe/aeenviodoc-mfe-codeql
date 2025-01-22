@@ -1,0 +1,135 @@
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <div class="piuRegion piuClassServiceLog">
+
+            <div class="filter col-12 ">
+                <div id="filtertabs" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" [ngClass]="{'active': true}">
+                            <a aria-controls="F_ByID" role="tab" data-bs-toggle="tab">{{title}}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content filterContent col-12">
+                        <div class="tab-pane" [ngClass]=" {'active': true}">
+
+                            <div class="filterVariables">
+                                <div class="form-group" [ngClass]="fvFrom.editorCSSClasses">
+                                    <label for="fvFrom" class="control-label">{{fvFrom.alias}}</label>
+
+                                    <p-calendar class="primengCalendar" inputStyleClass="form-control" 
+                                        [dateFormat]="langMng.inputDateFormat" [firstDayOfWeek]="langMng.firstDayOfWeek"
+                                        [(ngModel)]="fvFrom.value" [showIcon]="true" [showButtonBar]="true" [disabled]="!fvFrom.enabled"
+                                        [required]="fvFrom.mandatory" name="fvFrom"></p-calendar>
+                                </div>
+
+                                <div class="form-group" [ngClass]="fvTo.editorCSSClasses">
+                                    <label for="fvTo" class="control-label">{{fvTo.alias}}</label>
+
+                                    <p-calendar class="primengCalendar" inputStyleClass="form-control"
+                                        [dateFormat]="langMng.inputDateFormat" [firstDayOfWeek]="langMng.firstDayOfWeek"
+                                        [(ngModel)]="fvTo.value" [showIcon]="true" [showButtonBar]="true" [disabled]="!fvTo.enabled"
+                                        [required]="fvTo.mandatory" name="fvTo"></p-calendar>
+                                </div>
+
+                            </div>
+                            <div class="filterButtons">
+                                <button class="btn btn-outline-secondary btn-sm pi pi-search" (click)="search()" aria-label="Search"></button>
+                                <button class="btn btn-outline-secondary btn-sm pi pi-trash" (click)="clean()" aria-label="Clean"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-12 piuDisplaySet">
+                <p-table #dt [columns]="gridColumns" [frozenColumns]="frozenColumns" frozenWidth="600px"  [value]="gridData" 
+                    [paginator]="true" [rows]="gridPaginationPageSize" [rowsPerPageOptions]="gridPaginationPageSizeValues"
+                    [alwaysShowPaginator]="false" selectionMode="single" [(selection)]="gridSelectedRows" [metaKeySelection]="true"
+                    [scrollable]="true" scrollWidth="100%" [resizableColumns]="true" columnResizeMode="expand" (onPage)="onGridPaging($event)"
+                    [responsive]="true" dataKey="oid" [lazy]="!paginationInClient" (onLazyLoad)="onGridLazyLoadData($event)"
+                    [totalRecords]="gridTotalInstances" [first]="gridFirstInstanceDisplayed" sortMode="{{paginationInClient && 'multiple' }}"
+                    (onFilter)="onGridFilterData($event)">
+
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <ng-container *ngFor="let col of columns">
+                                <col *ngIf="!col.hidden" [ngClass]="col.styleClass">
+                            </ng-container>
+                        </colgroup>
+                    </ng-template>
+
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <ng-container *ngFor="let col of columns">
+                                <th *ngIf="col.sortable && !col.hidden" [pSortableColumn]="col.field" [ngClass]="col.styleClass" style="text-align:center"
+                                    pResizableColumn>
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                </th>
+                                <th *ngIf="!col.sortable && !col.hidden" pResizableColumn>
+                                </th>
+                            </ng-container>
+                        </tr>
+                        <ng-container *ngIf="paginationInClient">
+                            <tr>
+                                <ng-container *ngFor="let col of columns">
+                                    <th *ngIf="col.filter && !col.hidden" [ngClass]="col.styleClass" pResizableColumn>
+                                        <input type="text" style="width:100%" (change)="filterByColumn(dt, $event.target, col.field, col.filterMatchMode)" autocomplete="off"/>
+                                    </th>
+                                    <th *ngIf="!col.filter && !col.hidden" [ngClass]="col.styleClass" pResizableColumn>
+                                    </th>
+                                </ng-container>
+                            </tr>
+                        </ng-container>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <ng-container *ngFor="let col of columns">
+                                <ng-container *ngIf="!col.hidden">
+                                    <td [ngClass]="col.styleClass" class="ui-resizable-column">
+                                        <span class="ui-column-title">{{col.header}}</span>
+                                        <ng-container *ngIf="col.type === 0 || col.type === 5">
+                                            <span>{{rowData[col.field]}}</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="col.type === 1">
+                                            <span>{{rowData[col.field] | number : col.mask}}</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="col.type === 2">
+                                            <span>{{getValueFromDefinedSelection(col, rowData[col.field])}}</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="col.type === 3">
+                                            <span>{{rowData[col.field] | date: col.mask}}</span>
+                                        </ng-container>
+                                    </td>
+                                </ng-container>
+
+                            </ng-container>
+    
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="summary">
+                        <div class="row">
+                            <div class="gridSummary">
+                                <div class="gridSummaryLeft">
+                                    <button type="button" class="btn btn-sm pi pi-refresh gridFooterBtnRefresh" (click)="onRefresh()"></button>
+                                    <button type="button" *ngIf="gridData && gridData.length > 0" class="btn btn-sm pi pi-download gridFooterBtnExport" (click)="dt.exportCSV()"></button>
+                                </div>
+                                <div class="gridSummaryRight">
+                                    <span class="gridFooterNumElements">{{getGridTotalInstancesText()}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </p-table>
+            </div>
+        </div>
+
+        <div class="col-12 piuButtons">
+            <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
+        </div>
+    </ng-container>
+</form>

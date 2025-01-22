@@ -1,0 +1,11 @@
+<div class="form-group preloadMultipleDropDown" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <p-multiSelect [options]="field.getPreloadInstances()" [(ngModel)]="field.value"
+        [placeholder]="langMng.translateText('app_SELECT', '')" name="field" optionLabel="supplementaryInfo"
+        [disabled]="!field.enabled" appendTo="body" [filter]="false"
+        styleClass="preloadMultipleDropDown"
+        dataKey="jsonOID" [style]="{'width':'100%', 'border':'1px solid rgb(206, 212, 218)'}"></p-multiSelect>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

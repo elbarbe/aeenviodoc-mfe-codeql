@@ -1,0 +1,31 @@
+<waitDialog [showWait]="showWait"></waitDialog>
+<form novalidate class="form-horizontal">
+
+    <div class="col-md-4 offset-md-4 col-6 offset-3 col-sm-4 offset-sm-4">
+        <h2 style="text-align: center;">{{title}}</h2>
+        <imes-input-definedselection *ngIf="agentSelector.options.length > 0" [field]="agentSelector" (valueChanged)="profileChanged()"></imes-input-definedselection>
+
+        <ng-container *ngFor="let oidField of oidFields">
+            <imes-input-numeric [field]="oidField" *ngIf="oidField.dataType == 'autonumeric'"></imes-input-numeric>
+            <imes-input-numeric [field]="oidField" *ngIf="oidField.dataType == 'int'"></imes-input-numeric>
+            <imes-input-numeric [field]="oidField" *ngIf="oidField.dataType == 'nat'"></imes-input-numeric>
+            <imes-input-numeric [field]="oidField" *ngIf="oidField.dataType == 'real'"></imes-input-numeric>
+            <imes-input-date [field]="oidField" *ngIf="oidField.dataType == 'date'"></imes-input-date>
+            <imes-input-date [field]="oidField" *ngIf="oidField.dataType == 'time'"></imes-input-date>
+            <imes-input-date [field]="oidField" *ngIf="oidField.dataType == 'datetime'"></imes-input-date>
+            <imes-input-string [field]="oidField" *ngIf="oidField.dataType == 'string'"></imes-input-string>
+            <imes-input-string [field]="oidField" *ngIf="oidField.dataType == 'text'"></imes-input-string>
+            <imes-input-check [field]="oidField" *ngIf="oidField.dataType == 'bool'"></imes-input-check>
+        </ng-container>
+
+        <!-- Password -->
+        <div *ngIf="agentSelector.value && oidFields.length > 0" class="form-group" style="clear: left;width: 100%;">
+            <label class="control-label">Password</label>
+            <input type="password" class="form-control" [(ngModel)]="password" name="password" [disabled]="false" [required]="true" />
+        </div>
+    </div>
+    <div *ngIf="agentSelector.value" class="col-12 siuButtons" style="text-align:center">
+        <button class="btn btn-primary" (click)="loginUser()">Log In</button>
+    </div>
+</form>
+

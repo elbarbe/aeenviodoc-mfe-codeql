@@ -1,0 +1,25 @@
+﻿<waitDialog [showWait]="showWait"></waitDialog> 
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <h3 class="title">{{title}}</h3>
+        <div class="iiuRegion" [ngClass]="cssClasses">
+            <imes-actionsnavigations [queryIU]="this"></imes-actionsnavigations>
+            <!-- Display Set elements -->
+            <div class="card displaySet">
+                <div class="card-header">{{title}}</div>
+                <div class="card-body">
+                    <imes-input-numeric [field]="dseNumRadicado" *ngIf="dseNumRadicado.visible"></imes-input-numeric>
+                    <imes-input-numeric [field]="dsevalorCuota" *ngIf="dsevalorCuota.visible"></imes-input-numeric>
+                    <imes-input-numeric [field]="dsevalorCuotaBrutaC" *ngIf="dsevalorCuotaBrutaC.visible"></imes-input-numeric>
+                    <imes-input-numeric [field]="dsedrvDifValorCuotaBruta" *ngIf="dsedrvDifValorCuotaBruta.visible"></imes-input-numeric>
+                </div>
+            </div>
+            <div *ngIf="showInstanceLog" class="iiuLogNavigation">
+                <a (click)="onNavigateLoginstance()">{{langMng.translateText('app_INSTANCELOG', 'Log Instance')}}</a>
+            </div>
+        </div>
+        <div class="col-12 iiuButtons">
+            <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
+        </div>
+    </ng-container>
+</form>

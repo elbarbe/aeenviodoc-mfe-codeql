@@ -1,0 +1,59 @@
+<div class="col-12 ticaGrid" [ngClass]="tica.fieldTICA ? tica.fieldTICA.editorCSSClasses : ''">
+
+    <p-table [columns]="tica.gridColumns" [value]="tica.fieldTICA.value"
+        [(selection)]="tica.gridSelectedRows" [paginator]="false" selectionMode="single"
+        dataKey="_rowId" [scrollable]="true" scrollWidth="100%" [resizableColumns]="true" columnResizeMode="expand"
+        [responsive]="true" styleClass="p-datatable-sm" (onRowSelect)="onGridRowSelect($event)">
+
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col class="gridColAction">
+
+                <ng-container *ngFor="let col of columns">
+                    <col [ngClass]="col.styleClass" [style.width]="col.applyWidth ? col.width + 'px' : ''">
+                </ng-container>
+            </colgroup>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th scope="col" class="gridColAction"></th>
+                <ng-container *ngFor="let col of columns">
+                    <th scope="col" [ngClass]="col.styleClass" [style.width]="col.applyWidth ? col.width + 'px' : ''"
+                        class="gridHeader" pResizableColumn>
+                        {{col.header}}
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+            <tr [pSelectableRow]="rowData">
+                <td class="gridColAction">
+                    <button type="button" class="btn btn-outline-secondary pi pi-times"
+                        style="padding: 3px;font-size: 11px;color: red;border-color: red;float: left;margin-top: 2px;"
+                        [title]="langMng.translateText('app_SIU_BTNDELETE', '')"
+                        (click)="tica.deleteRowByIndex(index)" aria-label="Delete"></button>
+                </td>
+                <ng-container *ngFor="let col of columns">
+                    <td [ngClass]="col.styleClass" [style.width]="col.applyWidth ? col.width + 'px' : ''"
+                        class="ui-resizable-column">
+                        <span class="ui-column-title">{{col.header}}</span>
+                        <ng-container *ngIf="col.type === 0">
+                            <span [title]="rowData[col.field]">{{rowData[col.field]}}</span>
+                        </ng-container>
+                        <ng-container *ngIf="col.type === 1">
+                            <span>{{rowData[col.field] | number : col.mask}}</span>
+                        </ng-container>
+                        <ng-container *ngIf="col.type === 2">
+                            <span>{{getValueFromDefinedSelection(col, rowData[col.field])}}</span>
+                        </ng-container>
+                        <ng-container *ngIf="col.type === 3">
+                            <span>{{rowData[col.field] | date: col.mask}}</span>
+                        </ng-container>
+
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

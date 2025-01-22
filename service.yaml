@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aeenviodoc-mfe
+  labels:
+    app: aeenviodoc-mfe
+    app.kubernetes.io/component: aeenviodoc-mfe
+    app.kubernetes.io/instance: aeenviodoc-mfe
+    app.kubernetes.io/name: aeenviodoc-mfe
+    app.kubernetes.io/part-of: ae-app-frontend
+    app.openshift.io/runtime: aeenviodoc-mfe
+spec:
+  selector:
+    app: aeenviodoc-mfe
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

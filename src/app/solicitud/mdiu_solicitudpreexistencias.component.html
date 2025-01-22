@@ -1,0 +1,46 @@
+﻿<waitDialog [showWait]="showWait"></waitDialog> 
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <h3 class="title">{{title}}</h3>
+
+        <div class="master" [ngClass]="cssClasses">
+            <h3 class="title">{{master.title}}</h3>
+            <div class="iiuRegion" [ngClass]="master.cssClasses">
+                <imes-actionsnavigations [queryIU]="master"></imes-actionsnavigations>
+                <!-- Display Set elements -->
+                <div class="card displaySet">
+                    <div class="card-header">{{master.title}}</div>
+                    <div class="card-body">
+                        <imes-input-string [field]="master.dseAeusolicitudesNumerousolicitud" *ngIf="master.dseAeusolicitudesNumerousolicitud.visible"></imes-input-string>
+                        <imes-input-string [field]="master.dseNumContrato" *ngIf="master.dseNumContrato.visible"></imes-input-string>
+                    </div>
+                </div>
+                <div *ngIf="master.showInstanceLog" class="iiuLogNavigation">
+                    <a (click)="master.onNavigateLoginstance()">{{master.langMng.translateText('app_INSTANCELOG', 'Log Instance')}}</a>
+                </div>
+            </div>
+        </div>
+        <fieldset class="col-12 details"  [ngClass]="cssClasses" [disabled]="!enableDetails" *ngIf="d0Visible">
+            <legend *ngIf="false">Details legend</legend>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" *ngIf="d0Visible">
+                    <a (click)="setActiveDetail(0)" class="nav-link"
+                            [ngClass]="{'active': activeDetail == 0}" role="tab" tabindex
+                            data-bs-toggle="tab">{{d0.title}}</a>
+                </li>
+            </ul>
+            <div class="tab-content detailsContent">
+                <div class="tab-pane" [ngClass]=" {'active': activeDetail == 0}" *ngIf="d0Visible" role="tabpanel">
+                        <h3 class="title">{{d0.title}}</h3>
+                        <div class="piuRegion" [ngClass]="d0.cssClasses">
+                            <imes-actionsnavigations [queryIU]="d0"></imes-actionsnavigations>
+                            <imes-grid [piu]="d0"></imes-grid>
+                        </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="col-12 mdiuButtons">
+            <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
+        </div>
+    </ng-container>
+</form>

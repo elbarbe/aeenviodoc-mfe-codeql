@@ -1,0 +1,27 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: aeenviodoc-mfe
+  labels:
+    app: aeenviodoc-mfe
+    app.kubernetes.io/component: aeenviodoc-mfe
+    app.kubernetes.io/instance: aeenviodoc-mfe
+    app.kubernetes.io/name: aeenviodoc-mfe
+    app.kubernetes.io/part-of: ae-app-frontend
+    app.openshift.io/runtime: aeenviodoc-mfe
+spec:
+  source:
+    type: Git
+    git:
+#INIGIT
+      uri: "git@github.com:IntegranovaSoporteColSanitas/aeenviodoc-mfe.git"
+      ref: "5.0.0"
+    sourceSecret:
+      name: ae-git-credentials
+#FINGIT
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: aeenviodoc-mfe:latest

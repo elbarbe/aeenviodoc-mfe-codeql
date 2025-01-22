@@ -1,0 +1,58 @@
+<p-dialog header="" [(visible)]="display" [modal]="true" (onHide)="cancel()" [blockScroll]="true" [draggable]="true"
+    [closeOnEscape]="false" [closable]="false" [resizable]="false"
+    styleClass="preferencesDialog" [baseZIndex]="1050" 
+    [contentStyle]="{'max-height':'400px', 'max-width':'450px', 'min-width':'250px'}">
+    <p-header>{{langMng.translateText('app_PREF_TITLE', '')}}</p-header>
+
+        <div style="width:100%;overflow:overlay;padding:0px;">
+            <p-table [value]="gridColumns" selectionMode="single" [(selection)]="selectedRow" [scrollable]="true"
+                scrollHeight="300px" styleClass="preferencesTable" dataKey="field">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 30px;" scope="col"></th>
+                        <th style="width: 200px;text-align:center;" scope="col">
+                            {{langMng.translateText('app_PREF_COLHEADER', '')}}
+                        </th>
+                        <th style="width: 30px;text-align:center;" scope="col">
+                            {{langMng.translateText('app_PREF_COLVISIBLE', '')}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData>
+                    <tr class="p-selectable-row">
+                        <td style="width: 30px;">
+                            <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+                        </td>
+                        <td style="width: 200px;">
+                            <input type="text" name="header" class="form-control" [(ngModel)]="rowData.header"
+                                [disabled]="rowData.hidden">
+                        </td>
+                        <td style="width: 30px;text-align:center;">
+                            <p-checkbox [(ngModel)]="rowData.visible" [binary]="true"></p-checkbox>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div style="width:100%;padding-top:5px;display:flex;">
+            <div style="width: 50%;float: left;">
+                <button type="button" class="btn btn-sm btn-outline-secondary pi pi-arrow-up" (click)="onUp()">
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary pi pi-arrow-down" (click)="onDown()">
+                </button>
+            </div>
+            <div style="width: 50%;text-align: right;float: right;">
+                <button type="button" class="btn btn-sm btn-outline-secondary pi pi-times" (click)="onReset()">
+                </button>
+            </div>
+        </div>
+    <p-footer>
+        <div class="col-12 siuButtons" style="text-align:center">
+            <button type="button" class="btn btn-primary btnOk"
+                (click)="save()">{{langMng.translateText('app_SIU_BTNOK', '')}}</button>
+            <button type="button" class="btn btn-danger btnCancel"
+                (click)="cancel()">{{langMng.translateText('app_SIU_BTNCANCEL', '')}}</button>
+        </div>
+    </p-footer>
+</p-dialog>

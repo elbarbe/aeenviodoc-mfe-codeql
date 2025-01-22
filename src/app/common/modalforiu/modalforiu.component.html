@@ -1,0 +1,12 @@
+<p-dialog header="" [(visible)]="visible" [modal]="true" (onHide)="cancel()" [blockScroll]="true" position="top"
+    [style]="{'padding-top': '60px'}"
+    [draggable]="true" [closeOnEscape]="true" [closable]="true" [resizable]="false"
+    styleClass="col-12 col-sm-11 col-md-11 modalForIU"
+    [contentStyle]="{'max-height':'500px', 'display': 'flow-root'}" >
+    <p-header>{{title}}</p-header>
+
+    <genericsiu *ngIf="selector=='genericsiu'"></genericsiu>
+
+
+</p-dialog>
+

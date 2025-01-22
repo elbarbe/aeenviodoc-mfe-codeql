@@ -1,0 +1,6 @@
+<div class="form-group" *ngIf="field.visible">
+    <ngx-extended-pdf-viewer [base64Src]="getPDFBase64()" backgroundColor="#ffffff" [height]="'75vh'"
+        [useBrowserLocale]="true" [handTool]="false" [showHandToolButton]="true"
+        [filenameForDownload]="fileName">
+    </ngx-extended-pdf-viewer>
+</div>

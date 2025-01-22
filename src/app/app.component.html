@@ -1,0 +1,14 @@
+<app-menu *ngIf="appGlobalInfo.isStandAlone"></app-menu>
+<p-toast key="mainToast" [baseZIndex]="1031"></p-toast>
+<gridPreferences [display]="showGridPreferences" [gridColumns]="gridColumnsToEdit"
+    (closed)="closeGridPreferences($event)"></gridPreferences>
+<modalForIU [visible]="iuInPopUpInfo.visible" [selector]="iuInPopUpInfo.selector" [title]="iuInPopUpInfo.title">
+</modalForIU>
+<errorMessages [messages]="errorMessages" (cleared)="clearErrorMessages()"></errorMessages>
+<imes-progressbar [data]="progressBarData" (canceled)="cancelProgressBar()"></imes-progressbar>
+<p-confirmDialog [style]="{width: '50vw'}" key="appMainConfirmDialog" [baseZIndex]="10000"></p-confirmDialog>
+<div class="container body-content" [style.padding-top.px]="bodyMarginTop">
+    <breadcrumb></breadcrumb>
+    <router-outlet></router-outlet>
+</div>
+

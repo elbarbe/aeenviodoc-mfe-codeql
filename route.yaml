@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: aeenviodoc-mfe
+  labels:
+    app: aeenviodoc-mfe
+    app.kubernetes.io/component: aeenviodoc-mfe
+    app.kubernetes.io/instance: aeenviodoc-mfe
+    app.kubernetes.io/name: aeenviodoc-mfe
+    app.kubernetes.io/part-of: ae-app-frontend
+    app.openshift.io/runtime: aeenviodoc-mfe
+spec:
+#INIHOST
+  host: aeenviodoc-mfe-soporte-colsanitas-dev.apps.sandbox-m3.1530.p1.openshiftapps.com
+#FINHOST
+  to:
+    kind: Service
+    name: aeenviodoc-mfe
+  tls:
+    termination: edge

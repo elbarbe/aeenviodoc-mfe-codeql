@@ -1,0 +1,68 @@
+<ng-container *ngIf="piu.visible">
+
+    <h3 class="title">{{piu.title}}</h3>
+
+    <div class="piuRegion">
+        <imes-actionsnavigations [queryIU]="piu"></imes-actionsnavigations>
+        <ng-container *ngIf="piu.filters.length > 0">
+            <ng-container *ngFor="let filter of piu.filters; index as i">
+
+                <div class="filter col-12 ">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a (click)="piu.setActiveFilterIndex(i)" class="nav-link"
+                                [ngClass]="{'active': piu.activeFilter && piu.activeFilter.index == i}" role="tab" tabindex
+                                data-bs-toggle="tab">{{filter.title}}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content filterContent">
+                            <div class="tab-pane" [ngClass]=" {'active': piu.activeFilter && piu.activeFilter.index == i}" role="tabpanel">
+                                <div class="filterVariables">
+
+                                    <ng-container *ngFor="let field of filter.variables">
+                                        <imes-input-numeric [field]="field" *ngIf="field.dataType == 'autonumeric'"></imes-input-numeric>
+                                        <imes-input-numeric [field]="field" *ngIf="field.dataType == 'int'"></imes-input-numeric>
+                                        <imes-input-numeric [field]="field" *ngIf="field.dataType == 'nat'"></imes-input-numeric>
+                                        <imes-input-numeric [field]="field" *ngIf="field.dataType == 'real'"></imes-input-numeric>
+                                        <imes-input-date [field]="field" *ngIf="field.dataType == 'date'"></imes-input-date>
+                                        <imes-input-date [field]="field" *ngIf="field.dataType == 'time'"></imes-input-date>
+                                        <imes-input-date [field]="field" *ngIf="field.dataType == 'datetime'"></imes-input-date>
+                                        <imes-input-string [field]="field" *ngIf="field.dataType == 'string'"></imes-input-string>
+                                        <imes-input-string [field]="field" *ngIf="field.dataType == 'text'"></imes-input-string>
+                                        <imes-input-check [field]="field" *ngIf="field.dataType == 'bool'"></imes-input-check>
+                                        <imes-input-blob [field]="castFieldBlob(field)" *ngIf="field.dataType == 'blob'"></imes-input-blob>
+                                    </ng-container>
+
+                                </div>
+                                <div class="filterButtons">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm pi pi-search" (click)="filter.search()"
+                                        aria-label="Search"></button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm pi pi-trash" (click)="filter.clean()"
+                                        aria-label="Clean"></button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+        
+            </ng-container>
+        </ng-container>
+
+        <imes-grid [piu]="piu"></imes-grid>
+
+        <ng-container *ngIf="piu.associatedService && piu.associatedService.userIsAgent">
+
+            <fieldset class="card associatedService" [disabled]="!piu.associatedServiceEnabled">
+                <legend *ngIf="false">Service legend</legend>
+                <div class="card-header">{{piu.associatedService.title}}</div>
+                <div class="card-body">
+                    <imes-siu [siu]="piu.associatedService" associated="true"></imes-siu>      
+                    <div class="col-12 siuButtons">
+                        <button type="button" class="btn btn-primary" (click)="piu.associatedService.saveChanges()">{{langMng.translateText('app_SIU_BTNSAVE', '')}}</button>
+                        <button type="button" class="btn btn-danger" (click)="piu.onClearAssociatedService()">{{langMng.translateText('app_SIU_BTNCLEAR', '')}}</button>
+                    </div>
+                </div>
+            </fieldset>
+        </ng-container>
+    </div>
+
+</ng-container>

@@ -1,0 +1,11 @@
+﻿<waitDialog [showWait]="showWait"></waitDialog> 
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <h3 class="title">{{title}}</h3>
+        <div class="piuRegion" [ngClass]="cssClasses">
+            <imes-actionsnavigations [queryIU]="this"></imes-actionsnavigations>
+            <imes-grid [piu]="this"></imes-grid>
+        </div>
+        <imes-piubuttons [piu]="this"></imes-piubuttons>
+    </ng-container>
+</form>

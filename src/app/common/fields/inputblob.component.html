@@ -1,0 +1,43 @@
+<div class="form-group" *ngIf="field.visible" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <div class="input-group">
+        <input type="file" [id]="field.nameInRequest" class="form-control" [disabled]="!field.enabled" [required]="field.mandatory"
+            (change)="onFieldChange($event)" [accept]="field.fileAllowedExtensions"
+            [attr.multiple]="field.allowMultiSelect ? 'multiple' : null"
+            style="width:0.1px!important;height:0.1px;opacity: 0;overflow: hidden;position: absolute;"/>
+        <label [for]="field.nameInRequest" class="btn btn-outline-secondary btn-sm pi pi-upload labelForFile"></label>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-times"
+                *ngIf="hasValue()" (click)="onDelete()" aria-label="Delete field"></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-eye" *ngIf="field.allowMultiSelect && field.dataFiles.length > 1"
+                (click)="onShowSelected()" aria-label="Show selected"></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-download"
+                *ngIf="hasValue()" (click)="onDownload()" aria-label="Download field"></button>
+        </span>
+        <label class="labelFileName">{{field.fileName}}</label>
+    </div>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+
+    <p-dialog [header]="field.alias" appendTo="body" [(visible)]="showDialogSelectedInstances" [modal]="true" [blockScroll]="true"
+        styleClass="imesDialogSelectedInstances col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5"
+        [style]="{'height': '55vh', 'box-shadow': 'none', 'border': '0px', 'padding-top': '60px'}"
+        [baseZIndex]="10000" position="top">
+        <div style="float: left;width: 100%;">
+            <ng-container *ngFor="let file of field.dataFiles; index as i">
+                <div style="float: left;width: 100%;height: 24px;border-bottom: 1px solid #8080805e;">
+                    <button type="button" class="btn btn-outline-secondary pi pi-times" *ngIf="field.enabled"
+                        style="padding: 3px;font-size: 11px;color: red;border-color: red;float: left;margin-top: 2px;"
+                        (click)="onRemoveInstance(i)" aria-label="Delete"></button>
+                    <label style="float: left;margin-left: 5px;">
+                        {{file.name}}
+                    </label>
+                </div>
+            </ng-container>
+        </div>
+        <p-footer>
+            <button type="button" class="btnOk btn btn-primary" (click)="showDialogSelectedInstances=false">{{langMng.translateText('app_CLOSE', '')}}</button>
+        </p-footer>
+    </p-dialog>  
+</div>

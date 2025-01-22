@@ -1,0 +1,34 @@
+<ng-container *ngIf="siu.visible">
+
+    <h2 class="title">{{siu.title}}</h2>
+
+    <div class="siuRegion">
+        <ng-container *ngFor="let field of siu.fields">
+            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'autonumeric'"></imes-input-numeric>
+            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'int'"></imes-input-numeric>
+            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'nat'"></imes-input-numeric>
+            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'real'"></imes-input-numeric>
+            <imes-input-date [field]="field" *ngIf="field.dataType == 'date'"></imes-input-date>
+            <imes-input-date [field]="field" *ngIf="field.dataType == 'time'"></imes-input-date>
+            <imes-input-date [field]="field" *ngIf="field.dataType == 'datetime'"></imes-input-date>
+            <imes-input-string [field]="field" *ngIf="field.dataType == 'string'"></imes-input-string>
+            <imes-input-string [field]="field" *ngIf="field.dataType == 'text'"></imes-input-string>
+            <imes-input-check [field]="field" *ngIf="field.dataType == 'bool'"></imes-input-check>
+            <imes-input-blob [field]="castFieldBlob(field)" *ngIf="field.dataType == 'blob'"></imes-input-blob>
+
+            <imes-lense [field]="castFieldOVLense(field)" *ngIf="field.visible && field.constructor.name == 'FieldOVLense'" 
+                (selected)="onLenseSelected(field)" (cleared)="onLenseClean(field)" (searched)="doSearchAction(field)"></imes-lense>
+
+            <imes-lensesearch [field]="castFieldOVLenseSearch(field)" *ngIf="field.visible && field.constructor.name == 'FieldOVLenseSearch'"
+                (selected)="onLenseSearchSelected(castFieldOVLenseSearch(field), $event)" (cleared)="onLenseClean(field)"
+                (keypressLenseSearch)="onKeypressLenseSearch(castFieldOVLenseSearch(field))" (searched)="doSearchAction(field)"></imes-lensesearch>
+                
+        </ng-container>
+    </div>
+
+    <div class="col-12 siuButtons" *ngIf="!siu.queryContainer">
+        <button type="button" class="btnOk btn btn-primary" (click)="siu.saveChanges()">{{langMng.translateText('app_SIU_BTNOK', '')}}</button>
+        <button type="button" class="btnCancel btn btn-danger" (click)="siu.processCancel()">{{langMng.translateText('app_SIU_BTNCANCEL', '')}}</button>
+    </div>
+
+</ng-container>

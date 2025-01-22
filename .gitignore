@@ -1,0 +1,9 @@
+# Angular
+node_modules/
+.angular/
+
+# Sonar
+.scannerwork/
+
+.git/
+*.bat

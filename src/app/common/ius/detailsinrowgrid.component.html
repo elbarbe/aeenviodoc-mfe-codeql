@@ -1,0 +1,31 @@
+<div class="col-12 detailInRowGrid">
+
+    <ng-container *ngIf="details.length > 1; else elseOneDetail">
+        <ul class="nav nav-tabs" role="tablist">
+            <ng-container *ngFor="let detail of details; index as i">
+                <li class="nav-item" *ngIf="detail.visible">
+                    <a (click)="setActiveDetail(detail.order)" class="nav-link"
+                            [ngClass]="{'active': activeDetail == detail.order}" role="tab" tabindex
+                            data-bs-toggle="tab">{{detail.title}}</a>
+            </ng-container>
+        </ul>
+        <div class="tab-content detailsContent">
+            <ng-container *ngFor="let detail of details; index as i">
+                <div class="tab-pane" [ngClass]=" {'active': activeDetail == detail.order}" *ngIf="detail.visible" role="tabpanel">
+                    <imes-mdiu *ngIf="detail.scenarioType == 'MDIU'" [mdiu]="castAbstractMDIU(detail)"></imes-mdiu>
+                    <imes-iiu *ngIf="detail.scenarioType == 'IIU'" [iiu]="castAbstractIIU(detail)"></imes-iiu>
+                    <imes-piu *ngIf="detail.scenarioType == 'PIU'" [piu]="castAbstractPIU(detail)"></imes-piu>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <ng-template #elseOneDetail>
+        <ng-container *ngFor="let detail of details; index as i">
+            <div class="inRowDetailTitle">{{detail.title}}</div>
+            
+            <imes-mdiu *ngIf="detail.scenarioType == 'MDIU'" [mdiu]="castAbstractMDIU(detail)"></imes-mdiu>
+            <imes-iiu *ngIf="detail.scenarioType == 'IIU'" [iiu]="castAbstractIIU(detail)"></imes-iiu>
+            <imes-piu *ngIf="detail.scenarioType == 'PIU'" [piu]="castAbstractPIU(detail)"></imes-piu>
+        </ng-container>
+</ng-template>
+</div>

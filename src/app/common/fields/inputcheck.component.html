@@ -1,0 +1,12 @@
+<div class="form-group checkField" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <input *ngIf="field.mandatory" type="checkbox" class="form-control" (checked)="field.value" [(ngModel)]="field.value"
+        [disabled]="!field.enabled" [required]="field.mandatory" (change)="onFieldChange()"/>
+
+    <p-triStateCheckbox *ngIf="!field.mandatory" [(ngModel)]="field.value"
+        [disabled]="!field.enabled" (onChange)="onFieldChange()"></p-triStateCheckbox>        
+
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

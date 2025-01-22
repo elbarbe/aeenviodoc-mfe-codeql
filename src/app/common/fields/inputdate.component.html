@@ -1,0 +1,15 @@
+<div class="form-group" *ngIf="field.visible" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <p-calendar class="primengCalendar" inputStyleClass="form-control" appendTo="body"
+        [firstDayOfWeek]="langMng.firstDayOfWeek"
+        [touchUI]="touchMode" [readonlyInput]="touchMode" [showButtonBar]="true"
+        [dateFormat]="langMng.inputDateFormat" [(ngModel)]="field.value"
+        [showIcon]="true"  [disabled]="!field.enabled" [required]="field.mandatory"
+        [showTime]="field.dataType == 'datetime' ? true : false" [timeOnly]="field.dataType == 'time' ? true : false"
+        (onBlur)="onFieldBlur()" (onClearClick)="onClearClick()" (onSelect)="onSelect()"
+        [showSeconds]="field.dataType == 'time' || field.dataType == 'datetime' ? showSeconds : false"
+        [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2030"></p-calendar>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

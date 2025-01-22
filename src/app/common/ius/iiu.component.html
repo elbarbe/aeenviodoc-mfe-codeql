@@ -1,0 +1,53 @@
+<ng-container *ngIf="iiu.visible">
+
+    <h3 class="title">{{iiu.title}}</h3>
+
+    <div class="iiuRegion">
+    <imes-actionsnavigations [queryIU]="iiu"></imes-actionsnavigations>
+        <div class="card displaySet">
+            <div class="card-header">{{iiu.title}}</div>
+            <div class="card-body">
+
+                <ng-container *ngFor="let field of iiu.fields; index as i">
+                    <ng-container *ngIf="field.visible">
+                        <ng-container *ngIf="castFieldDefinedSelection(field); else elseBlock">
+                            <imes-input-definedselection [field]="castFieldDefinedSelection(field)"></imes-input-definedselection>
+                        </ng-container>
+                        <ng-template #elseBlock>
+                            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'autonumeric'"></imes-input-numeric>
+                            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'int'"></imes-input-numeric>
+                            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'nat'"></imes-input-numeric>
+                            <imes-input-numeric [field]="field" *ngIf="field.dataType == 'real'"></imes-input-numeric>
+                            <imes-input-date [field]="field" *ngIf="field.dataType == 'date'"></imes-input-date>
+                            <imes-input-date [field]="field" *ngIf="field.dataType == 'time'"></imes-input-date>
+                            <imes-input-date [field]="field" *ngIf="field.dataType == 'datetime'"></imes-input-date>
+                            <imes-input-string [field]="field" *ngIf="field.dataType == 'string'"></imes-input-string>
+                            <imes-input-string [field]="field" *ngIf="field.dataType == 'text'"></imes-input-string>
+                            <imes-input-check [field]="field" *ngIf="field.dataType == 'bool'"></imes-input-check>
+                            <imes-input-blob-image [field]="castFieldBlob(field)" *ngIf="field.dataType == 'blob'"></imes-input-blob-image>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="iiu.showInstanceLog" class="iiuLogNavigation">
+            <a (click)="iiu.onNavigateLoginstance()">{{langMng.translateText('app_INSTANCELOG', 'Log Instance')}}</a>
+        </div>
+
+        <ng-container *ngIf="iiu.associatedService && iiu.associatedService.userIsAgent">
+
+            <fieldset class="card associatedService" [disabled]="!iiu.associatedServiceEnabled">
+                <legend *ngIf="false">Service legend</legend>
+                <div class="card-header">{{iiu.associatedService.title}}</div>
+                <div class="card-body">
+                    <imes-siu [siu]="iiu.associatedService" associated="true"></imes-siu>      
+                    <div class="col-12 siuButtons">
+                        <button type="button" class="btn btn-primary" (click)="iiu.associatedService.saveChanges()">{{langMng.translateText('app_SIU_BTNSAVE', '')}}</button>
+                    </div>
+                </div>
+            </fieldset>
+        </ng-container>
+
+    </div>
+
+</ng-container>

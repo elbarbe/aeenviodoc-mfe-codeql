@@ -1,0 +1,32 @@
+<div class="form-group" style="display: block;" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <input *ngIf="!isTextArea()" type="text" class="form-control" [(ngModel)]="field.value" [disabled]="!field.enabled"
+        [required]="field.mandatory" autocomplete="off" (change)="onFieldChange()" [maxlength]="field.maxLength > 0 ? field.maxLength : ''"
+        (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" [title]="field.value != null ? field.value : ''"/>
+    <textarea *ngIf="isTextArea()" class="form-control" [(ngModel)]="field.value"
+            [ngStyle]="textAreaStyle" (keyup)="onKeyUp($event)"
+            [disabled]="!field.enabled" [required]="field.mandatory" 
+            (change)="onFieldChange()" autocomplete="off"
+            [rows]="numRows"></textarea>
+    <button type="button" *ngIf="usePopupEditor"
+            style="width: 22px;float: right;padding: 2px;"
+            class="btn btn-sm pi pi-pencil"
+            (click)="previousValue=field.value;displayDialogEditor=true"></button>
+
+
+    <p-dialog [header]="field.alias" appendTo="body" [(visible)]="displayDialogEditor" [modal]="true" [blockScroll]="true"
+        styleClass="imesDialogEditor"
+        [style]="{'width': '90vw', 'height': '55vh', 'box-shadow': 'none', 'border': '0px', 'padding-top': '60px'}"
+        [baseZIndex]="10000" position="top">
+        <textarea class="form-control" [(ngModel)]="field.value" style="height: 100%;"
+            [disabled]="!field.enabled" [required]="field.mandatory"  (keyup)="onKeyUp($event)"
+            autocomplete="off"></textarea>
+        <p-footer>
+            <button type="button" class="btnOk btn btn-primary" *ngIf="field.enabled" (click)="displayDialogEditor=false">{{langMng.translateText('app_SIU_BTNOK', '')}}</button>
+            <button type="button" class="btnCancel btn btn-danger" (click)="field.value=previousValue;displayDialogEditor=false">{{langMng.translateText('app_SIU_BTNCANCEL', '')}}</button>
+        </p-footer>
+    </p-dialog>            
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

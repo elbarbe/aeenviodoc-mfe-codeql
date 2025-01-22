@@ -1,0 +1,17 @@
+﻿<waitDialog [showWait]="showWait"></waitDialog> 
+<form novalidate>
+    <ng-container *ngIf="visible">
+        <h2 class="title">{{title}}</h2>
+        <div class="siuRegion" [ngClass]="cssClasses">
+            <imes-lensesearch [field]="ptSolicitud" *ngIf="ptSolicitud.visible"
+                (selected)="processptsolicitudSelected($event)" (cleared)="cleanptsolicitud()"
+                (keypressLenseSearch)="onKeypressLenseSearch('onptsolicitudChange')"
+                (searched)="doSearchAction('ptSolicitud')"></imes-lensesearch>
+            <imes-input-numeric [field]="ptTipo" *ngIf="ptTipo.visible"></imes-input-numeric>
+        </div>
+        <div class="col-12 siuButtons">
+            <button type="button" class="btnOk btn btn-primary" (click)="saveChanges()">{{langMng.translateText('app_SIU_BTNOK', '')}}</button>
+            <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_SIU_BTNCANCEL', '')}}</button>
+        </div>
+    </ng-container>
+</form>

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aeenviodoc-mfe
+  labels:
+    app: aeenviodoc-mfe
+    app.kubernetes.io/component: aeenviodoc-mfe
+    app.kubernetes.io/instance: aeenviodoc-mfe
+    app.kubernetes.io/name: aeenviodoc-mfe
+    app.kubernetes.io/part-of: ae-app-frontend
+    app.openshift.io/runtime: aeenviodoc-mfe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aeenviodoc-mfe
+  template:
+    metadata:
+      labels:
+        app: aeenviodoc-mfe
+        deployment: aeenviodoc-mfe
+    spec:
+      containers:
+        - name: aeenviodoc-mfe
+#INIIMAGE
+          image: 'image-registry.openshift-image-registry.svc:5000/soporte-colsanitas-dev/aeenviodoc-mfe:latest'
+#FINIMAGE
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200Mi
+            requests:
+              cpu: 10m
+              memory: 100Mi
+          env:
+            - name: TZ
+              value: "America/Bogota"

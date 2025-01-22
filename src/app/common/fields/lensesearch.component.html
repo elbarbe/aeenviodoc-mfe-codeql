@@ -1,0 +1,52 @@
+<div class="form-group lenseSearch" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <div class="input-group">
+        <input type="text" [(ngModel)]="field.text" class="form-control"
+            [ngClass]="{ 'form-control-static' : !field.enabled }" [disabled]="!field.enabled"
+            [required]="field.mandatory" (keyup)="onKeyUp($event)" (keydown)="onKeypressLenseSearch()" autocomplete="off" />
+        <div class="dropdown open lenseSearchResultList" *ngIf="field.searchResults.length > 0">
+            <ul class="dropdown-menu">
+                <li *ngFor="let instance of field.searchResults; let i = index">
+                    <a (click)="onInstanceSelected(i)">{{instance.supplementaryInfo}}</a>
+                </li>
+                <li class="lenseSearchBtnClose">
+                    <a class="pi pi-times" (click)="onInstanceSelected(-1)"></a>
+                </li>
+            </ul>
+        </div>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-search lenseSearchBtn"
+                *ngIf="field.enabled" (click)="onSearch()" aria-label="Search field"></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-eye" *ngIf="showEye()"
+                (click)="onShowSelected()" aria-label="Show selected"></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-times lenseCleanBtn"
+                *ngIf="field.enabled" (click)="onClean()" aria-label="Clean field()"></button>
+        </span>
+    </div>
+
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+
+    <p-dialog [header]="field.alias" appendTo="body" [(visible)]="showDialogSelectedInstances" [modal]="true" [blockScroll]="true"
+        styleClass="imesDialogSelectedInstances col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5"
+        [style]="{'height': '55vh', 'box-shadow': 'none', 'border': '0px', 'padding-top': '60px'}"
+        [baseZIndex]="10000" position="top">
+        <div style="float: left;width: 100%;">
+            <ng-container *ngFor="let instance of field.getSelectedInstances(); index as i">
+                <div style="float: left;width: 100%;height: 24px;border-bottom: 1px solid #8080805e;">
+                    <button type="button" class="btn btn-outline-secondary pi pi-times" *ngIf="field.enabled"
+                        style="padding: 3px;font-size: 11px;color: red;border-color: red;float: left;margin-top: 2px;"
+                        (click)="onRemoveInstance(i)" aria-label="Delete"></button>
+                    <label style="float: left;margin-left: 5px;">
+                        {{instance.supplementaryInfo}}
+                    </label>
+                </div>
+            </ng-container>
+        </div>
+        <p-footer>
+            <button type="button" class="btnOk btn btn-primary" (click)="showDialogSelectedInstances=false">{{langMng.translateText('app_CLOSE', '')}}</button>
+        </p-footer>
+    </p-dialog>  
+
+</div>

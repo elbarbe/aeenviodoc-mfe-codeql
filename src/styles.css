@@ -1,0 +1,1330 @@
+html, body {
+	height: 100%;
+}
+
+.container {
+    max-width: 97%!important;
+}
+.footer{
+    text-align: center;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+}
+
+.form-control, .form-select {
+    font-size: 14px;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Check box */
+/*
+.checkField {
+    display: flex!important;
+}
+.checkField label {
+    width: calc(100% - 18px)!important;
+}
+*/
+.checkField input[type="checkbox"] {
+    width: 20px;
+    appearance: auto!important;
+}
+input[type="checkbox"] {
+    margin: 0px!important;
+}
+
+.breadcrumb {
+    margin-bottom: 0px;
+    font-size: 11px;
+    padding: 4px 10px 2px 10px;
+}
+.breadcrumb-item a {
+    color: #007ad9!important;
+    text-decoration: underline!important;
+}
+
+/* Menu */
+nav{
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+}
+.navbar-brand{	
+	color: rgba(255,255,255,.5)!important
+}
+/* Secondary menu items */
+nav li li {
+    height: 30px!important;
+    width: 100%;
+}
+/* TABLE  */
+table {
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 5px;
+    border: solid 1px #e8eef4;
+}
+
+table th {
+    padding: 6px 5px;
+    text-align: left;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
+}
+/* Minimum height to place the validation messages */
+.form-group {
+    margin-bottom: 5px;
+}
+/* DROPDOWN-SUBMENU */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #cccccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #ffffff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+.navbar-dark .navbar-nav .dropdown-submenu .nav-link {
+    color: inherit;
+}
+.dropdown-submenu .nav-link {
+    padding: 0px!important;
+    /* margin: 0px; */
+}
+.dropdown .dropdown-item:hover {
+    background-color: gainsboro;
+}
+/* Open menu on hover */
+.dropdown-menu {
+    margin-top: 0px;
+}
+/* FORMS */
+:required {
+    background-color: #e6ffff;
+}
+
+/* GRIDS */
+.uiGridNumber {
+    text-align: right;
+}
+
+/* Waiting image*/
+.waitLoading {
+    width: 100%;
+    height: 100%;
+    background-image: url("content/loading.gif");
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* No access scenario */
+.noaccess {
+    text-align: center;
+}
+
+/* Argument group */
+.argumentGroup {
+    clear: both;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.argumentGroup .card-header:empty {
+    display: none;
+}
+.card-header {
+    padding: 3px 15px 3px 15px;
+    font-weight: bold;
+}
+.argumentGroup .card-body {
+    padding: 5px 0px 0px 0px;
+    display: inline-block;
+    /* display: flex; */
+    flex-wrap: wrap;
+}
+.argumentGroup .argumentGroup {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: calc(100% - 10px);
+}
+.argumentGroupTab{
+    padding: 0px;
+    clear: both;
+}
+.argumentTabContent{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 7px 0px 0px 0px;
+    float: left;
+    width: 100%;
+}
+.argumentTabContent .argumentGroup {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: calc(100% - 10px);    
+}
+.tab-pane > .argumentGroup {
+    margin-top: 10px;
+}
+
+/* Lense Search*/
+.lenseSearch .input-group {
+    width: 100%;
+}
+.lenseSearch .input-group-btn {
+    font-size: inherit;
+}
+
+.lenseSearchBtnClose {
+    text-align: center !important;
+}
+.lenseSearchResultList {
+    width: 100%;
+    position: absolute;
+}
+.lenseSearchResultList .dropdown-menu {
+    display: block;
+    max-height: 200px;
+    overflow: auto;
+    width: 100%;
+    top: 32px;
+    font-size: 0.85rem;
+    margin: 0px;
+}
+.lenseSearchResultList li {
+    padding-left: 5px;
+}
+
+/* Lense Oid fields */
+.lenseGroup{
+    float: left;
+    width: 100%;
+}
+
+.oidField{
+    padding-bottom:6px;
+    padding-left:12px;
+    padding-right:12px;
+    padding-top:6px;
+}
+
+.oidField1 {
+    width: calc(100% - 350px);
+    float: left;
+    min-width: 50px;
+}
+.oidField2 {
+    width: calc((100% - 350px) / 2);
+    float: left;
+    min-width: 50px;
+}
+.oidField3 {
+    width: calc((100% - 350px) / 3);
+    float: left;
+    min-width: 50px;
+}
+.oidField4 {
+    width: calc((100% - 350px) / 4);
+    float: left;
+    min-width: 50px;
+}
+.oidField5 {
+    width: calc((100% - 350px) / 5);
+    float: left;
+    min-width: 50px;
+}
+
+.lenseButtons{
+    float: left;
+}
+
+.suppInfo {
+    float: left;
+    display: block;
+    max-width: 250px;
+}
+.suppInfo label{
+    display: block;
+    overflow: hidden;
+    margin-left: 3px;
+    font-weight: normal;
+}
+
+.grid {
+    max-height: 450px;
+    min-height: 450px;
+}
+
+select {
+    height: 25px;
+}
+
+.radioButtons>label {
+    margin-right: 10px;
+}
+.inputRadio .p-radiobutton-label {
+    display: flex;
+    align-items: center;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+.beginNewLine{
+	clear: left;
+}
+.totalWidth {
+    width: 100%!important;
+}
+/* Fix row height */
+@media screen and (min-width: 40em) {
+    .p-datatable-responsive .p-resizable-column span {
+        display: block;
+        overflow: hidden;
+    }
+    .p-datatable-scrollable-header, .p-datatable-scrollable-header,
+    .p-datatable-scrollable-body, .p-datatable-tbody{
+        min-width: 100%!important;
+    }
+    .p-datatable-scrollable-header, .p-datatable-tbody {
+        width: fit-content!important;
+    }
+    .p-column-title {
+        display: none!important;
+    }
+    .gridTextEnlarge{
+        display: inline-flex!important;
+        width: calc(100% - 20px);
+        overflow-x: hidden;
+    }
+    .p-datatable-tbody .editableCell p-celleditor{
+        width: 100%;
+        display: block;
+    }
+}
+
+/* In small devices changes the display */
+@media screen and (max-width: 40em) {
+    .p-datatable table {
+        table-layout: auto!important;
+    }
+    .p-datatable-scrollable tbody{
+        display: table-caption!important;
+        width: 100%;
+    }
+    .p-datatable-thead {
+        display: none!important;
+    }
+    .p-datatable-tbody > tr {
+        display: block!important;
+        float: left;
+        width: 100%!important;
+        border-color: black;
+        border-width: 0px 0px 1px 0px;
+        border-style: solid;
+    }
+    .p-resizable-column {
+        width: 100%!important;
+    }
+    .p-datatable-tbody>tr>td .p-column-title {
+        max-width: 45%;
+        padding-right: 1%;
+        width: 32%;
+        display: inline-block;
+        text-align: left;
+        font-weight: 700;
+    }
+
+    .p-datatable-tbody .editableCell p-celleditor{
+        width: 50%;
+        display: block;
+        float: left;
+    }
+    .p-datatable-tbody>tr>td>span {
+        max-width: 54%;
+        max-height: 100px;
+        white-space: break-spaces;
+        float: left;
+    }
+}
+@media screen and (max-width: 40em) and (orientation: landscape) {
+    .p-datatable-scrollable-body .p-datatable-tbody>tr>td .p-column-title {
+        display: inline-block!important;
+    }
+}
+
+.alignR {
+    text-align: right!important;
+}
+.inputAlignR input{
+    text-align: right!important;
+}
+.alignL {
+    text-align: left!important;
+}
+.alignC {
+    text-align: center!important;
+}
+
+.ui-cell-data a{
+    text-decoration: underline;
+}
+
+.p-datatable-tbody td{
+    word-break: break-word;
+    white-space: nowrap;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+    border: 1px solid #c8c8c8;
+    border-width: 0px 0px 1px 1px!important;
+}
+.p-datatable .p-datatable-tbody .p-highlight button.pi {
+    color: #ffffff;
+}
+
+/* Wait dialog */
+.waitModalDialog {
+    padding: 0px !important;
+}
+
+/** Links */
+a:hover {
+    cursor: pointer;
+}
+/** Prime dropdown*/
+.primeDropdown {
+    padding: 0px !important;
+    /*border: 0px !important;*/
+    height: 100%;
+}
+
+.primeDropdown[required] .ui-dropdown-label {
+    background-color: #e6ffff;
+}
+
+/* Preload multiple dropdown*/
+.p-multiselect {
+    border: 1px solid rgb(206, 212, 218);
+}
+.p-multiselect .p-multiselect-label {
+    padding: 4px 6px 4px 6px;
+}
+
+/* Prime listbox */
+.preloadMultiple{
+    height: 240px;
+}
+.preloadMultiple .p-listbox {
+    height: 200px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.preloadMultiple .p-listbox-item {
+    padding: 2px 0px 2px 5px!important;
+}
+.preloadMultiple p-listbox[required] .p-listbox, 
+.preloadMultiple p-listbox[required] .p-listbox-list{
+    background-color: #e6ffff;
+}
+
+/** Disabled fields font opacity*/
+.ui-state-disabled, .ui-widget:disabled {
+    opacity: 0.7 !important;
+}
+
+/* Actions Navigations */
+.actionsNavigations{
+    margin-bottom: 5px;
+}
+.action, .navigation {
+    display: block;
+}
+/* SIU */
+.btnOk, .btnOkPrint {
+    margin-right: 5px;
+}
+
+/* IIU */
+.iiuRegion {
+    width: 100%;    
+    padding: 0px;
+    float: left;
+    margin-bottom: 10px;
+}
+.iiuRegion .displaySet {
+    width: 100%;
+    margin-top: 10px;
+    float: left;
+}
+/* By default. It is hide */
+.iiuRegion .displaySet .card-header {
+    display: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.iiuRegion .displaySet .card-body {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.iiuRegion .associatedService {
+    float: left;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+.iiuRegion .associatedService>.card-header {
+    display: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.iiuRegion .actionsNavigations{
+    margin-top: 10px;
+}
+
+.iiuRegion .siuButtons{
+    text-align: right;
+}
+
+.iiuLogNavigation{
+    width: 100%;
+    text-align: right;
+    float: left;
+    margin-top: -20px;
+}
+/* PIU */
+
+.piuRegion {
+    padding: 0px;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.piuRegion .actionsNavigations{
+    margin-top: 10px;
+}
+.piuDisplaySet{
+    float: left;
+}
+.piuDisplaySet, .filter, .actionsNavigations, .details {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.filter{    
+    float: left;
+}
+
+.btnFilterShow, .btnFilterHide{
+    border: 0px;
+    padding: 0px 3px 0px 3px;
+}
+
+.p-datatable-scrollable-body {
+    max-height: 300px;
+}
+.gridCaption{
+    display: inline-flex;
+    float: right;
+    padding-right: 25px;
+    font-size: 11px;
+    align-items: center;
+    padding-left: 10px;
+}
+.gridCaption input {
+    margin-left: 7px;
+    margin-top: 0px;
+}
+.gridCaption select {
+    margin-left: 10px;
+    padding: 1px 1px 1px 1px!important;
+    font-size: 0.75rem;
+}
+.gridHeader{
+    text-align: center!important;
+}
+.gridFooterBtnRefresh{
+    float: left;
+    display: block;
+    padding: 0px 4px 0px 4px;
+}
+.gridFooterBtnSave, .gridFooterBtnPreferences, .gridFooterBtnGroup{
+    float: right;
+    display: block;
+    padding: 0px 4px 0px 4px;
+}
+.gridFooterNumElements {
+    float: right;
+    display: block;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.gridFooterBtnExport{
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+    padding: 0px 4px 0px 4px;
+    background: url("content/excel.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.gridFooterBtnExportAll{
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+    padding: 0px 4px 0px 4px;
+    background: url("content/excelall.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+.gridColActivateAssociatedSrv, .gridColQuickSelect {
+    width: 25px;
+    padding: 0px 1px 0px 1px!important;
+    text-align: center;
+}
+.gridColActivateAssociatedSrv button, .gridColQuickSelect button {
+    padding: 0px;
+}
+
+.editableCell input{
+    color:black;
+    padding: 0px 2px 0px 2px;
+    height: auto;
+    width: 100%;
+}
+.editableCell select {
+    padding: 0px 2px 0px 2px;
+    height: auto;
+}
+.editableCell.alignR input {
+    text-align: right;
+}
+.editableCell .p-calendar .form-control {
+    width: 100%!important;
+}
+.p-datepicker-year option {
+    height: 10px;
+}
+.editableCell .p-datepicker-calendar .ui-state-default {
+    color: #222222;
+}
+td.editableCell {
+    background-color: #d4edda!important;
+    color: #000000;
+}
+/* Table summary */
+.p-datatable-footer {
+    padding: 1px 0px 0px 0px;
+}
+.p-datatable-footer .row {
+    padding: 0px;
+    margin: 0px;
+}
+.p-datatable-scrollable-header th, .p-datatable-thead th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden!important;
+}
+imes-grid tr.p-element.p-selectable-row.p-highlight {
+    outline-width: 0px;
+}
+/* Fix heigth for frozen columns */
+.piuClassServiceLog .ui-table .p-datatable-frozen-view .p-datatable-tbody > tr > td, 
+.piuClassServiceLog .ui-table .p-datatable-unfrozen-view .p-datatable-tbody > tr > td{
+    height: 24px !important;
+    white-space: nowrap;
+}
+.piuClassServiceLog .ui-table .p-datatable-frozen-view .p-datatable-tbody > tr > td, 
+.piuClassServiceLog .ui-table .p-datatable-unfrozen-view .p-datatable-tbody > tr > td > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.piuClassServiceLog .p-datatable-frozen-view .p-datatable-scrollable-body {
+    max-height: 283px;
+}
+
+.p-datatable-tbody span a {
+    text-decoration: underline!important;
+}
+.p-datatable-tbody span a:not([href]):not([tabindex]){
+    color: #007ad9;
+}
+.p-highlight span a, .p-highlight span a:hover {
+    color: white!important;
+}
+.p-highlight .gridColQuickSelect a {
+    color: white;
+}
+
+/* Buttons in the grid */
+.buttonGrid {
+    width: 60px;
+    text-align: center;
+}
+.buttonGrid .btn {
+    padding: 1px 5px 1px 5px;
+    font-size: 11px;
+}
+
+.filterButtons{
+    padding-top: 25px;
+}
+
+.filterContent{
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+}
+
+.filterVariables{
+    width: calc(100% - 80px);
+    float: left;
+    display: block;
+    flex-wrap: wrap;
+}
+
+.piuButtons, .iiuButtons, .siuButtons, .mdiuButtons {
+    text-align: center;
+    margin-top: 10px;
+    clear: both;
+    display: block;
+    float: left;
+}
+
+.piuButtons .btn:not(first-child),
+.iiuButtons .btn:not(first-child),
+.siuButtons .btn:not(first-child),
+.mdiuButtons .btn:not(first-child) {
+    margin-left: 5px;
+}
+
+
+.btnSelect {
+    margin-right: 5px;
+}
+.associatedService>.card-body {
+    padding: 5px 5px 5px 5px;
+}
+.piuRegion .associatedService {
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.piuRegion .associatedService .card-header {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.piuRegion .siuButtons{
+    text-align: right;
+    margin-top: 0px;
+}
+
+/* Field Validation */
+.validationMessage {
+    color: red;
+    z-index: 5;
+    max-height: 18px;
+    position: relative;    
+}
+.lenseGroup .validationMessage {
+    display: block;
+    clear: left;
+}
+/* Lense */
+.oidselector {
+    min-width: 105px;
+}
+
+/* Master details */
+.master{
+    width: 100%;
+    display: block;
+    float: left;    
+}
+.details{
+    margin-top: 10px;
+}
+.details .title, .master .title {
+    display: none;
+}
+.detailsContent{
+    width: 100%;
+    float: left;
+    border: 1px solid #ddd;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.detailsContent .displaySet{
+    border: 0px;
+}
+
+/* Prime ng calendar */
+.primengCalendar{
+    width: 100%;
+    float:left;
+}
+
+p-calendar > span {
+    width: 100%;
+}
+
+p-calendar input[required=false] {
+    background-color: white;
+}
+
+p-calendar[required] input {
+    background-color: #e6ffff;
+}
+.p-datepicker-trigger {
+    width: 28px!important;
+    height: 28px!important;
+}
+
+/* Images */
+.p-datatable-tbody img {
+    width: 100%;
+}
+.imgField img{
+    width: 100%;
+}
+/* Conditional Navigation */
+.condNavQuestion{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+.condNavAnwsers{
+    padding-left: 20%;
+}
+
+/* Selected tab text in bold */
+.nav-tabs>li.active>a {
+    font-weight: bold;
+}
+
+
+/* Preferences */
+.gridPreferencesMenu {
+    font-size: 14px;
+}
+.gridPreferencesMenu button{
+    padding: 0px 2px 0px 0px;
+}
+.gridPreferencesMenu .dropdown-menu {
+    min-width: 0px;
+    width: max-content;
+}
+.gridPreferencesMenu a {
+    font-size: 12px;
+    padding: 0px 10px 0px 10px;
+}
+
+.preferencesDialog {
+    box-shadow: none;
+    border: 0px;
+}
+
+.preferencesDialog .p-dialog-header{
+    padding-top: 3px!important;
+    padding-bottom: 3px!important;
+}
+.preferencesTable .form-control, .preferencesTable button {
+    padding: 0px 5px 0px 5px;
+    height: 22px;
+}
+.preferencesTable td {
+    padding-left: 3px!important;
+    padding-right: 3px!important;
+}
+.preferencesTable thead th {
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
+}
+.preferencesTable tr td, .preferencesTable tr th {
+    flex: 0 0 auto!important;
+}
+/** logs */
+.gridSummary {
+    width: 100%;
+}
+.gridSummaryLeft {
+    float: left;
+}
+.gridSummaryRight {
+    float: right;
+    display: inline-flex;
+}
+.gridSummaryMenu {
+    font-size: 14px;
+}
+.gridSummaryMenu .dropdown-menu {
+    min-width: 0px;
+    width: max-content;
+}
+.gridSummaryMenu button {
+    padding: 0px 0px 0px 2px;
+}
+.gridSummaryMenu a {
+    font-size: 12px;
+    padding: 0px 10px 0px 10px;
+}
+.piuClassServiceLog{
+    margin-top: 10px;
+}
+/* Wizard */
+.wizardLinks li {
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.activeLinkStep{
+    font-weight: bold;
+}
+
+.wizardPage {
+    width: 100%;
+    float: left;
+    border: 1px solid #ccc;
+    padding-top: 10px;
+    border-radius: 10px;
+}
+
+.wizardButtons {
+    margin-top: 10px;
+    display: inline-block;
+}
+.btnWizardNext{
+    float: right;
+}
+/* Modal IU */
+.modalForIU {
+    box-shadow: none;
+    border: 0px;
+}
+.modalForIU h2, .modalForIU h3{
+    display: none;
+}
+.modalForIU .p-dialog-content {
+    overflow: auto;
+}
+.modalForIU .p-dialog-header {
+    padding: 0px 10px 0px 10px!important;
+}
+
+/* Error dialog */
+.errorMessages .p-dialog-header {
+    padding: 0px 10px 0px 10px;
+}
+.errorMessages .alert {
+    padding: 10px;
+    margin-bottom: 3px;
+}
+
+
+/* No results in lense search */
+.noResultsLenseSearch input {
+    animation-name : colorToRed;
+    animation-duration:  0.5s;
+    animation-iteration-count: 5;
+}
+@keyframes colorToRed {
+    50% {
+        /* border-color: red; */
+        color: red;
+    }
+}
+
+/* No valid field */
+.invalidField input, .invalidField select, .invalidField textarea{
+    border-color: red;
+}
+.invalidField label{
+    color: red;
+}
+
+.selectLanguages {
+    font-size: 12px;
+}
+.selectLanguages .dropdown-menu.show {
+    padding: 0px;
+}
+.selectLanguages a {
+    font-size: 12px;
+    padding: 2px 5px;
+}
+
+/* Reduce input size */ 
+input.form-control {
+    padding: 1px 6px 1px 6px!important;
+    height: 28px!important;
+	min-height: 28px!important;
+}
+select.form-select {
+    padding: 0px 6px 3px 6px!important;
+    height: 28px!important;
+	min-height: 28px!important;
+}
+label {
+    margin-bottom: 0px!important;
+    font-weight: normal!important;
+    height: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.aliasField{
+    width: 100%;
+}
+.form-group {
+    min-height: 57px;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+input[type=file] {
+    font-size: 12px;
+}
+
+/* Hide validation messages */
+.validationMessage {
+    display: none!important;
+}
+
+.lenseSearch button, .lenseButtons button, .filterButtons button{
+    height: 26px;
+    padding: 3px 8px!important; 
+    font-size: 1em!important;   
+}
+
+.filter .nav>li>a {
+    padding: 3px 10px 3px 10px;
+}
+
+.filterContent {
+    padding: 0px;
+    float: left;
+    padding-bottom: 3px;
+}
+
+.filterButtons{
+    padding-top: 20px;
+    float: right;
+    margin-right: 3px;
+}
+
+.siuRegion{
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.siuTitle {
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: 500;    
+}
+
+/* Input field as warning */
+.imesWarning {
+    min-height: 25px;
+}
+.imesWarning label {
+    display: none;
+}
+.imesWarning input[type="text"] {
+    border: 0px;
+    font-weight: bold;
+}
+
+/* Divide in sections */
+.divide1 .ui-steps-item{ width: 100%; }
+.divide2 .ui-steps-item{ width: 50%; }
+.divide3 .ui-steps-item{ width: 33.33%; }
+.divide4 .ui-steps-item{ width: 25%; }
+.divide5 .ui-steps-item{ width: 20%; }
+.divide6 .ui-steps-item{ width: 16.66%; }
+.divide7 .ui-steps-item{ width: 14.28%; }
+.divide8 .ui-steps-item{ width: 12.5%; }
+.divide9 .ui-steps-item{ width: 11.11%; }
+.divide10 .ui-steps-item{ width: 10%; }
+
+/* Reduce table size */
+.p-component {
+    font-size: 14px;
+}
+.p-datatable-tbody td {
+    padding-top: 1px!important;
+    padding-bottom: 1px!important;
+    padding-left: 4px!important;
+    padding-right: 4px!important;
+}
+.p-datatable-wrapper {
+    border: 1px solid #c8c8c8;
+}
+
+.p-datatable-scrollable-header-box {
+    padding-right: 0px !important;
+}
+.p-datatable-scrollable-header th, .p-datatable-thead th {
+    padding-top: 1px!important;
+    padding-bottom: 1px!important;
+    padding-left: 1px!important;
+    padding-right: 1px!important;
+}
+.p-datatable-footer {
+    padding: 2px 4px 2px 4px!important;
+}
+
+.p-paginator .p-dropdown {
+    height: 28px;
+}
+.p-paginator .p-dropdown .p-dropdown-label {
+    padding: 0px 0px 0px 3px;
+}
+/* Last column un PIU adjust to fill table */
+.piuDisplaySet thead th:last-child, .piuDisplaySet tbody td:last-child {
+    flex: 1!important;
+}
+
+.action .btn, .navigation .btn {
+    padding: 2px 5px 2px 5px!important;
+}
+
+.lenseSearchResultList .dropdown-menu {
+    top: 26px!important;
+}
+
+/* Calendar popup. Reduce paddings */
+body .p-datepicker {
+    padding: 0.5em!important;
+}
+body .p-datepicker .p-datepicker-header {
+    padding: 0px!important;
+}
+body .p-datepicker table th {
+    padding: 0px!important;
+    text-align: center;
+}
+body .p-datepicker table td {
+    padding: 0px!important;
+}
+body .p-datepicker-buttonbar {
+    padding: 0px!important;
+}
+body .p-datepicker-buttonbar .ui-button .ui-button-text-only .ui-button-text {
+    padding: 0.0em 0.4em!important;
+}
+/* END Reduce input size */ 
+.imesDialogEditor .p-dialog-header {
+    padding: 0px 10px 0px 10px!important;
+}
+.imesDialogEditor .p-dialog-content {
+    height: 100%;
+    padding: 5px!important;
+}
+.imesDialogEditor .p-dialog-footer {
+    padding: 5px 5px 5px 5px!important;
+    text-align: center!important;
+}
+.imesDialogEditor .btnOk, .imesDialogEditor .btnCancel{
+    padding: 0px 12px 0px 12px;
+}
+
+/* Expand details */
+imes-details-in-row-grid {
+    width: 100%;
+}
+.p-datatable-thead {
+    z-index: 10!important;
+}
+imes-details-in-row-grid .p-datatable-thead {
+    z-index: 9!important;
+}
+imes-details-in-row-grid imes-details-in-row-grid .p-datatable-thead {
+    z-index: 8!important;
+}
+imes-details-in-row-grid imes-details-in-row-grid imes-details-in-row-grid .p-datatable-thead {
+    z-index: 7!important;
+}
+imes-details-in-row-grid .p-datatable-wrapper {
+    height: auto!important;
+}
+imes-details-in-row-grid .p-datatable-footer {
+    display: none;
+}
+.p-highlight .gridColExpandDetails a {
+    color: white!important;
+}
+.gridExpandDetails .p-datatable-scrollable-body{
+    max-height: 600px;    
+}
+.inRowDetailTitle{
+    font-weight: bold;    
+}
+.gridColExpandDetails {
+    width: 27px;
+}
+.detailInRowGrid {
+    padding-top: 5px;
+    padding-left: 25px;
+}
+.detailInRowGrid .gridFilterRow {
+    display: none;
+}
+
+.gridColAction, .gridColNavigation {
+    width: 30px;
+    text-align: center;
+}
+.gridColAction button, .gridColNavigation button {
+    height: 20px;
+    width: 20px;
+    padding: 0px;
+    border: 0px;
+}
+.gridColAction .btn:disabled, .gridColNavigation .btn:disabled {
+    opacity: 0.35;
+}
+.accEditGrid{
+    background: url("content/accEdit.png");
+    background-size: 20px 20px; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.accDelGrid{
+    background: url("content/accDelete.png");
+    background-size: 20px 20px; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.accIIUGrid{
+    background: url("content/iiu.png");
+    background-size: 20px 20px; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.accPIUGrid{
+    background: url("content/piu.png");
+    background-size: 20px 20px; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.accMDIUGrid{
+    background: url("content/mdiu.png");
+    background-size: 20px 20px; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* MENU */
+@media screen and (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        display: block;
+    }
+
+    nav ul li {
+        min-height: 24px;
+        display: inline-block;
+    }
+
+    nav .nav-link {
+        padding: 0px 5px 0px 5px!important;
+    }
+}
+
+.imesDialogSelectedInstances .p-dialog-header {
+    padding: 0px 10px 0px 10px!important;
+}
+.imesDialogSelectedInstances .p-dialog-content {
+    height: 100%;
+    padding: 5px!important;
+}
+.imesDialogSelectedInstances .p-dialog-footer {
+    padding: 5px 5px 5px 5px!important;
+    text-align: center!important;
+}
+.imesDialogSelectedInstances .btnOk, .imesDialogSelectedInstances .btnCancel{
+    padding: 0px 12px 0px 12px;
+}
+
+.ticaGrid {
+    overflow-x: hidden;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    height: 250px;
+}
+.ticaGrid .p-datatable-scrollable-body {
+    max-height: 200px;
+}
+/* Change password */
+#hatLogout::before {
+    content: none;
+}
+#changePasswordDialog .p-dialog-header {
+    padding: 0px 10px 0px 10px!important;
+}

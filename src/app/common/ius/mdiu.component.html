@@ -1,0 +1,46 @@
+<ng-container *ngIf="mdiu.visible">
+
+    <h3 class="title">{{mdiu.title}}</h3>
+
+    <div class="master">
+
+        <h3 class="title">{{mdiu.masterAbstract.title}}</h3>
+
+        <imes-iiu *ngIf="mdiu.masterAbstract.scenarioType == 'IIU'" [iiu]="castAbstractIIU(mdiu.masterAbstract)"></imes-iiu>
+        <imes-piu *ngIf="mdiu.masterAbstract.scenarioType == 'PIU'" [piu]="castAbstractPIU(mdiu.masterAbstract)"></imes-piu>
+
+    </div>
+
+    <div *ngIf="!mdiu.expandDetails"  class="col-12 details">
+
+        <ng-container *ngIf="mdiu.details.length > 1; else elseOneDetail">
+            <ul class="nav nav-tabs" role="tablist">
+                <ng-container *ngFor="let detail of mdiu.details; index as i">
+                    <li class="nav-item" *ngIf="detail.visible">
+                        <a (click)="mdiu.setActiveDetail(i)" class="nav-link"
+                                [ngClass]="{'active': mdiu.activeDetail == i}" role="tab" tabindex
+                                data-bs-toggle="tab">{{detail.title}}</a>
+                    </li>
+                </ng-container>
+            </ul>
+            <div class="tab-content detailsContent">
+                <ng-container *ngFor="let detail of mdiu.details; index as i">
+                    <div class="tab-pane" [ngClass]=" {'active': mdiu.activeDetail == i}" *ngIf="detail.visible" role="tabpanel">
+                        <imes-mdiu *ngIf="detail.scenarioType == 'MDIU'" [mdiu]="castAbstractMDIU(detail)"></imes-mdiu>
+                        <imes-iiu *ngIf="detail.scenarioType == 'IIU'" [iiu]="castAbstractIIU(detail)"></imes-iiu>
+                        <imes-piu *ngIf="detail.scenarioType == 'PIU'" [piu]="castAbstractPIU(detail)"></imes-piu>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+        <ng-template #elseOneDetail>
+            <div class="tab-content detailsContent">
+                <ng-container *ngFor="let detail of mdiu.details; index as i">
+                    <imes-mdiu *ngIf="detail.scenarioType == 'MDIU'" [mdiu]="castAbstractMDIU(detail)"></imes-mdiu>
+                    <imes-iiu *ngIf="detail.scenarioType == 'IIU'" [iiu]="castAbstractIIU(detail)"></imes-iiu>
+                    <imes-piu *ngIf="detail.scenarioType == 'PIU'" [piu]="castAbstractPIU(detail)"></imes-piu>
+                </ng-container>
+            </div>
+        </ng-template>
+    </div>    
+</ng-container>

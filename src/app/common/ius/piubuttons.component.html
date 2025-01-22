@@ -1,0 +1,6 @@
+<div class="col-12 piuButtons">
+    <button type="button" class="btnSelect btn btn-primary" *ngIf="piu.inSelectionMode"
+        (click)="piu.doSelection()">{{langMng.translateText('app_SELECT', '')}}</button>
+    <button type="button" class="btnCancel btn btn-danger"
+        (click)="piu.processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
+</div>

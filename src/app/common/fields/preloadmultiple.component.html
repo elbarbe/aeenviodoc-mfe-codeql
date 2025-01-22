@@ -1,0 +1,10 @@
+<div class="form-group preloadMultiple" [ngClass]="field.editorCSSClasses">
+    <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
+    <p-listbox [options]="field.getPreloadInstances()" [(ngModel)]="field.value" (ngModelChange)="onInstanceSelected(0)"
+        [readonly]="!field.enabled" optionLabel="supplementaryInfo" [showToggleAll]="false"
+        [metaKeySelection]="false" [required]="field.mandatory" [multiple]="true" [checkbox]="true">
+    </p-listbox>
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿<form novalidate>
+    <h2 class="title">{{title}}</h2>
+    <imes-input-blob [field]="oaArchivo" *ngIf="oaArchivo.visible"></imes-input-blob>
+    <div class="col-12 iiuButtons">
+        <button type="button" class="btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
+    </div>
+</form>

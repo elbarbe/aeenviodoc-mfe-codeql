@@ -1,0 +1,14 @@
+
+<div class="form-group" *ngIf="field.visible" [ngClass]="field.editorCSSClasses"
+    style="min-height: 200px;">
+    <!-- <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label> -->
+
+    <canvas #sigPad id="canvasFirma" style="border: 1px solid #000;width: 100%;height: calc(100% - 57px);"
+    [height]="getHeight()"    
+    [width]="getWidth()" ></canvas>
+    <button type="button" class="btn-default btn-sm" (click)="clear()">Borrar</button>
+    
+    <div *ngIf="field.validationMessage != ''" class="validationMessage">
+        {{field.validationMessage}}
+    </div>
+</div>

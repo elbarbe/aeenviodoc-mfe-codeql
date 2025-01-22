@@ -1,0 +1,63 @@
+﻿<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" style="margin-left: 10px;margin-right: 10px;" (click)="navigateToMain()">{{langMng.translateText('app_HOME', '')}}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="toggleMenu()" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{ 'show': menuOpen }">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item" *ngIf="isNodeVisible('Vis_1727116476416393NodoJer_5',['Funcionario','Admin','SuperAdmin','Asesor','AreaMedica','Afiliaciones','Gestor','MesaDeApoyo'])">
+                    <a class="nav-link" 
+                        (click)="navigateFromHat('0')">{{langMng.translateText('_fixed.hat.0', 'Ver Reporte')}}</a>
+                </li>
+                <li class="nav-item" *ngIf="isNodeVisible('Vis_1727116476416393NodoJer_3',['Admin','SuperAdmin','Asesor','AreaMedica','Afiliaciones','Gestor','MesaDeApoyo'])">
+                    <a class="nav-link" 
+                        (click)="navigateFromHat('1')">{{langMng.translateText('_fixed.hat.1', 'Envío de documentos')}}</a>
+                </li>
+            </ul>
+		
+            <ul class="nav navbar-nav" *ngIf="loginVisible()">
+                <li class="nav-item"><a class="nav-link" (click)="navigateToLogin()">{{langMng.translateText('app_LOGIN',
+                    '')}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav" *ngIf="logoutVisible()">
+                <span style="color: rgba(255, 255, 255, 0.5);padding-right: 3px;">{{displayName()}}</span>
+                <li class="nav-item dropdown dropstart">
+                    <a class="nav-link dropdown-toggle " id="hatLogout" data-bs-toggle="dropdown"
+                        aria-expanded="false" aria-haspopup="true">
+                        <em class="pi pi-user"></em>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="hatLogout">
+                        <a class="dropdown-item" (click)="displayChangePassword=true;menuOpen = false;">
+                            <em class="pi pi-key"></em>
+                            {{langMng.translateText('app_CHGPWD_TITLE', '')}}</a>
+                        <a class="dropdown-item" (click)="logOut()">
+                            <em class="pi pi-sign-out"></em>
+                            {{langMng.translateText('app_LOGOUT', '')}}</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="selectLanguages nav navbar-nav navbar-right"
+                *ngIf="langMng.availableLanguages && langMng.availableLanguages.length > 0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="languages" data-bs-toggle="dropdown"
+                        aria-expanded="false" aria-haspopup="true">
+                        {{langMng.translateText('app_LANGUAGES', '')}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="languages">
+                        <a class="dropdown-item" *ngFor="let lang of langMng.availableLanguages"
+                            (click)="onLanguageChanged(lang.key)">{{lang.value}}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+</nav>
+<p-dialog id="changePasswordDialog" [header]="langMng.translateText('app_CHGPWD_TITLE', '')"
+    [(visible)]="displayChangePassword" [modal]="true" (onHide)="displayChangePassword=false" [blockScroll]="true"
+    position="top-right" [style]="{'padding-top': '40px', 'box-shadow': 'none', 'border': '0px'}" [closeOnEscape]="true"
+    [closable]="true" [resizable]="false"
+    [contentStyle]="{'max-height':'500px', 'display': 'flow-root', 'padding': '5px 15px'}">
+    <imes-changepassword *ngIf="displayChangePassword" (closed)="displayChangePassword=false"></imes-changepassword>
+</p-dialog>
