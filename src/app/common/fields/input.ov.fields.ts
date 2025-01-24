@@ -101,6 +101,10 @@ export class LenseComponent extends AbstractLenseComponent {
         }
     }
 
+    public mostrarBotones(): boolean {
+        return this.field.nameInRequest !== 'vo_persona';
+    }
+
     /**
      * Returns true if the eye button (shows selected instances) must be shown
      */
@@ -158,6 +162,10 @@ export class LenseSearchComponent extends AbstractLenseComponent {
                 LanguageMng.fsNumberInstacesSelected, '',
                 this.field.getSelectedInstances().length.toString());
         }
+    }
+
+    public mostrarBotones(): boolean {
+        return this.field.nameInRequest !== 'vo_persona';
     }
 
     /**

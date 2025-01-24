@@ -2269,7 +2269,7 @@ export class SolicitudSIUuTENVIARDOCComponent extends AbstractServiceIU implemen
      * Actions of dependency rule 1 for p_DocMaternidad argument
      */
     private executeDependecyRules1puDocMaternidadActions(): void {
-        // v <> NULL AND v = FALSE
+        // v <> NULL AND v = false
         if (!this.util.isNull(this.util.getBool(this.puDocMaternidad.value)) &&
             this.util.valueEquals(this.util.getBool(this.puDocMaternidad.value), false)) {
             // p_MarcarTodos.SetValue( FALSE )

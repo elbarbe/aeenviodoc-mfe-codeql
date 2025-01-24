@@ -1084,5 +1084,13 @@ export class OidBuilder {
         id_logcontratosexentosfingreso: number} {
         return {id_logcontratosexentosfingreso: logContratosExentosFIngresouiduLogContratosExentosFIngreso};
     }
+    /**
+     * Builds an Oid of class TextoAviso
+     * @param textoAvisouIdentificador Identificacion field 1
+     */
+    public buildOidTextoAviso(textoAvisouIdentificador: string): {
+        identificador: string} {
+        return {identificador: textoAvisouIdentificador};
+    }
 
 }

@@ -11,7 +11,7 @@ metadata:
     app.openshift.io/runtime: aeenviodoc-mfe
 spec:
 #INIHOST
-  host: aeenviodoc-mfe-soporte-colsanitas-dev.apps.sandbox-m3.1530.p1.openshiftapps.com
+  host: aeenviodoc-mfe-soporte-colsanitas-dev.apps.rm3.7wse.p1.openshiftapps.com
 #FINHOST
   to:
     kind: Service

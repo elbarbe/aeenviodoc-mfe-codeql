@@ -16,8 +16,8 @@
         </div>
         <span class="input-group-btn">
             <button type="button" class="btn btn-outline-secondary btn-sm pi pi-search lenseSearchBtn"
-                *ngIf="field.enabled" (click)="onSearch()" aria-label="Search field"></button>
-            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-eye" *ngIf="showEye()"
+                *ngIf="field.enabled && mostrarBotones()" (click)="onSearch()" aria-label="Search field"></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm pi pi-eye" *ngIf="showEye() && mostrarBotones()"
                 (click)="onShowSelected()" aria-label="Show selected"></button>
             <button type="button" class="btn btn-outline-secondary btn-sm pi pi-times lenseCleanBtn"
                 *ngIf="field.enabled" (click)="onClean()" aria-label="Clean field()"></button>

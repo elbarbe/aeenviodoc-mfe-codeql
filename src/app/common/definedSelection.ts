@@ -394,14 +394,17 @@ export class DefinedSelections {
      * Defined selection pattern DS_ServiciosBH for String data type
      */
     public static readonly DS_SERVICIOSBH = [{ key: null, value: '' }
+        , { key: 'Contract', value: 'Contract' }
         , { key: 'ContratoMP', value: 'ContratoMP' }
         , { key: 'ContratoPOS', value: 'ContratoPOS' }
-        , { key: 'SMSEnvio', value: 'SMSEnvio' }
+        , { key: 'Coverage', value: 'Coverage' }
+        , { key: 'EstadoDocumento', value: 'EstadoDocumento' }
         , { key: 'GestorDocumental', value: 'GestorDocumental' }
         , { key: 'NotificacionElectronica', value: 'NotificacionElectronica' }
         , { key: 'Parametricas', value: 'Parametricas' }
+        , { key: 'Patient', value: 'Patient' }
         , { key: 'Persona', value: 'Persona' }
-        , { key: 'EstadoDocumento', value: 'EstadoDocumento' }
+        , { key: 'SMSEnvio', value: 'SMSEnvio' }
         , { key: 'Validador', value: 'Validador' }
     ];
     /**
