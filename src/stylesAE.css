@@ -54,7 +54,7 @@
 }
 
 .paraAE .btnCancel, .paraAE .btnOk, .paraAE .btnSelect, .paraAE .errorMessages button,
-.paraAE .siuButtons button {
+.paraAE .siuButtons button, .iiuButtons button {
     padding: 1px 6px;
     font-size: 15px;
     font-family: Arial, sans-serif;

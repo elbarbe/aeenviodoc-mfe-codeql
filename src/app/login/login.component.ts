@@ -76,8 +76,9 @@ export class LoginComponent implements OnInit {
             return null;
         }
 
-        const loginData: {username: string, password: string} = {
-            username: this.oidFields[0].value,
+        const loginData: {facetname: string, username: string, password: string} = {
+            facetname: this.agentSelector.value,
+            username: JSON.stringify(this.agentOid),
             password: this.password
         };
 

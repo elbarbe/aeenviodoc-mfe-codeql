@@ -15,7 +15,7 @@ spec:
     git:
 #INIGIT
       uri: "git@github.com:IntegranovaSoporteColSanitas/aeenviodoc-mfe.git"
-      ref: "5.0.0"
+      ref: "6.0.0"
     sourceSecret:
       name: ae-git-credentials
 #FINGIT

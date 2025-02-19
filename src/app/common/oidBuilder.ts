@@ -1092,5 +1092,13 @@ export class OidBuilder {
         identificador: string} {
         return {identificador: textoAvisouIdentificador};
     }
+    /**
+     * Builds an Oid of class UsuarioSistemaExterno
+     * @param usuarioSistemaExternouLogin Identificacion field 1
+     */
+    public buildOidUsuarioSistemaExterno(usuarioSistemaExternouLogin: string): {
+        login: string} {
+        return {login: usuarioSistemaExternouLogin};
+    }
 
 }
