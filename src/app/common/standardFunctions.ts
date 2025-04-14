@@ -265,15 +265,22 @@ export class StandardFunctions {
      * Returns the date part of a datetime argument.
      * @param adatetime dateTime
      */
-    public getDatePart(adatetime: Date): Date {
-        return new Date(adatetime.getFullYear(), adatetime.getMonth(), adatetime.getDate(), 0, 0, 0, 0);
+    public getDatePart(adatetime: Date | null): Date | null {
+        try {
+            if (adatetime) {
+                return new Date(adatetime.getFullYear(), adatetime.getMonth(), adatetime.getDate(), 0, 0, 0, 0);
+            }
+        } catch(e) {
+            return null;
+        }
+        return null;
     }
 
     /**
      * Returns the time part of a datetime argument.
      * @param adatetime dateTime
      */
-    public getTimePart(adatetime: Date): Date {
+    public getTimePart(adatetime: Date | null): Date | null {
         return adatetime;
     }
 
@@ -347,9 +354,16 @@ export class StandardFunctions {
      * @param adate date
      * @param atime time
      */
-    public toDatetime(adate: Date, atime: Date): Date {
-        return new Date(adate.getFullYear(), adate.getMonth(), adate.getDate(), atime.getHours(),
-            atime.getMinutes(), atime.getSeconds(), atime.getMilliseconds());
+    public toDatetime(adate: Date | null, atime: Date | null): Date | null {
+        try {
+            if (adate && atime) {
+                return new Date(adate.getFullYear(), adate.getMonth(), adate.getDate(), atime.getHours(),
+                    atime.getMinutes(), atime.getSeconds(), atime.getMilliseconds());
+            }
+        } catch(e) {
+            return null;
+        }
+        return null;
     }
 
     /**

@@ -6,7 +6,7 @@ import { AbstractFilter } from '../../common/abstractFilter';
 import { StandardFunctions } from '../../common/standardFunctions';
 import { LanguageMng } from '../../common/languageMng';
 import { UserFunctions } from '../../common/userFunctions';
-import { AbstractPIU } from 'src/app/common/abstractPIU';
+import { AbstractPIU } from '../../common/abstractPIU';
 
 /**
  * Manages the filter F_SolicitudSolicitud of class Solicitud

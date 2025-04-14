@@ -84,7 +84,7 @@ export class SolicitudMDIUuSolicitudPreexistenciasComponent extends AbstractMDIU
             this.d0.title = this.langMng.translateText(
                 'cls_Solicitud_mdiu_MDIU_SolicitudPreexistencias_detail_Clas_1431957012480960UIMaDet_9Det_1',
                 'Preexistencias');
-            this.d0.setExchangeInfo(this.util.createExchangeInfoNavigationFromMasterToDetail('Preexistencia',
+            this.d0.initializeFromExchangeInfo(this.util.createExchangeInfoNavigationFromMasterToDetail('Preexistencia',
                 this.master.getContext(), null, 'Usuario.Solicitud', null, 'Solicitud', ''));
         }
         super.initializeComponents();

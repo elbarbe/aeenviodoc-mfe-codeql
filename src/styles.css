@@ -440,6 +440,9 @@ select {
 .waitModalDialog {
     padding: 0px !important;
 }
+.waitDialog{
+    z-index: 10000;
+}
 
 /** Links */
 a:hover {

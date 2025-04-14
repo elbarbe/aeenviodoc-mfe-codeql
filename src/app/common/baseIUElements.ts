@@ -1525,7 +1525,7 @@ export abstract class AbstractIU {
     /** Custom options from model */
     public customOptions = '';
     /** Block IU using wait dialog */
-    public showWait = false;
+    public showWait = true;
     constructor(protected appGlobalInfo: AppGlobalInfo,
                 protected util: Util,
                 protected changeDetectorRef: ChangeDetectorRef) {

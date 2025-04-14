@@ -234,6 +234,10 @@ export class AppExchangeInfo {
     }
 
     public isMainScenario(): boolean {
-        return !this.exchInfo;
+        if (this.exchInfo) {
+            return this.exchInfo.targetClassName && this.exchInfo.targetIUName ? false : true;
+        } else {
+            return true;
+        }
     }
 }
