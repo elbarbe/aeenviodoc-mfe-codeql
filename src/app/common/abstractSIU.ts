@@ -143,6 +143,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
             // Set the original context to the controller
             this.context = exchInfo.previous;
             this.loadFromContext();
+            this.setShowWait(false);
             this.processSelectionBackward(exchInfo);
             this.appGlobalInfo.appExchangeInfo.save(exchInfo.previous.exchangeInfo)
         } else {
