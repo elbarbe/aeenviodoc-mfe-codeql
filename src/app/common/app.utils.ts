@@ -1559,9 +1559,9 @@ export class Util {
         return new Promise<any>((resolve, reject) => {
             // Si hemos superado el numero de reintentos, damos un error
             if (numIntentos >= 3) {
-                reject(new ErrorInformation(false, '', 'Su sesión ha caducado, espere unos instantes y vuelva a intentarlo', '',[] ));
+                reject(new ErrorInformation(false, '', 'Su sesion ha caducado, espere unos instantes y vuelva a intentarlo', '',[] ));
             } else  if (this.appGlobalInfo.getLoggedUserInfo().lastActivityTimestamp > inicio) {
-                // Si ha habido actividad en la informaciÃ³n del usuario posterior al inicio, repetimos la llamada
+                // Si ha habido actividad en la informaciï¿½n del usuario posterior al inicio, repetimos la llamada
                 this.callHttpPostAux(url, data, responseAsText).then( (response: any) => {
                     resolve(response);
                 }).catch( (err: ErrorInformation) => {
@@ -1581,7 +1581,7 @@ export class Util {
     }
 
     /**
-     * Devuelve el código legal del tipo de identificación recibido
+     * Devuelve el cï¿½digo legal del tipo de identificaciï¿½n recibido
      * @param oidTipoIdent 
      */
     public getCodigoLegalTipoIdentificacion(oidTipoIdent: string): Promise<string> {

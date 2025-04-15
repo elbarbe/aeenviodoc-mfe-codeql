@@ -106,8 +106,12 @@ export abstract class AbstractPIU extends AbstractQueryIU {
     public override myngOnInit(): void {
         super.myngOnInit();
         // If pagination is in client, load data
-        if (this.visible && this.paginationInClient && this.autoSearch) {
-            this.refresh(1);
+        if (this.visible && this.paginationInClient){
+            if (this.autoSearch) {
+                this.refresh(1);
+            } else {
+                this.setShowWait(false);
+            }
         }
     }
 
@@ -557,6 +561,8 @@ export abstract class AbstractPIU extends AbstractQueryIU {
             // event.first: Zero-relative number of the first row to be displayed.
             if (!this.paginationInClient && (this.lastPageNumber !== -1 || this.autoSearch)) {
                 this.refresh(requestedPage);
+            } else {
+                this.setShowWait(false);
             }
         }
     }
