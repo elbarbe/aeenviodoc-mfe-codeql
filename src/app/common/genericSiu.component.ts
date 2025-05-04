@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';

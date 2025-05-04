@@ -1,6 +1,9 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Util } from './app.utils';
 
+/**
+ * « User functions »
+ */
 import { AppGlobalInfo } from '../app.appglobalinfo';
 
 @Injectable({providedIn: 'root'})

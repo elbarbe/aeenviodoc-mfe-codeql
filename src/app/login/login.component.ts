@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 import { ActivatedRoute } from '@angular/router';

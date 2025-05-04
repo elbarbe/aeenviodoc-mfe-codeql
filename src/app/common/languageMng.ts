@@ -1,4 +1,4 @@
-﻿import { getLocaleDateFormat, FormatWidth, getLocaleNumberSymbol, NumberSymbol, registerLocaleData} from '@angular/common';
+import { getLocaleDateFormat, FormatWidth, getLocaleNumberSymbol, NumberSymbol, registerLocaleData} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import { Injectable } from '@angular/core';
@@ -8,7 +8,8 @@ import { ErrorInformation } from './answerRequestInformation';
 
 
 /**
- * Language manager. It is on charge of translate texts and data formats
+ * « Language manager »
+ * It is on charge of translate texts and data formats
  */
 @Injectable({providedIn: 'root'})
 export class LanguageMng {

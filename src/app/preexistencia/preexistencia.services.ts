@@ -1,4 +1,4 @@
-﻿import { AbstractServices } from '../common/abstractServices';
+import { AbstractServices } from '../common/abstractServices';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 

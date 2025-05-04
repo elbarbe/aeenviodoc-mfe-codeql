@@ -1,4 +1,4 @@
-﻿import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Field, FieldOVLenseSearch } from '../common/baseIUElements';
 import { AbstractServiceIU } from '../common/abstractSIU';

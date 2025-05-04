@@ -10,8 +10,12 @@ import { ExchangeInfo } from './app.exchangeinfo';
 import { OidBuilder } from './oidBuilder';
 import { LanguageMng } from './languageMng';
 import { LogicError, ErrorInformation, QueryResponse, RequestError } from './answerRequestInformation';
+import { JsonUtility } from './jsonUtility';
 import { environment } from 'src/environments/environment';
 
+/**
+ * Â« Utility class for common functionality Â»
+ */
 import { ModelConstants } from './model.constants';
 
 @Injectable({providedIn: 'root'})
@@ -96,14 +100,14 @@ export class Util {
             }
         }
         if (datatype === 'datetime') {
-            dateValue = this.getDate(value);
+            dateValue = this.getDateTime(value);
             if (dateValue) {
                 valueString = dateValue.toLocaleDateString(this.langMng.getLanguageId())
                 + ' ' + dateValue.toLocaleTimeString(this.langMng.getLanguageId());
             }
         }
         if (datatype === 'time') {
-            dateValue = this.getDate(value);
+            dateValue = this.getTime(value);
             if (dateValue) {
                 valueString = dateValue.toLocaleTimeString(this.langMng.getLanguageId());
             }
@@ -140,7 +144,11 @@ export class Util {
         let dateType: Date | null = null;
         if (date) {
             try {
-                dateType = new Date(date);
+                if (typeof date === 'string') {
+                    return JsonUtility.jsonToDate(date);
+                } else {
+                    dateType = new Date(date);
+                }
                 if (isNaN(dateType.valueOf())) {
                     dateType = null;
                 }
@@ -151,6 +159,51 @@ export class Util {
         return dateType;
     }
 
+    /**
+     * If the value is a datetime, return a Date value
+     * @param date Possible date value
+     */
+    public getDateTime(date: any): Date | null {
+        let dateType: Date | null = null;
+        if (date) {
+            try {
+                if (typeof date === 'string') {
+                    return JsonUtility.jsonToDateTime(date);
+                } else {
+                    dateType = new Date(date);
+                }
+                if (isNaN(dateType.valueOf())) {
+                    dateType = null;
+                }
+            } catch (e) {
+                dateType = null;
+            }
+        }
+        return dateType;
+    }
+
+    /**
+     * If the value is a Time, return a Date value
+     * @param date Possible date value
+     */
+    public getTime(date: any): Date | null {
+        let dateType: Date | null = null;
+        if (date) {
+            try {
+                if (typeof date === 'string') {
+                    return JsonUtility.jsonToTime(date);
+                } else {
+                    dateType = new Date(date);
+                }
+                if (isNaN(dateType.valueOf())) {
+                    dateType = null;
+                }
+            } catch (e) {
+                dateType = null;
+            }
+        }
+        return dateType;
+    }    
     public getBool(value: any): boolean {
         let valueTyped = true;
         if (!this.isNull(value)) {
@@ -224,11 +277,61 @@ export class Util {
         likeExpresion = likeExpresion.replace(new RegExp('[*]', 'g'), '\\*');
         likeExpresion = likeExpresion.replace(new RegExp('[%]', 'g'), '.*');
         likeExpresion = '^' + likeExpresion + '$';
-        // likeExpresion = '\\A' + likeExpresion;
-
 
         const regExp = new RegExp(likeExpresion, 'i');
         return regExp.test(strData);
+    }
+
+    /**
+     * Returns true if date 1 is greater than date2
+     * @param date1 
+     * @param date2 
+     * @returns 
+     */
+    public dateGT(date1: Date | null, date2: Date | null): boolean {
+        if (date1 && date2) {
+            return date1 > date2;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if date 1 is greater than or equals to date2
+     * @param date1 
+     * @param date2 
+     * @returns 
+     */
+    public dateGTE(date1: Date | null, date2: Date | null): boolean {
+        if (date1 && date2) {
+            return date1 >= date2;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if date 1 is less than date2
+     * @param date1 
+     * @param date2 
+     * @returns 
+     */
+    public dateLT(date1: Date | null, date2: Date | null): boolean {
+        if (date1 && date2) {
+            return date1 < date2;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if date 1 is less than or equals to date2
+     * @param date1 
+     * @param date2 
+     * @returns 
+     */
+    public dateLTE(date1: Date | null, date2: Date | null): boolean {
+        if (date1 && date2) {
+            return date1 <= date2;
+        }
+        return false;
     }
 
     /**
@@ -1561,7 +1664,7 @@ export class Util {
             if (numIntentos >= 3) {
                 reject(new ErrorInformation(false, '', 'Su sesion ha caducado, espere unos instantes y vuelva a intentarlo', '',[] ));
             } else  if (this.appGlobalInfo.getLoggedUserInfo().lastActivityTimestamp > inicio) {
-                // Si ha habido actividad en la información del usuario posterior al inicio, repetimos la llamada
+                // Si ha habido actividad en la informaciÃ³n del usuario posterior al inicio, repetimos la llamada
                 this.callHttpPostAux(url, data, responseAsText).then( (response: any) => {
                     resolve(response);
                 }).catch( (err: ErrorInformation) => {
@@ -1581,7 +1684,7 @@ export class Util {
     }
 
     /**
-     * Devuelve el código legal del tipo de identificación recibido
+     * Devuelve el cÃ³digo legal del tipo de identificaciÃ³n recibido
      * @param oidTipoIdent 
      */
     public getCodigoLegalTipoIdentificacion(oidTipoIdent: string): Promise<string> {

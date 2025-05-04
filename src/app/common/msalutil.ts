@@ -7,7 +7,7 @@ import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
 import { environment } from 'src/environments/environment';
 /**
- * Utility class for Entra Id support
+ * « Utility class for Entra Id support »
  */
 @Injectable({ providedIn: 'root' })
 export class MSALUtil {

@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 import { DisplaySetItem } from '../common/queryIUElements';
@@ -10,6 +10,9 @@ import { StandardFunctions } from '../common/standardFunctions';
 import { ConditionalNavigationMng } from '../common/conditionalNavigationMng';
 import { UserFunctions } from '../common/userFunctions';
 
+/**
+ * « Implements PIU PIU_Preexistencia of Preexistencia »
+ */
 export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
     /** Constants for display set item aliases */
     private readonly dsusuarioddrvnombrecompleto = 'Usuario';

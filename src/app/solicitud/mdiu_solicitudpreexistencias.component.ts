@@ -1,4 +1,4 @@
-﻿import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 import { AbstractMDIU } from '../common/abstractMDIU';
@@ -11,6 +11,9 @@ import { PreexistenciaPIUuPreexistenciaComponent } from '../preexistencia/piu_pr
 
 import { UserFunctions } from '../common/userFunctions';
 
+/**
+ * « Implements MDIU MDIU_SolicitudPreexistencias of Solicitud »
+ */
 @Component({
     selector: 'imes-solicitud-mdiu-solicitudpreexistencias',
     templateUrl: './mdiu_solicitudpreexistencias.component.html',

@@ -1,4 +1,4 @@
-﻿import { ModelConstants } from './common/model.constants';
+import { ModelConstants } from './common/model.constants';
 
 export class Configuration {
     public BASE_URL = '';

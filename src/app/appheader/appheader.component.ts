@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { ExchangeInfo } from '../common/app.exchangeinfo';
 import { Util } from '../common/app.utils';
@@ -6,6 +6,9 @@ import { LanguageMng } from '../common/languageMng';
 import { ModelConstants } from '../common/model.constants';
 import { MSALUtil } from '../common/msalutil';
 
+/**
+ * « Main header component »
+ */
 @Component({
     selector: 'app-menu',
     templateUrl: './appheader.component.html',

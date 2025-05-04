@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../../app.appglobalinfo';
 import { Util } from '../../common/app.utils';
 import { Field } from '../../common/baseIUElements';

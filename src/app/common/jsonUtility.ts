@@ -53,5 +53,79 @@ export class JsonUtility {
         return timeJson;
 
     }
+
+    /**
+     * Returns the date from string Json
+     * @param date String value to be converted
+     */
+    public static jsonToDate(date: string | null): Date | null {
+        let dateType: Date | null = null;
+        if (date) {
+            try {
+                dateType = new Date( +date.substring(0,4),
+                +date.substring(5,7) - 1,
+                +date.substring(8,10),0,0,0,0);
+
+                if (isNaN(dateType.valueOf())) {
+                    dateType = null;
+                }
+            } catch (e) {
+                dateType = null;
+            }
+        }
+        return dateType;
+    }
+
+    /**
+     * Returns the datetime from string Json
+     * @param date String value to be converted
+     */
+    public static jsonToDateTime(date: string | null): Date | null {
+        let dateType: Date | null = null;
+        if (date) {
+            try {
+                dateType = new Date( +date.substring(0,4),
+                +date.substring(5,7) - 1,
+                +date.substring(8,10),
+                +date.substring(11,13),
+                +date.substring(14,16),
+                +date.substring(17,19),
+                0);
+
+                if (isNaN(dateType.valueOf())) {
+                    dateType = null;
+                }
+            } catch (e) {
+                dateType = null;
+            }
+        }
+        return dateType;
+
+    }
+
+    /**
+     * Returns the time from string Json
+     * @param date String value to be converted
+     */
+    public static jsonToTime(date: string | null): Date | null {
+        let dateType: Date | null = null;
+        if (date) {
+            try {
+                dateType = new Date( 1970, 0, 1,
+                +date.substring(11,13),
+                +date.substring(14,16),
+                +date.substring(17,19),
+                0);
+
+                if (isNaN(dateType.valueOf())) {
+                    dateType = null;
+                }
+            } catch (e) {
+                dateType = null;
+            }
+        }
+        return dateType;
+
+    }
 }
 

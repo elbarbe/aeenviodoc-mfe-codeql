@@ -1,5 +1,5 @@
-﻿/**
- * Defined selection patterns
+/**
+ * « Defined selection patterns »
  */
 export class DefinedSelections {
     /**

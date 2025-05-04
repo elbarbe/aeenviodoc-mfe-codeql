@@ -1,4 +1,4 @@
-﻿import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { AbstractIU } from '../common/baseIUElements';
 import { Field, FieldBlob } from '../common/baseIUElements';
@@ -9,6 +9,9 @@ import { LanguageMng } from '../common/languageMng';
 import { ConditionalNavigationMng } from '../common/conditionalNavigationMng';
 
 @Component({
+/**
+ * « Implements outbound arguments global SIU SIU_OGETREPORTE »
+ */
     selector: 'imes-gs-siu-ogetreporte-out',
     templateUrl: './siu_ogetreporte_out.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
