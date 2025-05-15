@@ -194,7 +194,9 @@ export class SolicitudPIUuEnvioDocComponent extends AbstractPIU implements OnIni
         dsItem.alias = this.langMng.translateText(
             'cls_Solicitud_ds_DS_Solicitud_PIUEnvioDoc_item_Clas_1431957012480960CjtoVis_3ICtjoVis_11',
             this.dsagentedusuario);
-        dsItem.agents = [];
+        dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();

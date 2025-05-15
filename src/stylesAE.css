@@ -425,3 +425,9 @@
 .paraAE .avisoProDatos textarea.form-control {
     height: 350px !important;
 }
+.paraAE .avisoProDatos .aliasField {
+    display: none;
+}
+.paraAE .cssNavPrimero .actionsNavigations .action {
+    order: 2;
+}

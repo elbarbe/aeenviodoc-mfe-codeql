@@ -234,7 +234,7 @@ export class GridComponent implements AfterViewInit {
         if (col.options) {
             dataValue = this.piu.getValueFromDefinedSelection(col, item[col.field]);
         } else if (col.dataType === 'datetime') {
-            dataValue = this.util.getDate(dataValue);
+            dataValue = this.util.getDateTime(dataValue);
             if (dataValue) {
                 dataValue = dataValue.toLocaleDateString(this.langMng.getLanguageId()) + ' ' +
                 dataValue.toLocaleTimeString(this.langMng.getLanguageId());
@@ -245,7 +245,7 @@ export class GridComponent implements AfterViewInit {
                 dataValue = dataValue.toLocaleDateString(this.langMng.getLanguageId());
             }
         } else if (col.dataType === 'time') {
-            dataValue = this.util.getDate(dataValue);
+            dataValue = this.util.getTime(dataValue);
             if (dataValue) {
                 dataValue = dataValue.toLocaleTimeString(this.langMng.getLanguageId());
             }

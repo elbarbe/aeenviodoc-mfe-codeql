@@ -299,9 +299,12 @@ export abstract class AbstractIIU extends AbstractQueryIU {
             return;
         }
         for (const field of this.fields) {
-            if (field.dataType.toLowerCase() === 'date' || field.dataType.toLowerCase() === 'datetime' ||
-                field.dataType.toLowerCase() === 'time') {
+            if (field.dataType.toLowerCase() === 'date') {
                 field.value = this.util.getDate(this.instanceData[field.nameInRequest.replace(new RegExp('[.]', 'g'), '-')]);
+            } else if (field.dataType.toLowerCase() === 'datetime') {
+                field.value = this.util.getDateTime(this.instanceData[field.nameInRequest.replace(new RegExp('[.]', 'g'), '-')]);
+            } else if (field.dataType.toLowerCase() === 'time') {
+                field.value = this.util.getTime(this.instanceData[field.nameInRequest.replace(new RegExp('[.]', 'g'), '-')]);
             } else if (field.dataType.toLowerCase() === 'blob') {
                 field.value = this.instanceData[field.nameInRequest.replace(new RegExp('[.]', 'g'), '-')];
             } else {

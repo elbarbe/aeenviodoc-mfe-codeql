@@ -148,10 +148,6 @@ export abstract class AbstractServiceIU extends AbstractIU {
             this.appGlobalInfo.appExchangeInfo.save(exchInfo.previous.exchangeInfo)
         } else {
             this.initializeFromExchangeInfo(exchInfo);
-            if (this.noShow) {
-                this.visible = false;
-                this.saveChanges();
-            }
         }
     }
 

@@ -447,9 +447,14 @@ export abstract class AbstractPIU extends AbstractQueryIU {
             this.activeFilterIsHidden = true;
             for (const row of data) {
                 for (const dsElem of this.displaySet) {
-                    if (row[dsElem.field] && (dsElem.type.toLowerCase() === 'date' || dsElem.type.toLowerCase() === 'datetime' ||
-                        dsElem.type.toLowerCase() === 'time')) {
-                        row[dsElem.field] = this.util.getDate(row[dsElem.field]);
+                    if (row[dsElem.field]) {
+                        if (dsElem.type.toLowerCase() === 'date') {
+                            row[dsElem.field] = this.util.getDate(row[dsElem.field]);
+                        } else if (dsElem.type.toLowerCase() === 'datetime') {
+                            row[dsElem.field] = this.util.getDateTime(row[dsElem.field]);
+                        } else if (dsElem.type.toLowerCase() === 'time') {
+                            row[dsElem.field] = this.util.getTime(row[dsElem.field]);
+                        }
                     }
                 }
             }
