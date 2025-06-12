@@ -4,6 +4,7 @@ import { Util } from '../common/app.utils';
 import { DisplaySetItem } from '../common/queryIUElements';
 import { ModelConstants } from '../common/model.constants';
 import { AbstractPIU } from '../common/abstractPIU';
+import { PersonaFilterFuPersonaVarios} from './filters/personafilterfupersonavarios';
 import { DefinedSelections } from '../common/definedSelection';
 import { Field } from '../common/baseIUElements';
 import { LanguageMng } from '../common/languageMng';
@@ -31,6 +32,9 @@ export class PersonaPIUuPersonaComponent extends AbstractPIU implements OnInit {
     private readonly dsgenero = 'Género';
     private readonly dsrazonsocial = 'Razón Social';
 
+    /** Filters */
+    public f0: PersonaFilterFuPersonaVarios;
+
     /**
      * Component constructor
      * @param appGlobalInfo Application Global Information
@@ -53,6 +57,10 @@ export class PersonaPIUuPersonaComponent extends AbstractPIU implements OnInit {
             'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo']));
         this.title = this.langMng.translateText('cls_Persona_piu_PIU_Persona',
             'Personas');
+        this.f0 = new PersonaFilterFuPersonaVarios(this.appGlobalInfo,
+            this.util, this.changeDetectorRef, this.langMng, stdFun, usrFunc);
+        this.f0.populationContainer = this;
+        this.filters.push(this.f0);
         this.queryURL = '/api/PersonaApi/GetPopulationDynamic';
         this.paginationInClient = false;
     }
@@ -79,7 +87,9 @@ export class PersonaPIUuPersonaComponent extends AbstractPIU implements OnInit {
         dsItem.alias = this.langMng.translateText(
             'cls_Persona_ds_DS_Persona_PIU_item_Clas_1431886233600805CjtoVis_2ICtjoVis_1',
             this.dstipoidentificaciondnombrecorto);
-        dsItem.agents = [];
+        dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();

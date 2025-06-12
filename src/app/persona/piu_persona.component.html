@@ -4,6 +4,38 @@
         <h3 class="title">{{title}}</h3>
         <div class="piuRegion" [ngClass]="cssClasses">
             <imes-actionsnavigations [queryIU]="this"></imes-actionsnavigations>
+            <div class="filter col-12 ">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a (click)="setActiveFilterIndex(0)" class="nav-link"
+                            [ngClass]="{'active': activeFilter && activeFilter.index == 0}" role="tab" tabindex
+                            data-bs-toggle="tab">{{f0.title}}
+                            <button *ngIf="activeFilter && activeFilter.index == 0 && hideFilters && activeFilterIsHidden" [ngClass]="getShowFilterCSSClass()" (click)="showCurrentFilter()"
+                                aria-label="Show" title="Show"></button>
+                            <button *ngIf="activeFilter && activeFilter.index == 0 && hideFilters && !activeFilterIsHidden" [ngClass]="getHideFilterCSSClass()" (click)="hideCurrentFilter()"
+                                aria-label="Hide" title="Hide"></button>
+                        </a>
+                    </li>
+                </ul>
+                <div *ngIf="!hideFilters || !activeFilterIsHidden" class="tab-content filterContent">
+                        <div class="tab-pane" [ngClass]=" {'active': activeFilter && activeFilter.index == 0}" role="tabpanel">
+                            <div class="filterVariables">
+                                <imes-input-definedselection [field]="f0.vuTipoPersona" *ngIf="f0.vuTipoPersona.visible"></imes-input-definedselection>
+                            <imes-preload [field]="f0.vouTipoIdentificacion" *ngIf="f0.vouTipoIdentificacion.visible"></imes-preload>
+                                <imes-input-string [field]="f0.vuRazonSocial" *ngIf="f0.vuRazonSocial.visible"></imes-input-string>
+                                <imes-input-string [field]="f0.vuPrimerNombre" *ngIf="f0.vuPrimerNombre.visible"></imes-input-string>
+                                <imes-input-string [field]="f0.vuPrimerApellido" *ngIf="f0.vuPrimerApellido.visible"></imes-input-string>
+                                <imes-input-string [field]="f0.vuSegundoApellido" *ngIf="f0.vuSegundoApellido.visible"></imes-input-string>
+                            </div>
+                            <div class="filterButtons">
+                                <button class="btn btn-outline-secondary btn-sm pi pi-search" (click)="f0.search()"
+                                    aria-label="Search"></button>
+                                <button class="btn btn-outline-secondary btn-sm pi pi-trash" (click)="f0.clean()"
+                                    aria-label="Clean"></button>
+                            </div>
+                        </div>
+                </div>
+            </div>
             <imes-grid [piu]="this"></imes-grid>
         </div>
         <imes-piubuttons [piu]="this"></imes-piubuttons>

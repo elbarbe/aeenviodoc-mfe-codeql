@@ -1157,7 +1157,7 @@ export class FieldOVLenseSearch extends FieldOV {
             }
             this.lastText = this.text;
         } else {
-            this.text = '';
+            //this.text = '';
         }
     }
 
