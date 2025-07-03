@@ -401,10 +401,13 @@ export class DefinedSelections {
         , { key: 'EstadoDocumento', value: 'EstadoDocumento' }
         , { key: 'GestorDocumental', value: 'GestorDocumental' }
         , { key: 'NotificacionElectronica', value: 'NotificacionElectronica' }
+        , { key: 'Notifications', value: 'Notifications' }
+        , { key: 'Organization', value: 'Organization' }
+        , { key: 'Parametric', value: 'Parametric' }
         , { key: 'Parametricas', value: 'Parametricas' }
         , { key: 'Patient', value: 'Patient' }
         , { key: 'Persona', value: 'Persona' }
-        , { key: 'SMSEnvio', value: 'SMSEnvio' }
+        , { key: 'smsenvio', value: 'SMSEnvio' }
         , { key: 'Validador', value: 'Validador' }
     ];
     /**
