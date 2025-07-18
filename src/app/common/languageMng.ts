@@ -350,6 +350,8 @@ export class LanguageMng {
             app_FLD_ERRORNOTEXIST: '%1 no existe',
             app_FLD_ERRORPWDCONF: 'El campo %1 no coincide con la confirmación',
             app_FLD_NUMBERSELECTED: '%1 seleccionados',
+            app_FILE_SIZE: 'El fichero supera el tamaño máximo permitido de %1',
+            app_FILE_EXTENSION: 'El fichero no tiene una de las extensiones permitidas: %1',
             app_INSTANCELOG: 'Detalle de servicios',
             app_GLOBALLOG: 'Log Global',
             app_CLASSLOG: 'Log de servicios',

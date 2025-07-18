@@ -233,6 +233,9 @@ export class Field {
      * Returns the single field value
      */
     public getSingleValue(): any {
+        if (this.value === '') {
+            return null;
+        }
         return this.value;
     }
 
@@ -663,17 +666,17 @@ export class FieldBlob extends Field {
      */
     private validateFileProperties(file: any): string {
         if (this.fileMaxSize && file.size > this.fileMaxSize * 1048576) {
-            return this.langMng.translateTextWithParams('_fixed.fields.errorFileSize', '', this.fileMaxSize.toString());
+            return this.langMng.translateTextWithParams('app_FILE_SIZE', '', this.fileMaxSize.toString());
         }
         if (this.fileAllowedExtensions) {
             const index = file.name.lastIndexOf('.');
             if (index >= 0) {
                 const fileExtension = file.name.substring(index + 1).toLowerCase();
                 if (this.fileAllowedExtensions.toLowerCase().indexOf(fileExtension) < 0) {
-                    return this.langMng.translateTextWithParams('_fixed.fields.errorFileExtension', '', this.fileAllowedExtensions);
+                    return this.langMng.translateTextWithParams('app_FILE_EXTENSION', '', this.fileAllowedExtensions);
                 }
             } else {
-                return this.langMng.translateTextWithParams('_fixed.fields.errorFileExtension', '', this.fileAllowedExtensions);
+                return this.langMng.translateTextWithParams('app_FILE_EXTENSION', '', this.fileAllowedExtensions);
             }
         }
         return '';
@@ -1293,6 +1296,9 @@ export class FieldOVPreload extends FieldOV {
             instance.jsonOID = element.jsonOID;
             this.preloadValues.push({ label: instance.supplementaryInfo, value: instance });
         });
+        if (this.value && this.value.oid && !this.possibleValue) {
+            this.possibleValue = this.value.oid;
+        }
         if (this.possibleValue && this.preloadValues.length > 0) {
             this.setValue(this.possibleValue);
             this.possibleValue = null;
