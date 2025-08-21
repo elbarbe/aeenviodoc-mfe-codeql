@@ -125,7 +125,7 @@ export class GenericSiuComponent implements OnInit {
             this.argAlias = 'Configuration not found';
             this.argValue = '';
         }
-        if (this.util.modalForIUResponse.observers.length <= 1) {
+        if (this.util.modalForIUResponse.observed) {
             this.appGlobalInfo.setScenarioTitle(this.title);
         }
     }

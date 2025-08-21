@@ -41,6 +41,7 @@ html, body {
 }
 input[type="checkbox"] {
     margin: 0px!important;
+    appearance: auto!important;
 }
 
 .breadcrumb {

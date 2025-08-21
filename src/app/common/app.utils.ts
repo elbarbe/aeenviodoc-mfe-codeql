@@ -463,6 +463,8 @@ export class Util {
                 // Remove the top element in the context stack
                 if (exchInfo.comeBackContext?.exchangeInfo) {
                     this.appGlobalInfo.appExchangeInfo.save(exchInfo.comeBackContext.exchangeInfo);
+                } else {
+                    this.navigateToMain();
                 }
             } else if ( exchInfo.comeBackContext) {
                 this.navigateComeBack(exchInfo.comeBackContext);
@@ -963,7 +965,10 @@ export class Util {
                     case 'pdf':
                         options = { type: 'application/pdf' };
                         break;
-                    case 'ppt':
+                    case 'png':
+                        options = { type: 'image/png' };
+                        break;
+                        case 'ppt':
                         options = { type: 'application/vnd.ms-powerpoint' };
                         break;
                     case 'rar':
@@ -1047,6 +1052,12 @@ export class Util {
                     default:
                         options = { type: 'application/octet-stream' };
                 }
+            }
+
+            // If mime type is unknown, direct download 
+            if (options.type === 'application/octet-stream') {
+                this.saveFileFromBase64(fileDataBase64, fileName);
+                return;
             }
 
             const binaryString = atob(fileDataBase64);

@@ -95,7 +95,7 @@ export class SolicitudFilterFuSolicitudContratanteTitular extends AbstractFilter
 
         // v_FIni
         const defValv_FIni = new Promise<void>((resolveDefValue) => {
-            let rtnFuncvuFIni0;
+            let rtnFuncvuFIni0: any;
             this.usrFunc.fuGetFechaDesdeVarFiltro().then((res) => {
                 rtnFuncvuFIni0 = res;
 

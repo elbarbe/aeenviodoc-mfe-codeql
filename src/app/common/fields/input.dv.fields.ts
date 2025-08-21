@@ -110,7 +110,12 @@ export class InputStringComponent {
     public onKeyDown(event: KeyboardEvent): void {
         if (!this.isTextArea() && (event.key === 'Enter' || event.key === 'NumpadEnter' || event.keyCode === 13)) {
             event.preventDefault();
-            this.doAction.emit();
+            if (this.doAction.observed) {
+                this.doAction.emit();
+            }
+            if (this.field) {
+                this.field.onKeyDown(event.key);
+            }
         }
     }
 

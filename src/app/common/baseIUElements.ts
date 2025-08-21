@@ -69,6 +69,8 @@ export class Field {
     public fieldSize = -1;
     /** Calculted size data in pixels. To decide the editor to be used */
     public sizePixels = 0;
+    /** Key event observable */
+    public keyEvent: Subject<string> = new Subject<string>();
 
     /**
      * Constructor
@@ -467,6 +469,16 @@ export class Field {
     public getNameInRequest(): string {
         return this.nameInRequest;
     }
+    /**
+     * Process the key press event
+     * @param key
+     */
+    public onKeyDown(key:string): void {
+        if (['autonumeric','bool','int','nat','real','date','time','string','datetime','text','password'].includes(this.dataType)) {
+            this.keyEvent.next(key);
+        }
+    }
+
 }
 
 /**
@@ -1324,7 +1336,7 @@ export class FieldOVPreload extends FieldOV {
     private setExistingValue(oid: any): void {
         // Check if the received value exists in the preload list
         for (const item of this.preloadValues) {
-            if (item.value.jsonOID === JSON.stringify(oid)) {
+            if (item.value && JSON.stringify(JSON.parse(item.value.jsonOID)) === JSON.stringify(oid)) {
                 if (this.allowMultiSelect || this.isList) {
                     this.selectedInstances.push(item.value);
                     this.value = this.selectedInstances;
@@ -1562,7 +1574,7 @@ export abstract class AbstractIU {
             this.initialize();
         }
         // Set the title
-        if (this.util.modalForIUResponse.observers.length <= 1) {
+        if (this.util.modalForIUResponse.observed) {
             this.appGlobalInfo.setScenarioTitle(this.title);
         }
     }
