@@ -474,9 +474,7 @@ export class Field {
      * @param key
      */
     public onKeyDown(key:string): void {
-        if (['autonumeric','bool','int','nat','real','date','time','string','datetime','text','password'].includes(this.dataType)) {
-            this.keyEvent.next(key);
-        }
+        this.keyEvent.next(key);
     }
 
 }
@@ -1645,5 +1643,14 @@ export abstract class AbstractIU {
     public setShowWait(value: boolean): void {
         this.showWait = value;
         this.changeDetectorRef.markForCheck();
+    }
+
+    public getCompleteTitle(): string {
+        let completeTitle = this.title;
+        const context = this.getGlobalContext();
+        if (context?.exchangeInfo?.targetScenarioTitle) {
+            completeTitle += '. ' + context.exchangeInfo.targetScenarioTitle;
+        }
+        return completeTitle;
     }
 }

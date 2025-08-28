@@ -98,8 +98,8 @@ export class ConditionalNavigationMng {
     private condNavSolicituddummyuDiferenciasLiq(request: any, response: any, previousContext: any, comeBackContext: any): boolean {
 
         let exchInfo: ExchangeInfo;
-        if (this.appGlobalInfo.getLoggedUserInfo().isAgentOneOf(['Admin', 'SuperAdmin', 'Asesor', 'AreaMedica', 'Afiliaciones',
-            'Gestor', 'MesaDeApoyo'])) {
+        if (this.appGlobalInfo.getLoggedUserInfo().isAgentOneOf(['Funcionario', 'Admin', 'SuperAdmin', 'Asesor', 'AreaMedica',
+            'Afiliaciones', 'Gestor', 'MesaDeApoyo'])) {
             exchInfo = this.util.createExchangeInfoFromCondNavigation(ModelConstants.Solicitud.name,
                 ModelConstants.Solicitud.iiuudiferenciasliquidacion, previousContext, comeBackContext);
             exchInfo.selectedOidsClassName = ModelConstants.Solicitud.name;

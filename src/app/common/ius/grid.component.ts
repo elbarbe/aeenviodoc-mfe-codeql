@@ -36,6 +36,8 @@ export class GridComponent implements AfterViewInit {
                 this.intPIU.masterDetailContainer.masterAbstract === this.intPIU) {
                 this.expandDetails = true;
             }
+            this.piu.savingContextInformation.subscribe((data: any) => this.processSavingContextInformation(data));
+            this.piu.selectionChanged.subscribe(() => this.processSelectionChanged());
         }
     }
     get piu(): AbstractPIU { return this.intPIU; }
@@ -388,5 +390,45 @@ export class GridComponent implements AfterViewInit {
         if (event.key === 'Enter') {
             this.intPIU.onGridClickCell(rowData, linkIsAction, linkIndex)
         } 
+    }
+
+    /**
+     * Process the saving context information event
+     * @param context 
+     */
+    protected processSavingContextInformation(context: any): void {
+        // Save the current scroll position
+        if (context.customData) {
+            context.customData.tableOffsetTop = this.grid?.tableHeaderViewChild?.nativeElement?.offsetTop;
+        } else {
+            context.customData = {};
+            context.customData.tableOffsetTop = this.grid?.tableHeaderViewChild?.nativeElement?.offsetTop;
+        }
+    }
+
+    /**
+     * Process the saving context information event
+     * @param context 
+     */
+    protected processSelectionChanged(): void {
+        // Restore the scroll position
+        if (this.grid && this.piu.gridData && this.piu.gridSelectedRows && this.piu.gridSelectedRows.length > 0) {
+            // Get the index of first selected row
+            const rowIndex = this.piu.gridData.findIndex( (x: any) => x.oid === this.piu.gridSelectedRows[0].oid);
+            // If first selected row is present in the current data
+            if (rowIndex !== -1) {
+                const savedScrollPosition = this.piu.context?.customData?.tableOffsetTop;
+                if (savedScrollPosition) {
+                    // Remove the scroll position from context
+                    this.piu.context.customData.tableOffsetTop = undefined;
+                    window.setTimeout( () => {
+                        if (this.grid.tableViewChild?.nativeElement?.rows?.length > rowIndex) {
+                            this.grid.scrollTo( {top: savedScrollPosition});
+                        }
+                    }, 100);
+                }
+            }
+        }
+        
     }
 }

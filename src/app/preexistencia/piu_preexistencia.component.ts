@@ -38,6 +38,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
         super(appGlobalInfo, util, changeDetectorRef, langMng, condNavMng);
         this.idXML = 'Clas_1434050494464197UIPobCl_1';
         this.className = ModelConstants.Preexistencia.name;
+        this.classAlias = this.langMng.translateText('cls_Preexistencia',
+            'Preexistencia');
         this.iuName = 'PIU_Preexistencia';
         this.setUserVisibility(this.appGlobalInfo.getLoggedUserInfo().isIUVisible(this.idXML, ['Admin', 'SuperAdmin', 'Asesor',
             'AreaMedica', 'Gestor', 'MesaDeApoyo']));

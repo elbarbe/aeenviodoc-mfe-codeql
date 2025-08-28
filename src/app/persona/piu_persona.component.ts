@@ -52,6 +52,10 @@ export class PersonaPIUuPersonaComponent extends AbstractPIU implements OnInit {
         super(appGlobalInfo, util, changeDetectorRef, langMng, condNavMng);
         this.idXML = 'Clas_1431886233600805UIPobCl_1';
         this.className = ModelConstants.Persona.name;
+        this.classAlias = this.langMng.translateText('cls_Persona',
+            'Persona');
+        this.supplementaryInfoAtt.push('tipoidentificacion.nombrecorto');
+        this.supplementaryInfoAtt.push('numidentificacion');
         this.iuName = ModelConstants.Persona.piuupersona;
         this.setUserVisibility(this.appGlobalInfo.getLoggedUserInfo().isIUVisible(this.idXML, ['Admin', 'SuperAdmin', 'Asesor',
             'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo']));

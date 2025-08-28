@@ -47,9 +47,12 @@ export class SolicitudPIUuRadicadosuObsComponent extends AbstractPIU implements 
         super(appGlobalInfo, util, changeDetectorRef, langMng, condNavMng);
         this.idXML = 'Clas_1431957012480960UIPobCl_1';
         this.className = ModelConstants.Solicitud.name;
+        this.classAlias = this.langMng.translateText('cls_Solicitud',
+            'Solicitud');
+        this.supplementaryInfoAtt.push('ae_solicitudes.numero_solicitud');
         this.iuName = ModelConstants.Solicitud.piuuradicadosuobs;
         this.setUserVisibility(this.appGlobalInfo.getLoggedUserInfo().isIUVisible(this.idXML, ['Admin', 'SuperAdmin', 'Asesor',
-            'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo']));
+            'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo', 'Funcionario']));
         this.title = this.langMng.translateText('cls_Solicitud_piu_PIU_Radicados_Obs',
             'Radicados');
         this.queryURL = '/api/SolicitudApi/GetPopulationDynamic';
@@ -146,8 +149,8 @@ export class SolicitudPIUuRadicadosuObsComponent extends AbstractPIU implements 
         dsItem.alias = this.langMng.translateText(
             'cls_Solicitud_ds_DS_Solicitud_PIURadicado_item_Clas_1431957012480960CjtoVis_1ICtjoVis_5',
             this.dsnumradicado);
-        dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+        dsItem.agents = [ModelConstants.Funcionario.name, ModelConstants.Admin.name, ModelConstants.Superadmin.name,
+            ModelConstants.Asesor.name, ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
             ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 

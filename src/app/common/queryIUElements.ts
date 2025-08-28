@@ -261,6 +261,11 @@ export abstract class AbstractQueryIU extends AbstractIU {
     /** Progress bar subscription to manage the cancel */
     protected progressBarSubscription: Subscription | null = null;
 
+    /** Class alias */
+    protected classAlias = '';
+    /** Supplementary information attributes */
+    protected supplementaryInfoAtt: string[] = [];
+
     constructor(protected override appGlobalInfo: AppGlobalInfo,
                 protected override util: Util,
                 protected override changeDetectorRef: ChangeDetectorRef,
@@ -667,12 +672,26 @@ export abstract class AbstractQueryIU extends AbstractIU {
             } else if (nav.showInModal) {
                 this.showNavigationInModal(nav, previousContext, comeBackContext);
             } else {
-                this.util.navigateFromNavigation(nav.targetClass, nav.targetUI, previousContext,
-                    comeBackContext, nav.rolePath, this.getSelectedOids(), this.className, nav.navigationalFilter);
+                this.formTextForTitleInTarget().then( (text: string) => {
+                    this.util.navigateFromNavigation(nav.targetClass, nav.targetUI, previousContext,
+                        comeBackContext, nav.rolePath, this.getSelectedOids(), this.className, nav.navigationalFilter, text);
+    
+                }).catch( (err: Error) => {
+                    this.util.navigateFromNavigation(nav.targetClass, nav.targetUI, previousContext,
+                        comeBackContext, nav.rolePath, this.getSelectedOids(), this.className, nav.navigationalFilter, '');
+                });
             }
         }
 
         this.changeDetectorRef.markForCheck();
+    }
+
+    /**
+     * Returns the text containing information about the selected instance
+     * @returns 
+     */
+    protected formTextForTitleInTarget(): Promise<string> {
+        return Promise.resolve('');
     }
 
     /**

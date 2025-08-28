@@ -366,4 +366,27 @@ export abstract class AbstractIIU extends AbstractQueryIU {
         this.refresh();
     }
 
+    /**
+     * Returns the text containing information about the selected instance
+     * @returns 
+     */
+    protected override formTextForTitleInTarget(): Promise<string> {
+        // Return text for target scenario. Format => alias: oidValues - displaySetValues
+        if (this.instanceData) {
+            let instance = this.instanceData;
+            let oidValues = '';
+            let attValues = '';
+            for (const att of this.supplementaryInfoAtt) {
+                if (instance[att]) {
+                    attValues += ' ' + instance[att];
+                }
+            }
+            if (oidValues || attValues) {
+                return Promise.resolve(this.classAlias + ':' + oidValues + ' - ' + attValues);    
+            }
+            return Promise.resolve('');
+        } else {
+            return Promise.resolve('');
+        }
+    }
 }

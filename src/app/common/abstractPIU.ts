@@ -27,9 +27,10 @@ export abstract class AbstractPIU extends AbstractQueryIU {
     public context: {
         exchangeInfo: ExchangeInfo | null, filtersContext: any[], activeFilterIndex: number, gridSelectedRows: any, gridPageSize: number,
         gridFirstRowDisplayed: number, breadCrumbTitle: string, gridExpandedRows: any, gridBuiltInFilterFields: any,
-        gridSortInformation: any} = { exchangeInfo: null, filtersContext: [], activeFilterIndex: -1, gridSelectedRows: null,
+        gridSortInformation: any, customData: any} = { exchangeInfo: null, filtersContext: [], activeFilterIndex: -1, gridSelectedRows: null,
         gridPageSize: 0, gridFirstRowDisplayed: 0, breadCrumbTitle: '', gridExpandedRows: undefined, gridBuiltInFilterFields: undefined,
-        gridSortInformation: undefined};
+        gridSortInformation: undefined,
+        customData: undefined};
 
     /** Flag to select one or more instances */
     public inSelectionMode = false;
@@ -90,6 +91,8 @@ export abstract class AbstractPIU extends AbstractQueryIU {
     public gridDataChanged: Subject<void> = new Subject<void>();
     /** Flag to control the first search when navigation come back to this scenario */
     private isComeBackSearch = false;
+    /** Saving context cnformation */
+    public savingContextInformation: Subject<any> = new Subject<any>();
 
     constructor(protected override appGlobalInfo: AppGlobalInfo,
                 protected override util: Util,
@@ -692,6 +695,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
         this.context.gridExpandedRows = this.gridExpandedRows;
         this.context.gridBuiltInFilterFields = this.gridBuiltInFilterFields;
         this.context.gridSortInformation = this.gridSortInformation;
+        this.savingContextInformation.next(this.context)
     }
 
     /**
@@ -1360,5 +1364,36 @@ export abstract class AbstractPIU extends AbstractQueryIU {
 
     public getRowCssClasses(dataRow: any): string {
         return '';
+    }
+
+    /**
+     * Returns the text containing information about the selected instance
+     * @returns 
+     */
+    protected override formTextForTitleInTarget(): Promise<string> {
+        // Return text for target scenario. Format => alias: oidValues - displaySetValues
+        // Only if there is only one instance selected
+        if (this.gridSelectedRows) {
+            let instance = this.gridSelectedRows;
+            if (Array.isArray(this.gridSelectedRows)) {
+                if (this.gridSelectedRows.length > 1) {
+                    return Promise.resolve('');
+                }
+                instance = this.gridSelectedRows[0]
+            }
+            let oidValues = '';
+            let attValues = '';
+            for (const att of this.supplementaryInfoAtt) {
+                if (instance[att]) {
+                    attValues += ' ' + instance[att];
+                }
+            }
+            if (oidValues || attValues) {
+                return Promise.resolve(this.classAlias + ':' + oidValues + ' - ' + attValues);    
+            }
+            return Promise.resolve('');
+        } else {
+            return Promise.resolve('');
+        }
     }
 }

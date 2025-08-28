@@ -1,7 +1,8 @@
 <div class="form-group preload" [ngClass]="field.editorCSSClasses">
     <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
     <select class="form-select" [(ngModel)]="field.value" (ngModelChange)="onInstanceSelected(0)"
-        [disabled]="!field.enabled" [required]="field.mandatory" name="field" autocomplete="off">
+        [disabled]="!field.enabled" [required]="field.mandatory" name="field" (keydown)="onKeyDown($event)" 
+        autocomplete="off">
         <option class="option" *ngFor="let option of field.preloadValues" [ngValue]="option.value">{{option.label}}
         </option>
     </select>

@@ -3,7 +3,7 @@
     <div class="input-group">
         <input type="text" [(ngModel)]="field.text" class="form-control"
             [ngClass]="{ 'form-control-static' : !field.enabled }" [disabled]="!field.enabled"
-            [required]="field.mandatory" (keyup)="onKeyUp($event)" (keydown)="onKeypressLenseSearch()" autocomplete="off" />
+            [required]="field.mandatory" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" autocomplete="off" />
         <div class="dropdown open lenseSearchResultList" *ngIf="field.searchResults.length > 0">
             <ul class="dropdown-menu">
                 <li *ngFor="let instance of field.searchResults; let i = index">

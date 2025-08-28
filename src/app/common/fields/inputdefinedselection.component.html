@@ -1,7 +1,7 @@
 <div class="form-group" *ngIf="field.visible" [ngClass]="field.editorCSSClasses">
     <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
     <select class="form-select" [(ngModel)]="field.value" (ngModelChange)="onFieldChange()"
-        [disabled]="!field.enabled" [required]="field.mandatory"
+        [disabled]="!field.enabled" [required]="field.mandatory" (keydown)="onKeyDown($event)"
         autocomplete="off">
         <option class="option" *ngFor="let option of field.options" [ngValue]="option.key">{{option.value}}</option>
     </select>

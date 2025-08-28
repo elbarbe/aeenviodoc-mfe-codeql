@@ -642,7 +642,8 @@ export class Util {
      * @param navigationalFilterIdentity Navigational filter identity
      */
     public navigateFromNavigation(targetClassName: string, targetIUName: string, previousContext: any, comeBackContext: any,
-                                  rolePath: string, selectedOids: any, selectedOidsClassName: string, navigationalFilterIdentity: string) {
+                                  rolePath: string, selectedOids: any, selectedOidsClassName: string, navigationalFilterIdentity: string,
+                                  selectedInstanceSupplementaryInformation = '') {
 
         // Create and save the exchange information
         const exchInfo = new ExchangeInfo();
@@ -654,6 +655,7 @@ export class Util {
         exchInfo.selectedOids = selectedOids;
         exchInfo.selectedOidsClassName = selectedOidsClassName;
         exchInfo.rolePath = rolePath;
+        exchInfo.targetScenarioTitle = selectedInstanceSupplementaryInformation;
         if (navigationalFilterIdentity && navigationalFilterIdentity.length > 0) {
             exchInfo.navigationalFilterIdentity = [navigationalFilterIdentity];
             if (selectedOids && selectedOids.length === 1) {
