@@ -357,7 +357,7 @@ export class GridComponent implements AfterViewInit {
 
         // Add the headers row
         filtered.unshift(excelHeaders);
-        const worksheet = XLSX.utils.json_to_sheet(filtered, { skipHeader: true });
+        const worksheet = XLSX.utils.json_to_sheet(filtered, { skipHeader: true, cellDates: true});
         const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
