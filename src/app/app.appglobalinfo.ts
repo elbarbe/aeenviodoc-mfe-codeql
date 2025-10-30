@@ -532,7 +532,12 @@ export class AppGlobalInfo {
      * @param title Scenario title
      */
     public setScenarioTitle(title: string): void {
-        this.scenarioTitle = title;
-        this.infoChanged.next();
+        const exchInfo = this.appExchangeInfo.get();
+        if (exchInfo && !exchInfo.isInModal) {
+            setTimeout( () => {
+                this.scenarioTitle = title;
+                this.infoChanged.next();
+            }, 50);
+        }
     }
 }

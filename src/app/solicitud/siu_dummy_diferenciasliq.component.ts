@@ -44,7 +44,7 @@ export class SolicitudSIUudummyuDiferenciasLiqComponent extends AbstractServiceI
         this.noShow = true;
 
         // Create inbound argument components
-        this.puthisSolicitud = new FieldOVLenseSearch(this.langMng);
+        this.puthisSolicitud = new FieldOVLenseSearch(this.langMng, this.util);
 
     }
 
@@ -145,44 +145,20 @@ export class SolicitudSIUudummyuDiferenciasLiqComponent extends AbstractServiceI
             });
         }
     }
-
     /**
      * Process the change in the p_thisSolicitud lense search argument
      */
     public onputhissolicitudChange(): void {
-
-        const searchText = this.puthisSolicitud.text;
-        if (searchText && searchText !== '') {
-            if (searchText !== this.puthisSolicitud.lastText) {
-                this.puthisSolicitud.removeCSSClass('noResultsLenseSearch');
-                this.puthisSolicitud.lastText = searchText;
-                this.util.searchLenseSearch(ModelConstants.Solicitud.name, 'IC_Solicitud', searchText, [], null).then(
-                        (response: any) => {
-                            this.puthisSolicitud.removeCSSClass('noResultsLenseSearch');
-                            this.puthisSolicitud.searchResults = response.results;
-                            if (this.puthisSolicitud.searchResults &&
-                                this.puthisSolicitud.searchResults.length === 0) {
-                                this.puthisSolicitud.addCSSClass('noResultsLenseSearch');
-                            }
-                            if (this.puthisSolicitud.searchResults &&
-                                this.puthisSolicitud.searchResults.length === 1) {
-                                this.processputhissolicitudSelected(0);
-                            }
-                            this.changeDetectorRef.markForCheck();
-                        },
-                        (response: any) => {
-                            this.puthisSolicitud.removeCSSClass('noResultsLenseSearch');
-                            this.puthisSolicitud.searchResults = [];
-                            this.util.addErrorMessage(response.message);
-                            this.changeDetectorRef.markForCheck();
-                        });
+        this.executeLenseSearch(this.puthisSolicitud, ModelConstants.Solicitud.name, 'IC_Solicitud',
+            []).then( (foundInstances: number) => {
+            if (foundInstances === -1) {
+                this.cleanputhissolicitud();
             }
-        } else {
-            this.puthisSolicitud.removeCSSClass('noResultsLenseSearch');
-            this.puthisSolicitud.searchResults = [];
-            this.cleanputhissolicitud();
-        }
-
+            if (foundInstances === 1) {
+                this.processputhissolicitudSelected(0);
+            }
+            this.changeDetectorRef.markForCheck();
+        });
         this.changeDetectorRef.markForCheck();
     }
 
@@ -202,7 +178,7 @@ export class SolicitudSIUudummyuDiferenciasLiqComponent extends AbstractServiceI
                 this.puthisSolicitud.cleanSelectedInstances();
             }
             selectedInstance.oid = JSON.parse(selectedInstance.jsonOID);
-            this.puthisSolicitud.getSelectedInstances().push(selectedInstance);
+            this.puthisSolicitud.addInstances(selectedInstance);
         }
         this.executeDependecyRulesputhissolicitud('SetValue', false);
         this.changeDetectorRef.markForCheck();

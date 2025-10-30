@@ -130,9 +130,24 @@ export abstract class AbstractMDIU extends AbstractIU {
                 populationIU.refresh(1);
             }
         }
+        // Initialize default values in details
+        for (const detail of this.details) {
+            detail.initializeDefaultValues();
+        }
         this.loadPreload();
     }
 
+    /**
+     * Initialize default values for the IU
+     */
+    public override initializeDefaultValues(): Promise<void> {
+        this.masterAbstract.initializeDefaultValues();
+        for (const detail of this.details) {
+            detail.initializeDefaultValues();
+        }
+        return Promise.resolve();
+    }
+    
     /**
      * Save the scenario context information. Oposite to loadFromContext
      */

@@ -171,22 +171,27 @@ export abstract class AbstractFilter {
      * @param filterName Filter name
      * @param navFilters Navigational filter names
      */
-    public executeLenseSearch(filterVar: FieldOVLenseSearch, className: string, filterName: string, navFilters: string[]): void {
+    public executeLenseSearch(filterVar: FieldOVLenseSearch, className: string, filterName: string, navFilters: string[]): Promise<number> {
         const textToSearch = filterVar.text;
         if (textToSearch && textToSearch !== '') {
-
-            this.util.searchLenseSearch(className, filterName, textToSearch, navFilters, this.getNavigationFilterVariables()).then(
-                (response: any) => {
-                    filterVar.searchResults = response.results;
-                    this.changeDetectorRef.markForCheck();
-                },
-                (response: any) => {
-                    this.util.addErrorMessage(response.message);
-                    this.changeDetectorRef.markForCheck();
-                });
+            filterVar.lastText = textToSearch;
+            return new Promise<number>((resolve) => {
+                this.util.searchLenseSearch(className, filterName, textToSearch, navFilters, this.getNavigationFilterVariables()).then(
+                    (response: any) => {
+                        filterVar.setSearchResults(response.results);
+                        resolve(filterVar.searchResults ? filterVar.searchResults.length : 0);
+                    },
+                    (response: any) => {
+                        filterVar.setSearchResults([]);
+                        this.util.addErrorMessage(response.message);
+                        resolve(0);
+                    });
+            });
         } else {
             filterVar.searchResults = [];
+            filterVar.setSearchNoResultsFlag(false);
             filterVar.setText();
+            return Promise.resolve(-1);
         }
     }
 

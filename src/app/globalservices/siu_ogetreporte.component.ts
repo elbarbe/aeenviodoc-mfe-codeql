@@ -50,7 +50,7 @@ export class GSSIUuOGETREPORTEComponent extends AbstractServiceIU implements OnI
             'Ver Reporte');
 
         // Create inbound argument components
-        this.ptSolicitud = new FieldOVLenseSearch(this.langMng);
+        this.ptSolicitud = new FieldOVLenseSearch(this.langMng, this.util);
         this.ptTipo = new Field(this.langMng);
     }
 
@@ -144,44 +144,20 @@ export class GSSIUuOGETREPORTEComponent extends AbstractServiceIU implements OnI
             });
         }
     }
-
     /**
      * Process the change in the ptSolicitud lense search argument
      */
     public onptsolicitudChange(): void {
-
-        const searchText = this.ptSolicitud.text;
-        if (searchText && searchText !== '') {
-            if (searchText !== this.ptSolicitud.lastText) {
-                this.ptSolicitud.removeCSSClass('noResultsLenseSearch');
-                this.ptSolicitud.lastText = searchText;
-                this.util.searchLenseSearch(ModelConstants.Solicitud.name, 'IC_Solicitud', searchText, [], null).then(
-                        (response: any) => {
-                            this.ptSolicitud.removeCSSClass('noResultsLenseSearch');
-                            this.ptSolicitud.searchResults = response.results;
-                            if (this.ptSolicitud.searchResults &&
-                                this.ptSolicitud.searchResults.length === 0) {
-                                this.ptSolicitud.addCSSClass('noResultsLenseSearch');
-                            }
-                            if (this.ptSolicitud.searchResults &&
-                                this.ptSolicitud.searchResults.length === 1) {
-                                this.processptsolicitudSelected(0);
-                            }
-                            this.changeDetectorRef.markForCheck();
-                        },
-                        (response: any) => {
-                            this.ptSolicitud.removeCSSClass('noResultsLenseSearch');
-                            this.ptSolicitud.searchResults = [];
-                            this.util.addErrorMessage(response.message);
-                            this.changeDetectorRef.markForCheck();
-                        });
+        this.executeLenseSearch(this.ptSolicitud, ModelConstants.Solicitud.name, 'IC_Solicitud',
+            []).then( (foundInstances: number) => {
+            if (foundInstances === -1) {
+                this.cleanptsolicitud();
             }
-        } else {
-            this.ptSolicitud.removeCSSClass('noResultsLenseSearch');
-            this.ptSolicitud.searchResults = [];
-            this.cleanptsolicitud();
-        }
-
+            if (foundInstances === 1) {
+                this.processptsolicitudSelected(0);
+            }
+            this.changeDetectorRef.markForCheck();
+        });
         this.changeDetectorRef.markForCheck();
     }
 
@@ -201,7 +177,7 @@ export class GSSIUuOGETREPORTEComponent extends AbstractServiceIU implements OnI
                 this.ptSolicitud.cleanSelectedInstances();
             }
             selectedInstance.oid = JSON.parse(selectedInstance.jsonOID);
-            this.ptSolicitud.getSelectedInstances().push(selectedInstance);
+            this.ptSolicitud.addInstances(selectedInstance);
         }
         this.executeDependecyRulesptsolicitud('SetValue', false);
         this.changeDetectorRef.markForCheck();

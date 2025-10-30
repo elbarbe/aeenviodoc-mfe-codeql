@@ -181,10 +181,18 @@ export abstract class AbstractPIU extends AbstractQueryIU {
      */
     public override initializeFromExchangeInfo(exchInfo: ExchangeInfo): void {
         super.initializeFromExchangeInfo(exchInfo);
+        this.initializeDefaultValues();
+    }
+
+    /**
+     * Initialize default values for the IU
+     */
+    public override initializeDefaultValues(): Promise<void> {
         // Initialize Filter default values
         for (const filter of this.filters) {
             filter.initializeDefaultValues();
         }
+        return Promise.resolve();
     }
 
     /**

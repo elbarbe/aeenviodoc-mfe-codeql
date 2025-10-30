@@ -860,7 +860,7 @@ abstract class FieldOV extends Field {
                 this.value = inst;
                 this.selectedInstances.push(inst);
             } else {
-                this.selectedInstances.push(inst);
+                this.addInstanceIfNotExists(inst);
                 this.value = this.selectedInstances;
             }
         } else {
@@ -895,7 +895,7 @@ abstract class FieldOV extends Field {
                     instance.oid = oid;
                     instance.supplementaryInfo = '';
                     instance.jsonOID = JSON.stringify(oid);
-                    this.selectedInstances.push(instance);
+                    this.addInstanceIfNotExists(instance);
                 }
                 this.value = this.selectedInstances;
             } else {
@@ -915,7 +915,7 @@ abstract class FieldOV extends Field {
             instance.oid = oids;
             instance.supplementaryInfo = '';
             instance.jsonOID = JSON.stringify(oids);
-            this.selectedInstances.push(instance);
+            this.addInstanceIfNotExists(instance);
             this.value = instance;
         }
         this.validate();
@@ -932,7 +932,7 @@ abstract class FieldOV extends Field {
         if (Array.isArray(instances)) {
             if (this.allowMultiSelect || this.isList) {
                 for (const inst of instances) {
-                    this.selectedInstances.push(inst);
+                    this.addInstanceIfNotExists(inst);
                 }
                 this.value = this.selectedInstances;
             } else {
@@ -945,8 +945,17 @@ abstract class FieldOV extends Field {
             this.selectedInstances.push(instances);
             this.value = instances;
         } else {
-            this.selectedInstances.push(instances);
+            this.addInstanceIfNotExists(instances);
             this.value = this.selectedInstances;
+        }
+    }
+
+    protected addInstanceIfNotExists(instance: Instance): void {
+        const existing = this.selectedInstances.findIndex( (i: Instance) => {
+            return i.jsonOID === instance.jsonOID;
+        });
+        if (existing === -1) {
+            this.selectedInstances.push(instance);
         }
     }
 
@@ -1125,7 +1134,7 @@ export class FieldOVLenseSearch extends FieldOV {
      * Constructor
      * @param langMng Language manager
      */
-    constructor(public override langMng: LanguageMng) { super(langMng); }
+    constructor(public override langMng: LanguageMng, public util: Util) { super(langMng); }
 
     /**
      * Clean the field value
@@ -1153,7 +1162,7 @@ export class FieldOVLenseSearch extends FieldOV {
                 this.selectedInstances = [];
             }
             selectedInstance.oid = JSON.parse(selectedInstance.jsonOID);
-            this.selectedInstances.push(selectedInstance);
+            this.addInstanceIfNotExists(selectedInstance);
         }
     }
 
@@ -1234,6 +1243,48 @@ export class FieldOVLenseSearch extends FieldOV {
         return false;
     }
 
+    /**
+     * Assigns the CSS class
+     * @param cssClass New class to be assigned
+     */
+    public override addCSSClass(cssClass: string): void {
+        super.addCSSClass(cssClass);
+        if (cssClass === 'noResultsLenseSearch') {
+            this.setValidationMessage(this.langMng.translateTextWithParams('app_FLD_ERRORNOTEXIST', '', this.alias));
+        }
+    }
+
+    /**
+     * Removes  the CSS class
+     * @param cssClass Class to be assigned
+     */
+    public override removeCSSClass(cssClass: string): void {
+        super.removeCSSClass(cssClass);
+        if (cssClass === 'noResultsLenseSearch') {
+            this.setValidationMessage('');
+        }
+    }
+
+    public setSearchResults(results: any): void {
+        this.searchResults = results;
+        if (this.searchResults &&
+            this.searchResults.length > 0) {
+                this.setSearchNoResultsFlag(false);
+        } else {
+            this.setSearchNoResultsFlag(true);
+        }
+    }
+
+    public setSearchNoResultsFlag(flag: boolean): void {
+        if (flag) {
+            this.addCSSClass('noResultsLenseSearch');
+            if (this.util) {
+                this.util.showToastMessage(this.langMng.translateTextWithParams('app_FLD_ERRORNOTEXIST', '', this.alias));
+            }
+        } else {
+            this.removeCSSClass('noResultsLenseSearch');
+        }
+    }
 }
 
 /**
@@ -1586,7 +1637,12 @@ export abstract class AbstractIU {
         // Empty method
     }
 
-    /* Abstract methods to be implemented in derived classes */
+    /**
+     * Initialize with default values. By default, do nothing
+     */
+    public initializeDefaultValues(): Promise<void> {
+        return Promise.resolve();
+    }
 
     /**
      * Returns the scenario context information

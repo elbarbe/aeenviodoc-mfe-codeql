@@ -14,6 +14,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { StepsModule } from 'primeng/steps';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BreadCrumbMngComponent } from './common/breadCrumbMng.component';
 import { WaitDialogComponent } from './common/waitDialog.component';
 import { ProgressBarComponent } from './common/progressBar.component';
@@ -37,7 +38,7 @@ import { ChangePasswordComponent } from './common/changePassword.component';
 
 import { InputBlobSignatureComponent } from './common/fields/input.blob.signature'
 @NgModule({
-    imports: [CommonModule, FormsModule, TableModule, DropdownModule,
+    imports: [CommonModule, FormsModule, TableModule, DropdownModule, OverlayPanelModule,
         CalendarModule, MultiSelectModule, ListboxModule, RadioButtonModule, CheckboxModule, BlockUIModule, DialogModule, StepsModule,
         TriStateCheckboxModule, ConfirmDialogModule, NgxExtendedPdfViewerModule],
     declarations: [BreadCrumbMngComponent, WaitDialogComponent, ProgressBarComponent, ChangePasswordComponent,
@@ -55,7 +56,7 @@ import { InputBlobSignatureComponent } from './common/fields/input.blob.signatur
         InputDefinedSelectionComponent, InputRadioComponent, InputCheckComponent, InputBlobComponent,
         InputBlobImageComponent, ImesPDFViewerComponent, LenseComponent, LenseSearchComponent, PreloadComponent,
         PreloadMultipleComponent, PreloadMultipleDropdownComponent, ErrorMessagesComponent,
-        FormsModule, TableModule, DropdownModule, CalendarModule, MultiSelectModule, ListboxModule,
+        FormsModule, TableModule, DropdownModule, CalendarModule, MultiSelectModule, ListboxModule, OverlayPanelModule,
         RadioButtonModule, CheckboxModule, BlockUIModule, DialogModule, StepsModule, TriStateCheckboxModule, ConfirmDialogModule,
         InputBlobSignatureComponent]
 })

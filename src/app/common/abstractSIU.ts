@@ -60,9 +60,9 @@ export abstract class AbstractServiceIU extends AbstractIU {
     protected progressBarSubscription: Subscription | null = null;
 
     constructor(protected override appGlobalInfo: AppGlobalInfo,
-                protected override util: Util,
-                protected override changeDetectorRef: ChangeDetectorRef,
-                protected condNavMng: ConditionalNavigationMng) {
+        protected override util: Util,
+        protected override changeDetectorRef: ChangeDetectorRef,
+        protected condNavMng: ConditionalNavigationMng) {
         super(appGlobalInfo, util, changeDetectorRef);
         this.cacheDependencyRules = new CacheDependencyRules(this.appGlobalInfo, this.util);
         this.scenarioType = 'SIU';
@@ -235,9 +235,9 @@ export abstract class AbstractServiceIU extends AbstractIU {
         if (!this.context.exchangeInfo) {
             return;
         }
-        
+
         if (this.numberOfPendingPreload === 0) {
-            this.initializeDefaultValues().then( () => {
+            this.initializeDefaultValues().then(() => {
                 this.initializeFromCtxArgumentThis();
                 this.initializeFromCtxRelated();
                 this.initializeFromCtxCondNav();
@@ -257,13 +257,6 @@ export abstract class AbstractServiceIU extends AbstractIU {
                 }
             });
         }
-    }
-
-    /**
-     * Initialize with default values. By default, do nothing
-     */
-    public initializeDefaultValues(): Promise<void> {
-        return Promise.resolve();
     }
 
     /**
@@ -383,28 +376,33 @@ export abstract class AbstractServiceIU extends AbstractIU {
     }
 
     /**
-     * Execute the lense search query
+     * Execute the lense search query. Returns the number of found instances
      * @param inputField Lense search input field
      * @param className Class name
      * @param filterName Filter name
      * @param navFilters Navigational filter names
      */
-    public executeLenseSearch(inputField: FieldOVLenseSearch, className: string, filterName: string, navFilters: string[]): void {
+    public executeLenseSearch(inputField: FieldOVLenseSearch, className: string, filterName: string, navFilters: string[]): Promise<number> {
         const searchText = inputField.text;
         if (searchText && searchText !== '') {
-
-            this.util.searchLenseSearch(className, filterName, searchText, navFilters, this.getNavigationFilterVariables()).then(
-                (response: any) => {
-                    inputField.searchResults = response.results;
-                    this.changeDetectorRef.markForCheck();
-                },
-                (response: any) => {
-                    this.util.addErrorMessage(response.message);
-                    this.changeDetectorRef.markForCheck();
-                });
+            inputField.lastText = searchText;
+            return new Promise<number>((resolve) => {
+                this.util.searchLenseSearch(className, filterName, searchText, navFilters, this.getNavigationFilterVariables()).then(
+                    (response: any) => {
+                        inputField.setSearchResults(response.results);
+                        resolve(inputField.searchResults ? inputField.searchResults.length : 0);
+                    },
+                    (response: any) => {
+                        inputField.setSearchResults([]);
+                        this.util.addErrorMessage(response.message);
+                        resolve(0);
+                    });
+            });
         } else {
             inputField.searchResults = [];
+            inputField.setSearchNoResultsFlag(false);
             inputField.setText();
+            return Promise.resolve(-1);
         }
     }
 
@@ -418,7 +416,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
      * @param navFilters Navigational filter names
      */
     public executeSearchPreload(inputField: FieldOVPreload, className: string, filterName: string,
-                                orderCriteria: string, navFilters: string[]): void {
+        orderCriteria: string, navFilters: string[]): void {
         this.util.searchPreload(className, filterName, navFilters, this.getNavigationFilterVariables(), orderCriteria).then(
             (response: any) => {
                 inputField.loadPreload(response.results);
@@ -492,7 +490,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
     private getServiceRequestAux(argumentsMultiple: any[], argumentsSingleValue: any[], finalRequests: any[]): void {
         if (argumentsMultiple.length === 0) {
             // Create the request
-            const request: {[index: string]: any} = {};
+            const request: { [index: string]: any } = {};
             for (const argValue of argumentsSingleValue) {
                 request[argValue.name] = argValue.value;
             }
@@ -552,43 +550,43 @@ export abstract class AbstractServiceIU extends AbstractIU {
                 Math.round(((this.executionsCount + 1) / this.totalExecutions) * 100), 0);
         }
         this.util.callHttpPost(`${this.appGlobalInfo.APPCONSTANTS.BASE_URL}/api/${this.className}Api/${this.serviceName}`,
-                                request).then(
-            (response: any) => {
-                this.executionsCount += 1;
-                if (response.resultCode !== '000' && response.resultCode !== '') {
-                    this.totalErrors++;
-                    this.errorList.push(response.resultDescription);
-                }
-                if (this.executionsCount === this.totalExecutions) {
-                    this.util.addErrorMessageList(this.errorList);
-                    this.setShowWait(false);
-                    this.util.hideProgressBar();
-                    this.processOutArgumentAndCondNavigation(request, response);
-                    this.visible = true;
-                }
-                if (this.totalExecutions > 1 && !this.executeMultiSelectionInParallel && this.serviceRequests.length > 0) {
-                   this.executeService(this.serviceRequests.shift());
-                }
-                this.changeDetectorRef.markForCheck();
-            }, (errResponse: ErrorInformation) => {
-                this.executionsCount += 1;
-                this.totalErrors++;
-                errResponse.messageParts.push(this.title);
-                this.errorList.push(this.util.translateError(errResponse));
-                if (this.executionsCount === this.totalExecutions) {
-                    this.setShowWait(false);
-                    this.util.hideProgressBar();
-                    this.util.addErrorMessageList(this.errorList);
-                    this.visible = true;
-                    if (this.appGlobalInfo.errorCET) {
-                        this.processCancel();
+            request).then(
+                (response: any) => {
+                    this.executionsCount += 1;
+                    if (response.resultCode !== '000' && response.resultCode !== '') {
+                        this.totalErrors++;
+                        this.errorList.push(response.resultDescription);
                     }
-                }
-                if (this.totalExecutions > 1 && !this.executeMultiSelectionInParallel && this.serviceRequests.length > 0) {
-                    this.executeService(this.serviceRequests.shift());
-                }
-                this.changeDetectorRef.markForCheck();
-            });
+                    if (this.executionsCount === this.totalExecutions) {
+                        this.util.addErrorMessageList(this.errorList);
+                        this.setShowWait(false);
+                        this.util.hideProgressBar();
+                        this.processOutArgumentAndCondNavigation(request, response);
+                        this.visible = true;
+                    }
+                    if (this.totalExecutions > 1 && !this.executeMultiSelectionInParallel && this.serviceRequests.length > 0) {
+                        this.executeService(this.serviceRequests.shift());
+                    }
+                    this.changeDetectorRef.markForCheck();
+                }, (errResponse: ErrorInformation) => {
+                    this.executionsCount += 1;
+                    this.totalErrors++;
+                    errResponse.messageParts.push(this.title);
+                    this.errorList.push(this.util.translateError(errResponse));
+                    if (this.executionsCount === this.totalExecutions) {
+                        this.setShowWait(false);
+                        this.util.hideProgressBar();
+                        this.util.addErrorMessageList(this.errorList);
+                        this.visible = true;
+                        if (this.appGlobalInfo.errorCET) {
+                            this.processCancel();
+                        }
+                    }
+                    if (this.totalExecutions > 1 && !this.executeMultiSelectionInParallel && this.serviceRequests.length > 0) {
+                        this.executeService(this.serviceRequests.shift());
+                    }
+                    this.changeDetectorRef.markForCheck();
+                });
     }
 
     /**
@@ -704,7 +702,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
      * Process the responses to the check precondiciotns in advance calls
      * @param results Call results
      */
-    private processCheckPreconditionsInAdvanceResponses(results: any[]): string [] {
+    private processCheckPreconditionsInAdvanceResponses(results: any[]): string[] {
         const errorArray: string[] = [];
         for (const response of results) {
             if (response.resultCode !== '000' && response.resultCode !== '') {

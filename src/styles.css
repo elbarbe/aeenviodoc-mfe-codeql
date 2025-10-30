@@ -232,24 +232,45 @@ table th {
     font-size: inherit;
 }
 
-.lenseSearchBtnClose {
-    text-align: center !important;
+.lenseSearchListPanel {
+    margin: 0px !important;
+    max-width: 300px;
+    display: flex;
+    float: left;
+    width: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+.lenseSearchListPanel .p-overlaypanel, .lenseSearchListPanel .p-overlaypanel-content {
+    padding: 0px !important;
 }
 .lenseSearchResultList {
-    width: 100%;
-    position: absolute;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
 }
+
 .lenseSearchResultList .dropdown-menu {
     display: block;
-    max-height: 200px;
+    max-height: 300px;
     overflow: auto;
-    width: 100%;
-    top: 32px;
+    width: auto;
     font-size: 0.85rem;
     margin: 0px;
 }
 .lenseSearchResultList li {
     padding-left: 5px;
+    width: max-content;
+    max-width: 400px;
+}
+.lenseSearchBtnClose {
+    text-align: center !important;
+    width: 100% !important;
 }
 
 /* Lense Oid fields */
@@ -1159,10 +1180,6 @@ input[type=file] {
     padding: 2px 5px 2px 5px!important;
 }
 
-.lenseSearchResultList .dropdown-menu {
-    top: 26px!important;
-}
-
 /* Calendar popup. Reduce paddings */
 body .p-datepicker {
     padding: 0.5em!important;
@@ -1332,3 +1349,9 @@ imes-details-in-row-grid .p-datatable-footer {
 #changePasswordDialog .p-dialog-header {
     padding: 0px 10px 0px 10px!important;
 }
+
+.p-toast-message-content {
+    background-color: #e6ffff;
+    font-size: 15px;
+}
+

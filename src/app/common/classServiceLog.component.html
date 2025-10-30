@@ -1,3 +1,4 @@
+<waitDialog [showWait]="showWait"></waitDialog> 
 <form novalidate>
     <ng-container *ngIf="visible">
         <div class="piuRegion piuClassServiceLog">
@@ -44,14 +45,18 @@
             </div>
 
             <div class="col-12 piuDisplaySet">
-                <p-table #dt [columns]="gridColumns" [frozenColumns]="frozenColumns" frozenWidth="600px"  [value]="gridData" 
-                    [paginator]="true" [rows]="gridPaginationPageSize" [rowsPerPageOptions]="gridPaginationPageSizeValues"
-                    [alwaysShowPaginator]="false" selectionMode="single" [(selection)]="gridSelectedRows" [metaKeySelection]="true"
-                    [scrollable]="true" scrollWidth="100%" [resizableColumns]="true" columnResizeMode="expand" (onPage)="onGridPaging($event)"
-                    [responsive]="true" dataKey="oid" [lazy]="!paginationInClient" (onLazyLoad)="onGridLazyLoadData($event)"
-                    [totalRecords]="gridTotalInstances" [first]="gridFirstInstanceDisplayed" sortMode="{{paginationInClient && 'multiple' }}"
-                    (onFilter)="onGridFilterData($event)">
-
+                <p-table #dt [columns]="gridColumns" [value]="gridData" [paginator]="true" paginatorDropdownAppendTo="body"
+                [rows]="gridPaginationPageSize" [rowsPerPageOptions]="gridPaginationPageSizeValues"
+                [alwaysShowPaginator]="false" selectionMode="single"
+                [(selection)]="gridSelectedRows" [metaKeySelection]="true" [scrollable]="true" scrollWidth="100%"
+                [resizableColumns]="true" columnResizeMode="expand" 
+                (onPage)="onGridPaging($event)" [responsive]="true"
+                dataKey="oid" [lazy]="!paginationInClient" (onLazyLoad)="onGridLazyLoadData($event)"
+                [totalRecords]="gridTotalInstances" 
+                sortMode="{{paginationInClient && 'multiple'}}" 
+                styleClass="p-datatable-sm"
+                [first]="gridFirstInstanceDisplayed" (onFilter)="onGridFilterData($event)">
+                
                     <ng-template pTemplate="colgroup" let-columns>
                         <colgroup>
                             <ng-container *ngFor="let col of columns">
@@ -72,17 +77,6 @@
                                 </th>
                             </ng-container>
                         </tr>
-                        <ng-container *ngIf="paginationInClient">
-                            <tr>
-                                <ng-container *ngFor="let col of columns">
-                                    <th *ngIf="col.filter && !col.hidden" [ngClass]="col.styleClass" pResizableColumn>
-                                        <input type="text" style="width:100%" (change)="filterByColumn(dt, $event.target, col.field, col.filterMatchMode)" autocomplete="off"/>
-                                    </th>
-                                    <th *ngIf="!col.filter && !col.hidden" [ngClass]="col.styleClass" pResizableColumn>
-                                    </th>
-                                </ng-container>
-                            </tr>
-                        </ng-container>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr [pSelectableRow]="rowData">
@@ -91,16 +85,28 @@
                                     <td [ngClass]="col.styleClass" class="ui-resizable-column">
                                         <span class="ui-column-title">{{col.header}}</span>
                                         <ng-container *ngIf="col.type === 0 || col.type === 5">
-                                            <span>{{rowData[col.field]}}</span>
+                                            <span>
+                                            <a
+                                                (click)="onGridClickCell(rowData)">{{rowData[col.field]}}</a>
+                                            </span>
                                         </ng-container>
                                         <ng-container *ngIf="col.type === 1">
-                                            <span>{{rowData[col.field] | number : col.mask}}</span>
+                                            <span>
+                                                <a
+                                                    (click)="onGridClickCell(rowData)">{{rowData[col.field] | number : col.mask}}</a>
+                                                </span>
                                         </ng-container>
                                         <ng-container *ngIf="col.type === 2">
-                                            <span>{{getValueFromDefinedSelection(col, rowData[col.field])}}</span>
+                                            <span>
+                                                <a
+                                                    (click)="onGridClickCell(rowData)">{{getValueFromDefinedSelection(col, rowData[col.field])}}</a>
+                                                </span>
                                         </ng-container>
                                         <ng-container *ngIf="col.type === 3">
-                                            <span>{{rowData[col.field] | date: col.mask}}</span>
+                                            <span>
+                                                <a
+                                                    (click)="onGridClickCell(rowData)">{{rowData[col.field] | date: col.mask}}</a>
+                                                </span>
                                         </ng-container>
                                     </td>
                                 </ng-container>
@@ -132,4 +138,58 @@
             <button type="button" class="btnCancel btn btn-danger" (click)="processCancel()">{{langMng.translateText('app_CLOSE', '')}}</button>
         </div>
     </ng-container>
+<p-dialog id="logServiceDetail" [header]="title" 
+    [(visible)]="displayServiceDetails" [modal]="true" (onHide)="displayServiceDetails=false"
+    [blockScroll]="true" position="top"
+    styleClass="col-xs-10 col-sm-10 col-md-9"
+    [style]="{'padding-top': '40px', 'box-shadow': 'none', 'border': '0px'}"
+    [closeOnEscape]="true" [closable]="true" [resizable]="false"
+    [contentStyle]="{'max-height':'500px', 'display': 'flow-root', 'padding': '5px 15px'}" 
+    contentStyleClass="detailservicelog">
+    <div style="width: 100%;float: left;" *ngIf="gridSelectedRows">
+        <div style="width: 100%;float: left;">
+            <label style="height: auto;font-weight: bold!important;width: 50%;padding-left: 10px;">{{langMng.translateText('app_CLSLOG_COLTIMESTAMP', 'Timestamp')}}: {{gridSelectedRows.timestamp | date: 'short'}}</label>
+            <label style="height: auto;font-weight: bold!important;width: 50%;">{{langMng.translateText('app_CLSLOG_COLUSER', 'Usuario')}}: {{gridSelectedRows.userlogin}}</label>
+        </div>
+        <div style="width: 100%;float: left;">
+            <label style="height: auto;font-weight: bold!important;width: 50%;padding-left: 10px;">{{langMng.translateText('app_CLSLOG_COLCLASS', 'Clase')}}: {{gridSelectedRows.classalias}}</label>
+            <label style="height: auto;font-weight: bold!important;width: 50%;">{{langMng.translateText('app_CLSLOG_COLSRV', 'Servicio')}}: {{gridSelectedRows.servicealias}}</label>
+        </div>
+
+        <div style="display: block;float: left;width: 100%;text-align: center;">
+             <imes-input-radio [field]="showInboundOutBound"></imes-input-radio>   
+
+             <table class="argsDetailServiceLog" style="width: 100%;margin-top: 10px;float: left;">
+                <tr >
+                  <th style="text-align: center;">Nombre</th>
+                  <th style="text-align: center;">Valor</th>
+                </tr>
+                <ng-container *ngIf="showInboundOutBound.value; else elseBlock">
+                    <ng-container *ngFor="let row of gridSelectedRows.invalues">
+                        <tr>
+                            <td >{{row.alias}}</td>
+                            <td style="border: 1px solid black;border-collapse: collapse;">{{row.value}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-template #elseBlock>
+                    <ng-container *ngFor="let row of gridSelectedRows.outvalues">
+                        <tr>
+                            <td >{{row.alias}}</td>
+                            <td style="border: 1px solid black;border-collapse: collapse;">{{row.value}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-template>
+
+              </table>
+              
+
+        </div>
+    </div>
+    <div style="width: 100%;float: left;display: block;text-align: center;padding: 10px;">
+        <button type="button" class="btnCancel btn btn-danger" 
+            style="padding: 1px 10px;"
+            (click)="displayServiceDetails=false;">{{langMng.translateText('app_CLOSE', '')}}</button>
+    </div>
+</p-dialog>
 </form>

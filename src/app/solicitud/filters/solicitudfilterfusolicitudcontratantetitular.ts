@@ -39,7 +39,7 @@ export class SolicitudFilterFuSolicitudContratanteTitular extends AbstractFilter
             'Búsqueda por contratante/titular');
         this.filterName = 'F_SolicitudContratanteTitular';
 
-        this.vouPersona = new FieldOVLenseSearch(this.langMng);
+        this.vouPersona = new FieldOVLenseSearch(this.langMng, this.util);
         this.vuFIni = new Field(this.langMng);
         this.vuFFin = new Field(this.langMng);
     }
@@ -156,8 +156,15 @@ export class SolicitudFilterFuSolicitudContratanteTitular extends AbstractFilter
      * Process the change in the search text in the vo_Persona variable
      */
     public onvoupersonaChange() {
-        this.executeLenseSearch(this.vouPersona, ModelConstants.Persona.name, 'IC_Persona', []);
-        this.executeDependecyRulesvoupersona('SetValue', false);
+        this.executeLenseSearch(this.vouPersona, ModelConstants.Persona.name, 'IC_Persona', []).then( (foundInstances: number) => {
+            if (foundInstances === -1) {
+                this.cleanvoupersona();
+            }
+            if (foundInstances === 1) {
+                this.processvoupersonaSelected(0);
+            }
+            this.changeDetectorRef.markForCheck();
+        });
         this.changeDetectorRef.markForCheck();
     }
 

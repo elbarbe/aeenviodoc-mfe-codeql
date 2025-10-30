@@ -101,6 +101,7 @@ export class InputStringComponent {
      * Manages the value change event
      */
     public onFieldChange() {
+        this.field.setValidationMessage('');
         this.valueChanged.emit();
     }
 

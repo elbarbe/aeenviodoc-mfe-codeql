@@ -1,6 +1,7 @@
-import { Output, EventEmitter, ChangeDetectionStrategy, Input, Component } from '@angular/core';
+import { Output, EventEmitter, ChangeDetectionStrategy, Input, Component, ViewChild } from '@angular/core';
 import { LanguageMng } from '../languageMng';
 import { FieldOVLense, FieldOVLenseSearch, FieldOVPreload } from '../baseIUElements';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
     template: ''
@@ -127,6 +128,10 @@ export class LenseSearchComponent extends AbstractLenseComponent {
     /** Press any key event in search text */
     @Output() keypressLenseSearch = new EventEmitter<void>();
 
+    @ViewChild('overlayPanel', { static: false }) overlayPanel!: OverlayPanel;
+
+    private lastEvent: any;
+
     /* Constructor
      * @param langMng Language manager
      */
@@ -145,19 +150,11 @@ export class LenseSearchComponent extends AbstractLenseComponent {
             if (this.field) {
                 this.field.onKeyDown(event.key);
             }
-        } else {
+        } else if (event.key && (event.key.length === 1 || event.key === 'Backspace' || event.key === 'Delete')) {
+            this.lastEvent = event;
             this.keypressLenseSearch.emit();
         }
     }
-
-    /**
-     * Manages the key Up event
-     */
-    public onKeyUp(event: KeyboardEvent): void {
-        if (this.field && this.field.text) {
-            this.field.text = this.field.text.toUpperCase();
-        }
-    }    
     
     /**
      * Remove an instance from the selected ones
@@ -185,6 +182,28 @@ export class LenseSearchComponent extends AbstractLenseComponent {
      */
     public showEye(): boolean {
         return this.field.getSelectedInstances().length > 1;
+    }
+
+    /**
+     * Manages the key Up event
+     */
+    public onKeyUp(event: KeyboardEvent): void {
+        if (this.field && this.field.text) {
+            this.field.text = this.field.text.toUpperCase();
+        }
+    }    
+
+    public resultListVisible(): boolean {
+        if (this.field?.searchResults && this.field?.searchResults.length > 0) {
+            if (this.overlayPanel && this.lastEvent) {
+                this.overlayPanel.show(this.lastEvent);
+            }
+        } else {
+            if (this.overlayPanel) {
+                this.overlayPanel.hide();
+            }
+        }
+        return true;
     }
 }
 

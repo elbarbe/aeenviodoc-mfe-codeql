@@ -75,24 +75,33 @@ export class StandardFunctions {
      * Return the day in adate.
      * @param adate date
      */
-    public getDay(adate: Date): number {
-        return adate.getDate();
+    public getDay(adate: Date | null): number {
+        if (adate) {
+            return adate.getDate();
+        }
+        return 0;
     }
 
     /**
      * Return the month in adate. (1 through 12).
      * @param adate date
      */
-    public getMonth(adate: Date): number {
-        return adate.getMonth() + 1;
+    public getMonth(adate: Date | null): number {
+        if (adate) {
+            return adate.getMonth() + 1;
+        }
+        return 0;
     }
 
     /**
      * Return the year in adate.
      * @param adate date
      */
-    public getYear(adate: Date): number {
-        return adate.getFullYear();
+    public getYear(adate: Date | null): number {
+        if (adate) {
+            return adate.getFullYear();
+        }
+        return 0;
     }
 
     /**
@@ -100,8 +109,11 @@ export class StandardFunctions {
      * The possible values are 1 through 7.
      * @param adate date
      */
-    public getDayOfweek(adate: Date): number {
-        return adate.getDay() + 1;
+    public getDayOfweek(adate: Date | null): number {
+        if (adate) {
+            return adate.getDay() + 1;
+        }
+        return 0;
     }
 
     /**
@@ -127,7 +139,7 @@ export class StandardFunctions {
      * Return a date corresponding to the next day of the argument aDate.
      * @param adate date
      */
-    public tomorrow(adate: Date): Date | null {
+    public tomorrow(adate: Date | null): Date | null {
         return this.dateAdd('d', 1, adate);
     }
 
@@ -170,7 +182,7 @@ export class StandardFunctions {
      * Return a string (short) representation of the argument adate.
      * @param adate date
      */
-    public toShortDateFormat(adate: Date): string {
+    public toShortDateFormat(adate: Date | null): string {
         return adate ? formatDate(adate, 'shortDate', this.langMng.getLanguageId()) : '';
     }
 
@@ -178,7 +190,7 @@ export class StandardFunctions {
      * Return a string (medium) representation of the argument adate.
      * @param adate Date
      */
-    public tomediumDateFormat(adate: Date): string {
+    public tomediumDateFormat(adate: Date | null): string {
         return adate ? formatDate(adate, 'mediumDate', this.langMng.getLanguageId()) : '';
     }
 
@@ -186,7 +198,7 @@ export class StandardFunctions {
      * Return a string (long) representation of the argument adate.
      * @param adate Date
      */
-    public tolongDateFormat(adate: Date): string {
+    public tolongDateFormat(adate: Date | null): string {
         return adate ? formatDate(adate, 'longDate', this.langMng.getLanguageId()) : '';
     }
 
@@ -194,7 +206,7 @@ export class StandardFunctions {
      * Return a string (full) representation of the argument adate.
      * @param adate Date
      */
-    public tofullDateFormat(adate: Date): string {
+    public tofullDateFormat(adate: Date | null): string {
         return adate ? formatDate(adate, 'fullDate', this.langMng.getLanguageId()) : '';
     }
 

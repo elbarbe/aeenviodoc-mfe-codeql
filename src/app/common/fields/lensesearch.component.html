@@ -4,16 +4,20 @@
         <input type="text" [(ngModel)]="field.text" class="form-control"
             [ngClass]="{ 'form-control-static' : !field.enabled }" [disabled]="!field.enabled"
             [required]="field.mandatory" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" autocomplete="off" />
-        <div class="dropdown open lenseSearchResultList" *ngIf="field.searchResults.length > 0">
-            <ul class="dropdown-menu">
-                <li *ngFor="let instance of field.searchResults; let i = index">
-                    <a (click)="onInstanceSelected(i)">{{instance.supplementaryInfo}}</a>
-                </li>
-                <li class="lenseSearchBtnClose">
-                    <a class="pi pi-times" (click)="onInstanceSelected(-1)"></a>
-                </li>
-            </ul>
-        </div>
+            <ng-container *ngIf="resultListVisible()">
+                <p-overlayPanel #overlayPanel styleClass="lenseSearchListPanel">
+                    <div class="dropdown open lenseSearchResultList" >
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let instance of field.searchResults; let i = index">
+                                <a (click)="onInstanceSelected(i)">{{instance.supplementaryInfo}}</a>
+                            </li>
+                            <li class="lenseSearchBtnClose">
+                                <a class="pi pi-times" (click)="onInstanceSelected(-1)"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </p-overlayPanel>                
+            </ng-container>
         <span class="input-group-btn">
             <button type="button" class="btn btn-outline-secondary btn-sm pi pi-search lenseSearchBtn"
                 *ngIf="field.enabled" (click)="onSearch()" aria-label="Search field"></button>

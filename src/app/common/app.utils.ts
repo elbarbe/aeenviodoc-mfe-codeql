@@ -1815,8 +1815,23 @@ export class Util {
                         } else {
                             if (res.body && res.body.resultCode === '777') {
                                 // Sesion abierta en otro dispositivo
-                                this.appGlobalInfo.setLogOut();
-                                reject( new ErrorInformation(false, '', '','', []) );
+                                this.confirmationService.confirm({
+                                    key: 'appMainConfirmDialog',
+                                    message: 'Se ha detectado un inicio de sesión en otro dispositivo. Esta sesión queda cancelada',
+                                    header: 'Aviso',
+                                    icon: 'pi pi-info-circle',
+                                    acceptLabel: 'Ok',
+                                    rejectVisible: false,
+                                    accept: () => {
+                                        this.appGlobalInfo.setLogOut();
+                                        reject( new ErrorInformation(false, '', '','', []) );
+                                    },
+                                    reject: (type: number) => {
+                                        this.appGlobalInfo.setLogOut();
+                                        reject( new ErrorInformation(false, '', '','', []) );
+                                    }
+                                });
+                    
                             } else {
                                 resolve(res.body);
                             }

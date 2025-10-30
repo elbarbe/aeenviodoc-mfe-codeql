@@ -4,11 +4,15 @@ import { Util } from '../common/app.utils';
 
 import { LanguageMng } from '../common/languageMng';
 import { ConditionalNavigationMng } from '../common/conditionalNavigationMng';
-import { Field } from './baseIUElements';
+import { Field, FieldDefinedSelection } from './baseIUElements';
+import { JsonUtility } from './jsonUtility';
 
 @Component({
     selector: 'ClassServiceLog',
     templateUrl: './classServiceLog.component.html',
+    styles: [ '.argsDetailServiceLog, .argsDetailServiceLog th, .argsDetailServiceLog td { padding: 0px;} ',
+    '.argsDetailServiceLog, .argsDetailServiceLog th, .argsDetailServiceLog td { border: 1px solid black;border-collapse: collapse;} ',
+    '.argsDetailServiceLog th, .argsDetailServiceLog td { width: 50%;} '] ,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassServiceLogComponent implements OnInit {
@@ -18,7 +22,7 @@ export class ClassServiceLogComponent implements OnInit {
     /** Scenario is visible for the current user */
     public visible = true;
     /** URL Web api */
-    private readonly queryURL = '/api/AppServicesLogApi/PIU_InstanceAppServicesLog';
+    private readonly queryURL = '/api/AppServicesLogApi/GetPopulationDynamic';
     /** Last page number requested. Used to distinguish refresh and grid sort or filter */
     public lastPageNumber = -1;
     /** Last Lazy Load event values. Used in grid sort and filter operations */
@@ -29,11 +33,6 @@ export class ClassServiceLogComponent implements OnInit {
     public autoSearch = true;
     /** Grid columns */
     public gridColumns: any[] = [];
-    /** Frozen Grid columns */
-    public frozenColumns: any[] = [];
-
-    public gridColumnsInArguments: any[] = [];
-    public gridColumnsOutArguments: any[] = [];
 
     /** Original data. To sort and filter operations */
     public gridOriginalData: any;
@@ -58,8 +57,13 @@ export class ClassServiceLogComponent implements OnInit {
     /* Filter variable To */
     public fvTo: Field;
 
+    public displayServiceDetails = false;
+    public showInboundOutBound: FieldDefinedSelection;
     /** Comeback context */
     private comeBackContext: any;
+    /* Show wai dialog */
+    public showWait = false;
+
     /**
      * Component constructor
      * @param appGlobalInfo Application Global Information
@@ -85,6 +89,15 @@ export class ClassServiceLogComponent implements OnInit {
         this.fvTo.alias = langMng.translateText('app_CLSLOG_VARTO', 'To');
         this.fvTo.editorCSSClasses = ['col-8 col-sm-4 col-md-2 inputAlignR'];
         this.fvTo.mandatory = false;
+
+        this.showInboundOutBound = new FieldDefinedSelection(this.langMng);
+        this.showInboundOutBound.dataType = Field.dtBool;
+        this.showInboundOutBound.value = true;
+        this.showInboundOutBound.options = [{ key: true, value: 'Entrada' }, { key: false, value: 'Salida' }];
+        this.showInboundOutBound.alias = 'Argumentos: ';
+        this.showInboundOutBound.fieldSize = 50;
+        this.showInboundOutBound.assignCSS();
+        this.showInboundOutBound.addCSSClass('aliasNoWidth');
     }
 
     /**
@@ -129,7 +142,6 @@ export class ClassServiceLogComponent implements OnInit {
      */
     private initializeToDefaultColumns(): void {
         this.gridColumns = [];
-        this.frozenColumns = [];
         const colTimeStamp: {
             field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
             styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
@@ -138,7 +150,7 @@ export class ClassServiceLogComponent implements OnInit {
             sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120 alignR',
             dataType: 'datetime', type: 3, mask: 'short', frozen: true
         };
-        this.frozenColumns.push(colTimeStamp);
+        this.gridColumns.push(colTimeStamp);
 
         const colUser: {
             field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
@@ -148,37 +160,37 @@ export class ClassServiceLogComponent implements OnInit {
             sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
             mask: '', frozen: true
         };
-        this.frozenColumns.push(colUser);
+        this.gridColumns.push(colUser);
 
         const colClass: {
             field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
             styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
             } = {
             field: 'classalias', header: this.langMng.translateText('app_CLSLOG_COLCLASS', 'Clase'),
-            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
+            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width160', dataType: 'string', type: 0,
             mask: '', frozen: true
         };
-        this.frozenColumns.push(colClass);
+        this.gridColumns.push(colClass);
 
         const colService: {
             field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
             styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
             } = {
             field: 'servicealias', header: this.langMng.translateText('app_CLSLOG_COLSRV', 'Servicio'),
-            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
-            mask: '', frozen: true
+            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width350', dataType: 'string', type: 0,
+            mask: '', frozen: true  
         };
-        this.frozenColumns.push(colService);
+        this.gridColumns.push(colService);
 
         const colOID: {
             field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
             styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
             } = {
             field: 'instanceoid', header: this.langMng.translateText('app_CLSLOG_COLINSTANCE', 'Instancia'),
-            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
+            sortable: true, filter: true, filterMatchMode: 'contains', hidden: false, styleClass: '', dataType: 'string', type: 0,
             mask: '', frozen: true
         };
-        this.frozenColumns.push(colOID);
+        this.gridColumns.push(colOID);
     }
 
     /**
@@ -191,35 +203,27 @@ export class ClassServiceLogComponent implements OnInit {
         // Set the last first instance requested
         this.lastPageNumber = pageNumber;
 
-        let queryRequest = '';
+        let filter = this.util.getFilter('F_InstanceAppServicesLog');
         if (this.classNameId) {
-            queryRequest = `?vClassId=${this.classNameId}`;
-        } else {
-            queryRequest = `?vClassId=`;
+            filter = this.util.addFilterVariable(filter, 'vClassId', this.classNameId);
         }
         if (this.instanceOID) {
-            queryRequest = `${queryRequest}&vInstanceOID=${this.instanceOID}`;
-        } else {
-            queryRequest = `${queryRequest}&vInstanceOID=`;
+            filter = this.util.addFilterVariable(filter, 'vInstanceOID', this.instanceOID);
         }
         if (this.fvFrom.value) {
-            queryRequest = `${queryRequest}&vFrom=${this.util.formatDate(this.fvFrom.value)}`;
-        } else {
-            queryRequest = `${queryRequest}&vFrom=`;
+            filter = this.util.addFilterVariable(filter, 'vFrom', JsonUtility.date2Json( this.fvFrom.value));
         }
         if (this.fvTo.value) {
-            queryRequest = `${queryRequest}&vUntil=${this.util.formatDate(this.fvTo.value)}`;
-        } else {
-            queryRequest = `${queryRequest}&vUntil=`;
+            filter = this.util.addFilterVariable(filter, 'vUntil', JsonUtility.date2Json( this.fvTo.value));
         }
+        const queryRequest = this.util.getQueryRequest(
+            'timestamp,userlogin,classalias,servicealias,instanceoid,inboundarguments,outboundarguments',
+            [filter], 'OC_AppServicesLog', this.gridPaginationPageSize);
 
-        if (!this.paginationInClient) {
-            queryRequest = `${queryRequest}&pageSize=${this.gridPaginationPageSize}`;
-            queryRequest = `${queryRequest}&pageNumber=${pageNumber}`;
-        }
-
-        const url: string = this.appGlobalInfo.APPCONSTANTS.BASE_URL + this.queryURL + queryRequest;
-        this.util.populationQuery(url, '').then((okResponse: any) => {
+        queryRequest.pageNumber = pageNumber;
+        const url: string = this.appGlobalInfo.APPCONSTANTS.BASE_URL + this.queryURL;
+        this.showWait = true;
+        this.util.populationQuery(url, queryRequest).then((okResponse: any) => {
             const res = okResponse;
             if (res.resultCode === '000') {
                 this.gridTotalInstances = res.totalItems;
@@ -231,9 +235,11 @@ export class ClassServiceLogComponent implements OnInit {
             } else {
                 this.util.addErrorMessage(`ERROR (${res.resultCode}): ${res.resultDescription}`);
             }
+            this.showWait = false;
             this.changeDetectorRef.markForCheck();
         }, (errorResponse: any) => {
             this.util.addErrorMessage(errorResponse.message);
+            this.showWait = false;
             this.changeDetectorRef.markForCheck();
         });
     }
@@ -243,121 +249,9 @@ export class ClassServiceLogComponent implements OnInit {
      * @param data New data
      */
     public setData(data: any): void {
-        this.initializeToDefaultColumns();
-        this.gridColumnsInArguments = [];
-        this.gridColumnsOutArguments = [];
-        if (data) {
-            for (const row of data) {
-                this.processRowDataInboundArguments(row);
-                this.processRowDataOutboundArguments(row);
-            }
-        }
         this.gridData = data;
     }
 
-    /**
-     * Process a row to add the proper columns to the grid for inbound arguments
-     * @param row Row data
-     */
-    private processRowDataInboundArguments(row: any): void {
-        let argumentValues: any;
-        let nameToUse = '';
-        // Expand the inbound arguments
-        if (row.inboundarguments) {
-            argumentValues = JSON.parse(row.inboundarguments);
-            if (argumentValues) {
-                for (const arg of argumentValues) {
-                    nameToUse = this.getColumnNameForInboundArgument(arg);
-                    if (nameToUse) {
-                        row[nameToUse] = arg.value;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Process a row to add the proper columns to the grid for outbound arguments
-     * @param row Row data
-     */
-    private processRowDataOutboundArguments(row: any): void {
-        let argumentValues: any;
-        let nameToUse = '';
-        // Expand the outbound arguments
-        if (row.outboundarguments) {
-            argumentValues = JSON.parse(row.outboundarguments);
-            if (argumentValues) {
-                for (const arg of argumentValues) {
-                    nameToUse = this.getColumnNameForOutboundArgument(arg);
-                    if (nameToUse) {
-                        row[nameToUse] = arg.value;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Find or create the grid column for the inbound argument
-     * @param argument Inbound argument information
-     */
-    private getColumnNameForInboundArgument(argument: any): string {
-
-        let columnName = '';
-
-        // Search the column using the argument alias
-        for (const column of this.gridColumnsInArguments) {
-            if (column.header === argument.alias) {
-                columnName = column.field;
-            }
-        }
-        // If column not exist, create a new one
-        if (!columnName) {
-            columnName = '_in' + this.gridColumnsInArguments.length;
-            const column: {
-                field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
-                styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
-                } = {
-                field: columnName, header: argument.alias, sortable: true,
-                filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
-                mask: '', frozen: false
-            };
-            this.gridColumnsInArguments.push(column);
-            this.gridColumns.push(column);
-        }
-        return columnName;
-    }
-
-    /**
-     * Find or create the grid column for the outbound argument
-     * @param argument Outbound argument information
-     */
-    private getColumnNameForOutboundArgument(argument: any): string {
-
-        let columnName = '';
-
-        // Search the column using the argument alias adding an asterisk
-        for (const column of this.gridColumnsOutArguments) {
-            if (column.header === '*' + argument.alias) {
-                columnName = column.field;
-            }
-        }
-        // If column not exist, create a new one
-        if (!columnName) {
-            columnName = '_out' + this.gridColumnsOutArguments.length;
-            const column: {
-                field: string, header: string, sortable: boolean, filter: boolean, filterMatchMode: string, hidden: boolean,
-                styleClass: string, dataType: string, type: number, mask: string, frozen: boolean
-                } = {
-                field: columnName, header: '*' + argument.alias, sortable: true,
-                filter: true, filterMatchMode: 'contains', hidden: false, styleClass: 'width120', dataType: 'string', type: 0,
-                mask: '', frozen: false
-            };
-            this.gridColumnsOutArguments.push(column);
-            this.gridColumns.push(column);
-        }
-        return columnName;
-    }
 
     /**
      * Apply the grid order and filters using the event values
@@ -579,5 +473,19 @@ export class ClassServiceLogComponent implements OnInit {
         } else {
             this.util.navigateToMain();
         }
+    }
+
+    public onGridClickCell(row: any): void {
+        this.displayServiceDetails = true;
+        this.gridSelectedRows = row;
+        this.gridSelectedRows.invalues = JSON.parse(row.inboundarguments);
+        if (!Array.isArray(this.gridSelectedRows.invalues)) {
+            this.gridSelectedRows.invalues = [];
+        }
+        this.gridSelectedRows.outvalues = JSON.parse(row.outboundarguments);
+        if (!Array.isArray(this.gridSelectedRows.outvalues)) {
+            this.gridSelectedRows.outvalues = [];
+        }
+        this.changeDetectorRef.markForCheck();
     }
 }

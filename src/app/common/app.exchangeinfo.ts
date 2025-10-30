@@ -42,6 +42,8 @@ export class ExchangeInfo {
     public originalContext: any = undefined;
     /* Name of the UI used for printing */
     public printUIName = '';
+    /* Scenario in modal form */
+    public isInModal = false;
 
     /**
      * Deserialize an exchange info object

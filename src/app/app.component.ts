@@ -135,6 +135,10 @@ export class AppComponent implements OnDestroy {
             this.iuInPopUpInfo.selector = data.selector;
             this.iuInPopUpInfo.title = data.title;
             this.iuInPopUpInfo.visible = true;
+            const exchInfo = this.appGlobalInfo.appExchangeInfo.get();
+            if (exchInfo) {
+                exchInfo.isInModal = true;
+            }
             this.changeDetectorRef.markForCheck();
         }
     }
