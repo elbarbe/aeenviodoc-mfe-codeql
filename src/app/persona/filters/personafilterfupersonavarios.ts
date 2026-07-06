@@ -10,7 +10,7 @@ import { DefinedSelections } from '../../common/definedSelection';
 import { UserFunctions } from '../../common/userFunctions';
 
 /**
- * Manages the filter F_PersonaVarios of class Persona
+ * « Manages the filter F_PersonaVarios of class Persona »
  */
 export class PersonaFilterFuPersonaVarios extends AbstractFilter {
 

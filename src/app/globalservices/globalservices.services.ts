@@ -5,7 +5,7 @@ import { ErrorInformation } from '../common/answerRequestInformation';
 import { JsonUtility } from '../common/jsonUtility';
 
 /**
- * Global services
+ * « Global services »
  */
 export class GlobalServicesServices extends AbstractServices {
 

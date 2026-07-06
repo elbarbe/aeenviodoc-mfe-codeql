@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { JsonUtility } from './jsonUtility';
 
 /**
- * Utility Class for object valued inbound arguments
+ * « Utility Class for object valued inbound arguments »
  */
 export class Instance {
     public oid: any;
@@ -436,13 +436,20 @@ export class Field {
                 const groupSepRe = new RegExp('\\' + this.langMng.groupSeparator, 'g');
                 const num = parseFloat(newValue.replace(groupSepRe, '').replace(decimalSepRe, '.'));
                 if (isNaN(num)) {
-                    this.value = '';
+                    this.value = null;
                 } else {
                     this.value = num;
                 }
             } else {
-                this.value = '';
+                this.value = null;
             }
+        } else if (this.dataType === Field.dtAuto || this.dataType === Field.dtInt || this.dataType === Field.dtNat) {
+            const intValue = parseFloat(newValue);
+            if (!isNaN(intValue) && (intValue | 0) === intValue) {
+                this.value = intValue;
+            } else {
+                this.value = null;
+            }            
         } else {
             this.value = newValue;
         }
@@ -525,7 +532,7 @@ export class FieldPassword extends Field {
     /** Alias for the confirmation field */
     public aliasConfirmationValue = '';
     /** Confirmation value */
-    public confirmationValue = '';
+    public confirmationValue: string = null;
 
     /**
      * Constructor
@@ -1593,10 +1600,12 @@ export abstract class AbstractIU {
     public customOptions = '';
     /** Block IU using wait dialog */
     public showWait = true;
+
     constructor(protected appGlobalInfo: AppGlobalInfo,
                 protected util: Util,
                 protected changeDetectorRef: ChangeDetectorRef) {
     }
+
     /**
      * Process the scenario cancel button
      */
@@ -1710,3 +1719,4 @@ export abstract class AbstractIU {
         return completeTitle;
     }
 }
+

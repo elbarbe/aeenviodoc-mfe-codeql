@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { Util } from '../app.utils';
 import { TICAComponentInterface } from './ticaElements';
 
+/**
+ * « Interface for TICA graphical components »
+ */
 @Component({
     selector: 'imes-tica-grid',
     templateUrl: './ticagrid.component.html',

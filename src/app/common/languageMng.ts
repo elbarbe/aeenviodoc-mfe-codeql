@@ -42,7 +42,7 @@ export class LanguageMng {
     /** Group (thousand) separator for formating number using the current locale */
     public groupSeparator = '';
     /** Date format to be used for input */
-    public inputDateFormat = 'dd/mm/y';
+    public inputDateFormat = 'dd/mm/yy';
     /** First day of week. 0 = Sunday, 1 = Monday */
     public firstDayOfWeek = 1;
 

@@ -4,7 +4,7 @@ import { Util } from '../common/app.utils';
 import { QueryResponse } from '../common/answerRequestInformation';
 
 /**
- * Service and queries of class 'Persona'
+ * « Service and queries of class 'Persona' »
  */
 export class PersonaServices extends AbstractServices {
 

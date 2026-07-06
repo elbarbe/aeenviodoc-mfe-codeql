@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { ExchangeInfo } from './app.exchangeinfo';
 import { Util } from './app.utils';
@@ -6,7 +6,7 @@ import { AbstractIU } from './baseIUElements';
 import { AbstractFilter } from './abstractFilter';
 
 /**
- * Abstract class for Filter components
+ * « Abstract class for Filter components »
  */
 export abstract class AbstractFilterIU extends AbstractIU {
 
@@ -56,17 +56,16 @@ export abstract class AbstractFilterIU extends AbstractIU {
      */
     public override initialize(): void {
         // Get the exchange information
-        const exchInfo: ExchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
-
+        const exchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
         // Check Selection Backward case
         this.initializeComponents();
-        if (exchInfo.exchangeType === 'SelectionBackward') {
+        if (exchangeInfo.exchangeType === 'SelectionBackward') {
             // Set the original context to the controller
-            this.context = exchInfo.previous;
+            this.context = exchangeInfo.previous;
             this.loadFromContext();
-            this.processSelectionBackward(exchInfo);
+            this.processSelectionBackward(exchangeInfo);
         } else {
-            this.initializeFromExchangeInfo(exchInfo);
+            this.initializeFromExchangeInfo(exchangeInfo);
         }
         this.setShowWait(false);
     }
@@ -189,3 +188,4 @@ export abstract class AbstractFilterIU extends AbstractIU {
             });
     }
 }
+

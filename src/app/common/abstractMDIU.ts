@@ -1,4 +1,4 @@
-﻿import { AbstractIIU } from './abstractIIU';
+import { AbstractIIU } from './abstractIIU';
 import { AbstractPIU } from './abstractPIU';
 import { ExchangeInfo } from './app.exchangeinfo';
 import { AbstractIU } from './baseIUElements';
@@ -9,7 +9,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 /**
- * Base class for Master-Detail Interaction scenario
+ * « Base class for Master-Detail Interaction scenario »
  */
 export abstract class AbstractMDIU extends AbstractIU {
 
@@ -95,20 +95,20 @@ export abstract class AbstractMDIU extends AbstractIU {
         this.initializeComponents();
 
         // Get the exchange information
-        const exchInfo: ExchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
+        const exchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
 
-        switch (exchInfo.exchangeType) {
+        switch (exchangeInfo.exchangeType) {
             case 'SelectionBackward':
                 // Set the original context to the controller
-                this.processSelectionBackward(exchInfo);
+                this.processSelectionBackward(exchangeInfo);
                 break;
             case 'ComeBack':
                 // Set the original context to the controller
-                this.setContext(exchInfo.originalContext, 'ComeBack');
+                this.setContext(exchangeInfo.originalContext, 'ComeBack');
                 this.loadFromContext();
                 break;
             default:
-                this.initializeFromExchangeInfo(exchInfo);
+                this.initializeFromExchangeInfo(exchangeInfo);
                 break;
         }
     }
@@ -192,7 +192,7 @@ export abstract class AbstractMDIU extends AbstractIU {
             // Main Master is an instance, force refresh
             if (this.masterAbstract.isInstanceIU()) {
                 const instanceIU: AbstractIIU = this.masterAbstract as AbstractIIU;
-                instanceIU.refresh();
+                instanceIU.refresh(1);
             } else {
                 // Main Master is a population, if pagination is in client, force refresh
                 const populationIU: AbstractPIU = this.masterAbstract as AbstractPIU;
@@ -252,11 +252,11 @@ export abstract class AbstractMDIU extends AbstractIU {
         if (this.loadDetailsOnDemand) {
             const actDetail = this.details.find((detail) => detail.order === this.activeDetail);
             if (actDetail) {
-                actDetail.refresh();
+                actDetail.refresh(1);
             }
         } else {
             for (const detail of this.details) {
-                detail.refresh();
+                detail.refresh(1);
             }
         }
     }
@@ -265,7 +265,7 @@ export abstract class AbstractMDIU extends AbstractIU {
      * Refresh the global scenario
      * @param pageNumber Requested page number
      */
-    public refresh(pageNumber = 1): void {
+    public refresh(pageNumber = -1): void {
         this.masterAbstract.refresh(pageNumber);
     }
 
@@ -350,3 +350,4 @@ export abstract class AbstractMDIU extends AbstractIU {
         }
     }
 }
+

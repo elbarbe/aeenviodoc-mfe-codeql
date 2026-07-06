@@ -3,7 +3,7 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 
 /**
- * Service and queries of class 'Preexistencia'
+ * « Service and queries of class 'Preexistencia' »
  */
 export class PreexistenciaServices extends AbstractServices {
 

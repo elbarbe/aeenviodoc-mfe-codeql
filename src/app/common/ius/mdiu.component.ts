@@ -4,6 +4,9 @@ import { AbstractMDIU } from '../abstractMDIU';
 import { AbstractIIU } from '../abstractIIU';
 import { AbstractPIU } from '../abstractPIU';
 
+/**
+ * « Master-Detail interaction unit component »
+ */
 @Component({
     selector: 'imes-mdiu',
     templateUrl: './mdiu.component.html',

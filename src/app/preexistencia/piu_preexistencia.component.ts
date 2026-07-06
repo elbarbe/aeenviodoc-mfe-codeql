@@ -42,7 +42,7 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'Preexistencia');
         this.iuName = 'PIU_Preexistencia';
         this.setUserVisibility(this.appGlobalInfo.getLoggedUserInfo().isIUVisible(this.idXML, ['Admin', 'SuperAdmin', 'Asesor',
-            'AreaMedica', 'Gestor', 'MesaDeApoyo']));
+            'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo']));
         this.title = this.langMng.translateText('cls_Preexistencia_piu_PIU_Preexistencia',
             'Preexistencias');
         this.queryURL = '/api/PreexistenciaApi/GetPopulationDynamic';
@@ -65,7 +65,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'cls_Preexistencia_ds_DS_Preexistencia_PIU_item_Clas_1434050494464197CjtoVis_1ICtjoVis_1',
             this.dsusuarioddrvnombrecompleto);
         dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Gestor.name, ModelConstants.Mesadeapoyo.name];
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();
@@ -78,7 +79,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'cls_Preexistencia_ds_DS_Preexistencia_PIU_item_Clas_1434050494464197CjtoVis_1ICtjoVis_2',
             this.dsusuarioddrvidentificacion);
         dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Gestor.name, ModelConstants.Mesadeapoyo.name];
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();
@@ -91,7 +93,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'cls_Preexistencia_ds_DS_Preexistencia_PIU_item_Clas_1434050494464197CjtoVis_1ICtjoVis_3',
             this.dsdescripcion);
         dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Gestor.name, ModelConstants.Mesadeapoyo.name];
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();
@@ -103,7 +106,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'cls_Preexistencia_ds_DS_Preexistencia_PIU_item_Clas_1434050494464197CjtoVis_1ICtjoVis_4',
             this.dsfecinicio);
         dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Gestor.name, ModelConstants.Mesadeapoyo.name];
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
 
         dsItem = new DisplaySetItem();
@@ -115,7 +119,8 @@ export class PreexistenciaPIUuPreexistenciaComponent extends AbstractPIU {
             'cls_Preexistencia_ds_DS_Preexistencia_PIU_item_Clas_1434050494464197CjtoVis_1ICtjoVis_5',
             this.dsfecfin);
         dsItem.agents = [ModelConstants.Admin.name, ModelConstants.Superadmin.name, ModelConstants.Asesor.name,
-            ModelConstants.Areamedica.name, ModelConstants.Gestor.name, ModelConstants.Mesadeapoyo.name];
+            ModelConstants.Areamedica.name, ModelConstants.Afiliaciones.name, ModelConstants.Gestor.name,
+            ModelConstants.Mesadeapoyo.name];
         this.displaySet.push(dsItem);
     }
 

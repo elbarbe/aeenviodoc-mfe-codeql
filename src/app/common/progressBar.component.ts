@@ -3,8 +3,7 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { LanguageMng } from './languageMng';
 
 /**
- * Blocking progress bar component.
- * Show the bar, time remaining and cancel button
+ * « Blocking progress bar component. Show the bar, time remaining and cancel button »
  */
 @Component({
     selector: 'imes-progressbar',

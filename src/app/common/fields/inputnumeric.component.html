@@ -1,8 +1,24 @@
 <div class="form-group" [ngClass]="field.editorCSSClasses">
     <label class="control-label aliasField" [title]="field.alias">{{field.alias}}</label>
-    <input #inputNumeric type="text" class="form-control" [value]="getFormattedValue()" [disabled]="!field.enabled"
-        [required]="field.mandatory" autocomplete="off" (change)="onInputNumberChange($event)"
-        (blur)="onInputNumberChange($event)" (keydown)="onKeyDown($event)"/>
+    <ng-container *ngIf="field.dataType != 'autonumeric'">
+        <input #inputNumeric type="text" class="form-control" [value]="getFormattedValue()" [disabled]="!field.enabled"
+            [required]="field.mandatory" autocomplete="off" (change)="onInputNumberChange($event)"
+            (blur)="onInputNumberChange($event)" (keydown)="onKeyDown($event)"/>
+    </ng-container>
+    <ng-container *ngIf="field.dataType == 'autonumeric'">
+        <div class="">
+            <input #inputNumeric type="text" class="form-control" 
+                style="width: calc(100% - 20px); float: left;"
+                [(ngModel)]="field.value" [disabled]="!field.enabled || checkAuto"
+                [required]="field.mandatory" autocomplete="off" (change)="onInputNumberChange($event)"
+                (blur)="onInputNumberChange($event)" (keydown)="onKeyDown($event)"/>
+            <input type="checkbox" *ngIf="field.enabled"
+                style="width: 15px;height: 28px;float: right;"
+                (checked)="checkAuto" [(ngModel)]="checkAuto"
+                (change)="onCheckAutoChange()"/>
+        </div>
+    </ng-container>
+
     <div *ngIf="field.validationMessage != ''" class="validationMessage">
         {{field.validationMessage}}
     </div>

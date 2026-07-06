@@ -3,6 +3,9 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
 
+/**
+ * « Wrong version component »
+ */
 @Component({
     selector: 'wrongversion',
     template: `

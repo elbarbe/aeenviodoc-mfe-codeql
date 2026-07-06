@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { AbstractPIU } from '../abstractPIU';
 import { Field, FieldBlob } from '../baseIUElements';
 
+/**
+ * « Population interaction unit component »
+ */
 @Component({
     selector: 'imes-piu',
     templateUrl: './piu.component.html',

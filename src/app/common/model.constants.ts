@@ -1,5 +1,5 @@
 /**
- * Model constans names
+ * « Model constans names »
  */
 export class ModelConstants {
     public static readonly Funcionario = {name : 'Funcionario'};

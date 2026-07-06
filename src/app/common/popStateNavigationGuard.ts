@@ -4,6 +4,9 @@ import { Util } from './app.utils';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { AbstractIU } from './baseIUElements';
 
+/**
+ * « Back navigation guard »
+ */
 @Injectable({providedIn: 'root'})
 export class PopStateNavigationGuard implements CanDeactivate<any> {
 

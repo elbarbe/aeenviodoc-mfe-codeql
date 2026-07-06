@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { AbstractMDIU } from './abstractMDIU';
@@ -7,9 +7,9 @@ import { ExchangeInfo } from './app.exchangeinfo';
 import { Util } from './app.utils';
 import { AbstractIU } from './baseIUElements';
 import { ConditionalNavigationMng } from './conditionalNavigationMng';
-
+    
 /**
- * Information for display set elements
+ * « Information for display set elements »
  */
 export class DisplaySetItem {
 
@@ -58,6 +58,22 @@ export class DisplaySetItem {
     }
 }
 
+export enum ScenarioType {
+    Create = 'C',
+    Delete = 'D',
+    Normal = 'N',
+    Population = 'P',
+    Instance = 'I',
+    MasterDetail = 'MD',
+    Other = 'O'
+}
+
+export enum OpenScenarioType {
+    Default = 'D',
+    Modal = 'M',
+    NewWindow = 'N'
+}
+
 /**
  * Information for an action or navigation element
  */
@@ -75,6 +91,8 @@ export class AccNavItem {
     public multiSelection = false;
     /** Agents */
     public agents: string[] = [];
+    /** Target type */
+    public targetType: ScenarioType = ScenarioType.Normal;
     /** Target class name */
     public targetClass = '';
     /** Target interaction unit name */
@@ -398,7 +416,6 @@ export abstract class AbstractQueryIU extends AbstractIU {
         this.getContext().exchangeInfo = exchInfo;
     }
 
-
     /**
      * Navigate to the action scenario
      * @param actionId Id of the action element
@@ -656,8 +673,6 @@ export abstract class AbstractQueryIU extends AbstractIU {
      */
     public doNavigation(navigationId: number): void {
 
-        // Show the waiting image
-        this.setShowWait(true);
 
         // Save scenario information
         this.saveContextInfo();
@@ -672,6 +687,7 @@ export abstract class AbstractQueryIU extends AbstractIU {
             } else if (nav.showInModal) {
                 this.showNavigationInModal(nav, previousContext, comeBackContext);
             } else {
+                this.setShowWait(true);
                 this.formTextForTitleInTarget().then( (text: string) => {
                     this.util.navigateFromNavigation(nav.targetClass, nav.targetUI, previousContext,
                         comeBackContext, nav.rolePath, this.getSelectedOids(), this.className, nav.navigationalFilter, text);
@@ -797,18 +813,17 @@ export abstract class AbstractQueryIU extends AbstractIU {
         super.initialize();
         
         // Get the exchange information
-        const exchInfo: ExchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
-
+        const exchangeInfo: ExchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
         // Check Selection Backward case
         this.initializeComponents();
-        if (exchInfo.exchangeType === 'SelectionBackward') {
-            this.processSelectionBackward(exchInfo);
-        } else if (exchInfo.exchangeType === 'ComeBack') {
+        if (exchangeInfo.exchangeType === 'SelectionBackward') {
+            this.processSelectionBackward(exchangeInfo);
+        } else if (exchangeInfo.exchangeType === 'ComeBack') {
             // Set the original context to the controller
-            this.setContext(exchInfo.originalContext, 'ComeBack');
+            this.setContext(exchangeInfo.originalContext, 'ComeBack');
             this.loadFromContext();
         } else {
-            this.initializeFromExchangeInfo(exchInfo);
+            this.initializeFromExchangeInfo(exchangeInfo);
         }
     }
 
@@ -934,7 +949,7 @@ export abstract class AbstractQueryIU extends AbstractIU {
         return 0;
     }
 
-    public refresh(nextInstance = 0): void {
+    public refresh(nextInstance = -1): void {
         // Empty method
     }
 
@@ -1157,3 +1172,4 @@ export abstract class AbstractQueryIU extends AbstractIU {
         }
     }
 }
+

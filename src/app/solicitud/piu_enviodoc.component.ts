@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
-import { DisplaySetItem, AccNavItem } from '../common/queryIUElements';
+import { DisplaySetItem, AccNavItem, ScenarioType, OpenScenarioType } from '../common/queryIUElements';
 import { ModelConstants } from '../common/model.constants';
 import { AbstractPIU } from '../common/abstractPIU';
 import { SolicitudFilterFuSolicitudContratanteTitular} from './filters/solicitudfilterfusolicitudcontratantetitular';
@@ -263,7 +263,7 @@ export class SolicitudPIUuEnvioDocComponent extends AbstractPIU implements OnIni
             ModelConstants.Mesadeapoyo.name];
         accItem.targetClass = ModelConstants.Solicitud.name;
         accItem.targetUI = ModelConstants.Solicitud.siuutenviardoc;
-
+        accItem.targetType  = ScenarioType.Normal;
         this.actions.push(accItem);
 
         accItem = new AccNavItem();
@@ -283,7 +283,7 @@ export class SolicitudPIUuEnvioDocComponent extends AbstractPIU implements OnIni
         accItem.preconditionAttributes.push(
             { agents: [],
               attributes: ['drvhaypreexistencias'] });
-
+        accItem.targetType  = ScenarioType.Normal;
         this.actions.push(accItem);
 
         accItem = new AccNavItem();
@@ -303,7 +303,7 @@ export class SolicitudPIUuEnvioDocComponent extends AbstractPIU implements OnIni
         accItem.preconditionAttributes.push(
             { agents: [],
               attributes: ['tienedifliquidacion'] });
-
+        accItem.targetType  = ScenarioType.Normal;
         this.actions.push(accItem);
 
     }

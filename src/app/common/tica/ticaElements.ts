@@ -4,7 +4,7 @@ import { GridColumnType } from '../abstractPIU';
 import { ExchangeInfo } from '../app.exchangeinfo';
 
 /**
- * Interface for TICA graphical components
+ * « Interface for TICA graphical components »
  */
 export interface TICAComponentInterface {
     /* Information about the columns */

@@ -3,7 +3,7 @@ import { LanguageMng } from './languageMng';
 import { Injectable } from '@angular/core';
 
 /**
- * Common functions
+ * « Common functions »
  */
 @Injectable({providedIn: 'root'})
 export class StandardFunctions {

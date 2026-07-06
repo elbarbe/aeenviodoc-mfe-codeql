@@ -4,6 +4,9 @@ import { Util } from './app.utils';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { MSALUtil } from './msalutil';
 
+/**
+ * « LogIn guard »
+ */
 @Injectable({providedIn: 'root'})
 export class LoginGuard implements CanActivate {
 

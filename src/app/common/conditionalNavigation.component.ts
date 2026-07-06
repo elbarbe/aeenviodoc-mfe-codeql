@@ -1,8 +1,11 @@
-﻿import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
 
+/**
+ * « Conditional navigation component »
+ */
 @Component({
     selector: 'conditionalNavigation',
     template: `
@@ -12,7 +15,7 @@ import { LanguageMng } from './languageMng';
 
     <div class="condNavAnwsers">
         <ng-container *ngFor="let anwser of anwsers; let i = index">
-            <div style="float:left;display:block;width:100%;">
+            <div class="condNavAnwser">
                 <input style="margin-right: 5px;" type="radio" name="optradio" (change)="onSelectionChange(i)"/>
                 <label>{{anwser}}</label>
             </div>
@@ -59,8 +62,8 @@ export class ConditionalNavigationComponent implements OnInit {
         }
     }
 
-
     public processCancel(): void {
         this.util.navigateComeBack(this.appGlobalInfo.appExchangeInfo.getConditionalExchangeInfos()[0].comeBackContext);
     }
 }
+

@@ -3,12 +3,19 @@ import { Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class OidBuilder {
 
+    private isNull(value: any): boolean {
+        return value === null || value === undefined || value === '' || value.length === 0 || Number.isNaN(value);
+    }
+
     /**
      * Builds an Oid of class Funcionario
      * @param funcionariouId Identificacion field 1
      */
     public buildOidFuncionario(funcionariouId: number): {
         id: number} {
+        if (this.isNull(funcionariouId)) {
+            return null;
+        }
         return {id: funcionariouId};
     }
     /**
@@ -17,6 +24,9 @@ export class OidBuilder {
      */
     public buildOidAdmin(adminuId: number): {
         id: number} {
+        if (this.isNull(adminuId)) {
+            return null;
+        }
         return {id: adminuId};
     }
     /**
@@ -25,6 +35,9 @@ export class OidBuilder {
      */
     public buildOidSuperAdmin(superAdminuId: number): {
         id: number} {
+        if (this.isNull(superAdminuId)) {
+            return null;
+        }
         return {id: superAdminuId};
     }
     /**
@@ -33,6 +46,9 @@ export class OidBuilder {
      */
     public buildOidAsesor(asesoruId: number): {
         id: number} {
+        if (this.isNull(asesoruId)) {
+            return null;
+        }
         return {id: asesoruId};
     }
     /**
@@ -41,6 +57,9 @@ export class OidBuilder {
      */
     public buildOidAreaMedica(areaMedicauId: number): {
         id: number} {
+        if (this.isNull(areaMedicauId)) {
+            return null;
+        }
         return {id: areaMedicauId};
     }
     /**
@@ -49,6 +68,9 @@ export class OidBuilder {
      */
     public buildOidAfiliaciones(afiliacionesuId: number): {
         id: number} {
+        if (this.isNull(afiliacionesuId)) {
+            return null;
+        }
         return {id: afiliacionesuId};
     }
     /**
@@ -57,6 +79,9 @@ export class OidBuilder {
      */
     public buildOidRespRegional(respRegionaluId: number): {
         id: number} {
+        if (this.isNull(respRegionaluId)) {
+            return null;
+        }
         return {id: respRegionaluId};
     }
     /**
@@ -65,6 +90,9 @@ export class OidBuilder {
      */
     public buildOidGestor(gestoruId: number): {
         id: number} {
+        if (this.isNull(gestoruId)) {
+            return null;
+        }
         return {id: gestoruId};
     }
     /**
@@ -73,6 +101,9 @@ export class OidBuilder {
      */
     public buildOidMesaDeApoyo(mesaDeApoyouId: number): {
         id: number} {
+        if (this.isNull(mesaDeApoyouId)) {
+            return null;
+        }
         return {id: mesaDeApoyouId};
     }
     /**
@@ -81,6 +112,9 @@ export class OidBuilder {
      */
     public buildOidParamConfig(paramConfiguCodigo: string): {
         codigo: string} {
+        if (this.isNull(paramConfiguCodigo)) {
+            return null;
+        }
         return {codigo: paramConfiguCodigo};
     }
     /**
@@ -89,6 +123,9 @@ export class OidBuilder {
      */
     public buildOidLogParam(logParamuCodigo: number): {
         codigo: number} {
+        if (this.isNull(logParamuCodigo)) {
+            return null;
+        }
         return {codigo: logParamuCodigo};
     }
     /**
@@ -97,6 +134,9 @@ export class OidBuilder {
      */
     public buildOidFrecuenciaAct(frecuenciaActuCodigo: number): {
         codigo: number} {
+        if (this.isNull(frecuenciaActuCodigo)) {
+            return null;
+        }
         return {codigo: frecuenciaActuCodigo};
     }
     /**
@@ -105,6 +145,9 @@ export class OidBuilder {
      */
     public buildOidCuestionarioMed(cuestionarioMeduNumero: number): {
         numero: number} {
+        if (this.isNull(cuestionarioMeduNumero)) {
+            return null;
+        }
         return {numero: cuestionarioMeduNumero};
     }
     /**
@@ -113,6 +156,9 @@ export class OidBuilder {
      */
     public buildOidSeccion(seccionuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(seccionuIdentificador)) {
+            return null;
+        }
         return {identificador: seccionuIdentificador};
     }
     /**
@@ -121,6 +167,9 @@ export class OidBuilder {
      */
     public buildOidPregunta(preguntauNumero: number): {
         numero: number} {
+        if (this.isNull(preguntauNumero)) {
+            return null;
+        }
         return {numero: preguntauNumero};
     }
     /**
@@ -129,6 +178,9 @@ export class OidBuilder {
      */
     public buildOidValor(valoruIdentificador: number): {
         identificador: number} {
+        if (this.isNull(valoruIdentificador)) {
+            return null;
+        }
         return {identificador: valoruIdentificador};
     }
     /**
@@ -137,6 +189,9 @@ export class OidBuilder {
      */
     public buildOidProductos(productosuProducto: number): {
         producto: number} {
+        if (this.isNull(productosuProducto)) {
+            return null;
+        }
         return {producto: productosuProducto};
     }
     /**
@@ -145,6 +200,9 @@ export class OidBuilder {
      */
     public buildOidPlanes(planesuPlan: number): {
         plan: number} {
+        if (this.isNull(planesuPlan)) {
+            return null;
+        }
         return {plan: planesuPlan};
     }
     /**
@@ -153,6 +211,9 @@ export class OidBuilder {
      */
     public buildOidParentesco(parentescouCodigo: number): {
         codigo: number} {
+        if (this.isNull(parentescouCodigo)) {
+            return null;
+        }
         return {codigo: parentescouCodigo};
     }
     /**
@@ -161,6 +222,9 @@ export class OidBuilder {
      */
     public buildOidPeriodicidad(periodicidaduCodigo: number): {
         codigo: number} {
+        if (this.isNull(periodicidaduCodigo)) {
+            return null;
+        }
         return {codigo: periodicidaduCodigo};
     }
     /**
@@ -169,6 +233,9 @@ export class OidBuilder {
      */
     public buildOidRol(roluIdentificador: number): {
         identificador: number} {
+        if (this.isNull(roluIdentificador)) {
+            return null;
+        }
         return {identificador: roluIdentificador};
     }
     /**
@@ -177,6 +244,9 @@ export class OidBuilder {
      */
     public buildOidDominio(dominiouNumero: number): {
         numero: number} {
+        if (this.isNull(dominiouNumero)) {
+            return null;
+        }
         return {numero: dominiouNumero};
     }
     /**
@@ -185,6 +255,9 @@ export class OidBuilder {
      */
     public buildOidPlantillaEmail(plantillaEmailuIdPlantilla: number): {
         idplantilla: number} {
+        if (this.isNull(plantillaEmailuIdPlantilla)) {
+            return null;
+        }
         return {idplantilla: plantillaEmailuIdPlantilla};
     }
     /**
@@ -193,6 +266,9 @@ export class OidBuilder {
      */
     public buildOidEstadoContrato(estadoContratouCodigo: number): {
         codigo: number} {
+        if (this.isNull(estadoContratouCodigo)) {
+            return null;
+        }
         return {codigo: estadoContratouCodigo};
     }
     /**
@@ -201,6 +277,9 @@ export class OidBuilder {
      */
     public buildOidEstadoBeneficiario(estadoBeneficiariouCodigo: number): {
         codigo: number} {
+        if (this.isNull(estadoBeneficiariouCodigo)) {
+            return null;
+        }
         return {codigo: estadoBeneficiariouCodigo};
     }
     /**
@@ -209,6 +288,9 @@ export class OidBuilder {
      */
     public buildOidEstadoBeneficiarioAE(estadoBeneficiarioAEuCodigo: number): {
         codigo: number} {
+        if (this.isNull(estadoBeneficiarioAEuCodigo)) {
+            return null;
+        }
         return {codigo: estadoBeneficiarioAEuCodigo};
     }
     /**
@@ -217,6 +299,9 @@ export class OidBuilder {
      */
     public buildOidTarifa(tarifauId: number): {
         id: number} {
+        if (this.isNull(tarifauId)) {
+            return null;
+        }
         return {id: tarifauId};
     }
     /**
@@ -225,6 +310,9 @@ export class OidBuilder {
      */
     public buildOidRegional(regionaluCodigo: number): {
         codigo: number} {
+        if (this.isNull(regionaluCodigo)) {
+            return null;
+        }
         return {codigo: regionaluCodigo};
     }
     /**
@@ -233,6 +321,9 @@ export class OidBuilder {
      */
     public buildOidSucursal(sucursaluCodigo: number): {
         codigo: number} {
+        if (this.isNull(sucursaluCodigo)) {
+            return null;
+        }
         return {codigo: sucursaluCodigo};
     }
     /**
@@ -241,6 +332,9 @@ export class OidBuilder {
      */
     public buildOidGrupoAsociado(grupoAsociadouCodigo: number): {
         codigo: number} {
+        if (this.isNull(grupoAsociadouCodigo)) {
+            return null;
+        }
         return {codigo: grupoAsociadouCodigo};
     }
     /**
@@ -249,6 +343,9 @@ export class OidBuilder {
      */
     public buildOidEstadoCivil(estadoCiviluCodigo: number): {
         codigo: number} {
+        if (this.isNull(estadoCiviluCodigo)) {
+            return null;
+        }
         return {codigo: estadoCiviluCodigo};
     }
     /**
@@ -257,6 +354,9 @@ export class OidBuilder {
      */
     public buildOidDepartamento(departamentouCodigo: number): {
         codigo: number} {
+        if (this.isNull(departamentouCodigo)) {
+            return null;
+        }
         return {codigo: departamentouCodigo};
     }
     /**
@@ -265,6 +365,9 @@ export class OidBuilder {
      */
     public buildOidTipoIVA(tipoIVAuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoIVAuCodigo)) {
+            return null;
+        }
         return {codigo: tipoIVAuCodigo};
     }
     /**
@@ -273,6 +376,9 @@ export class OidBuilder {
      */
     public buildOidPersona(personauIdentificador: number): {
         identificador: number} {
+        if (this.isNull(personauIdentificador)) {
+            return null;
+        }
         return {identificador: personauIdentificador};
     }
     /**
@@ -281,6 +387,9 @@ export class OidBuilder {
      */
     public buildOidCompanyia(companyiauCodigo: number): {
         codigo: number} {
+        if (this.isNull(companyiauCodigo)) {
+            return null;
+        }
         return {codigo: companyiauCodigo};
     }
     /**
@@ -289,6 +398,9 @@ export class OidBuilder {
      */
     public buildOidMunicipio(municipiouCodigo: number): {
         codigo: number} {
+        if (this.isNull(municipiouCodigo)) {
+            return null;
+        }
         return {codigo: municipiouCodigo};
     }
     /**
@@ -297,6 +409,9 @@ export class OidBuilder {
      */
     public buildOidTipoDireccion(tipoDireccionuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoDireccionuCodigo)) {
+            return null;
+        }
         return {codigo: tipoDireccionuCodigo};
     }
     /**
@@ -305,6 +420,9 @@ export class OidBuilder {
      */
     public buildOidEstadoPersona(estadoPersonauCodigo: number): {
         codigo: number} {
+        if (this.isNull(estadoPersonauCodigo)) {
+            return null;
+        }
         return {codigo: estadoPersonauCodigo};
     }
     /**
@@ -313,6 +431,9 @@ export class OidBuilder {
      */
     public buildOidFormaPago(formaPagouCodigo: number): {
         codigo: number} {
+        if (this.isNull(formaPagouCodigo)) {
+            return null;
+        }
         return {codigo: formaPagouCodigo};
     }
     /**
@@ -321,6 +442,9 @@ export class OidBuilder {
      */
     public buildOidTipoIdentificacion(tipoIdentificacionuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoIdentificacionuCodigo)) {
+            return null;
+        }
         return {codigo: tipoIdentificacionuCodigo};
     }
     /**
@@ -329,6 +453,9 @@ export class OidBuilder {
      */
     public buildOidEps(epsuCodigo: number): {
         codigo: number} {
+        if (this.isNull(epsuCodigo)) {
+            return null;
+        }
         return {codigo: epsuCodigo};
     }
     /**
@@ -337,6 +464,9 @@ export class OidBuilder {
      */
     public buildOidEntidadFinancieraC(entidadFinancieraCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(entidadFinancieraCuCodigo)) {
+            return null;
+        }
         return {codigo: entidadFinancieraCuCodigo};
     }
     /**
@@ -345,6 +475,9 @@ export class OidBuilder {
      */
     public buildOidTipoEntidadC(tipoEntidadCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoEntidadCuCodigo)) {
+            return null;
+        }
         return {codigo: tipoEntidadCuCodigo};
     }
     /**
@@ -353,6 +486,9 @@ export class OidBuilder {
      */
     public buildOidTipoInstitucionC(tipoInstitucionCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoInstitucionCuCodigo)) {
+            return null;
+        }
         return {codigo: tipoInstitucionCuCodigo};
     }
     /**
@@ -361,6 +497,9 @@ export class OidBuilder {
      */
     public buildOidAe_solicitudes(aeusolicitudesuidusolicitud: number): {
         id_solicitud: number} {
+        if (this.isNull(aeusolicitudesuidusolicitud)) {
+            return null;
+        }
         return {id_solicitud: aeusolicitudesuidusolicitud};
     }
     /**
@@ -369,6 +508,9 @@ export class OidBuilder {
      */
     public buildOidSolicitud(solicituduidusolicitud: number): {
         id_solicitud: number} {
+        if (this.isNull(solicituduidusolicitud)) {
+            return null;
+        }
         return {id_solicitud: solicituduidusolicitud};
     }
     /**
@@ -377,6 +519,9 @@ export class OidBuilder {
      */
     public buildOidPersonaC(personaCuID: number): {
         id: number} {
+        if (this.isNull(personaCuID)) {
+            return null;
+        }
         return {id: personaCuID};
     }
     /**
@@ -385,6 +530,9 @@ export class OidBuilder {
      */
     public buildOidDireccionC(direccionCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(direccionCuCodigo)) {
+            return null;
+        }
         return {codigo: direccionCuCodigo};
     }
     /**
@@ -393,6 +541,9 @@ export class OidBuilder {
      */
     public buildOidTelefonoC(telefonoCuID: number): {
         id: number} {
+        if (this.isNull(telefonoCuID)) {
+            return null;
+        }
         return {id: telefonoCuID};
     }
     /**
@@ -406,6 +557,10 @@ export class OidBuilder {
         id: number,
         producto: number,
         codigo: number} {
+        if (this.isNull(proteccionDatosCuID) || this.isNull(proteccionDatosCuProducto)
+             || this.isNull(proteccionDatosCuCodigo)) {
+            return null;
+        }
         return {id: proteccionDatosCuID,
                 producto: proteccionDatosCuProducto,
                 codigo: proteccionDatosCuCodigo};
@@ -416,6 +571,9 @@ export class OidBuilder {
      */
     public buildOidDireccion(direccionuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(direccionuIdentificador)) {
+            return null;
+        }
         return {identificador: direccionuIdentificador};
     }
     /**
@@ -424,6 +582,9 @@ export class OidBuilder {
      */
     public buildOidPais(paisuCodigo: string): {
         codigo: string} {
+        if (this.isNull(paisuCodigo)) {
+            return null;
+        }
         return {codigo: paisuCodigo};
     }
     /**
@@ -432,6 +593,9 @@ export class OidBuilder {
      */
     public buildOidProteccionDatos(proteccionDatosuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(proteccionDatosuIdentificador)) {
+            return null;
+        }
         return {identificador: proteccionDatosuIdentificador};
     }
     /**
@@ -442,6 +606,9 @@ export class OidBuilder {
     public buildOidUsuario(usuariouidusolicitud: number, usuariouIdentificador: number): {
         id_solicitud: number,
         identificador: number} {
+        if (this.isNull(usuariouidusolicitud) || this.isNull(usuariouIdentificador)) {
+            return null;
+        }
         return {id_solicitud: usuariouidusolicitud,
                 identificador: usuariouIdentificador};
     }
@@ -451,6 +618,9 @@ export class OidBuilder {
      */
     public buildOidCuestionarioP(cuestionarioPuNumero: number): {
         numero: number} {
+        if (this.isNull(cuestionarioPuNumero)) {
+            return null;
+        }
         return {numero: cuestionarioPuNumero};
     }
     /**
@@ -459,6 +629,9 @@ export class OidBuilder {
      */
     public buildOidSeccionP(seccionPuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(seccionPuIdentificador)) {
+            return null;
+        }
         return {identificador: seccionPuIdentificador};
     }
     /**
@@ -467,6 +640,9 @@ export class OidBuilder {
      */
     public buildOidPreguntaP(preguntaPuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(preguntaPuIdentificador)) {
+            return null;
+        }
         return {identificador: preguntaPuIdentificador};
     }
     /**
@@ -475,6 +651,9 @@ export class OidBuilder {
      */
     public buildOidContratante(contratanteuidusolicitud: number): {
         id_solicitud: number} {
+        if (this.isNull(contratanteuidusolicitud)) {
+            return null;
+        }
         return {id_solicitud: contratanteuidusolicitud};
     }
     /**
@@ -483,6 +662,9 @@ export class OidBuilder {
      */
     public buildOidAnexoMat(anexoMatuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(anexoMatuIdentificador)) {
+            return null;
+        }
         return {identificador: anexoMatuIdentificador};
     }
     /**
@@ -491,6 +673,9 @@ export class OidBuilder {
      */
     public buildOidAnexoNeo(anexoNeouIdentificador: number): {
         identificador: number} {
+        if (this.isNull(anexoNeouIdentificador)) {
+            return null;
+        }
         return {identificador: anexoNeouIdentificador};
     }
     /**
@@ -499,6 +684,9 @@ export class OidBuilder {
      */
     public buildOidFirma(firmauIdentificador: number): {
         identificador: number} {
+        if (this.isNull(firmauIdentificador)) {
+            return null;
+        }
         return {identificador: firmauIdentificador};
     }
     /**
@@ -507,6 +695,9 @@ export class OidBuilder {
      */
     public buildOidContratoC(contratoCuID: number): {
         id: number} {
+        if (this.isNull(contratoCuID)) {
+            return null;
+        }
         return {id: contratoCuID};
     }
     /**
@@ -515,6 +706,9 @@ export class OidBuilder {
      */
     public buildOidObservacionesC(observacionesCuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(observacionesCuIdentificador)) {
+            return null;
+        }
         return {identificador: observacionesCuIdentificador};
     }
     /**
@@ -525,6 +719,9 @@ export class OidBuilder {
     public buildOidBeneficiarioC(beneficiarioCuContratoCuID: number, beneficiarioCuID: number): {
         contratoc_id: number,
         id: number} {
+        if (this.isNull(beneficiarioCuContratoCuID) || this.isNull(beneficiarioCuID)) {
+            return null;
+        }
         return {contratoc_id: beneficiarioCuContratoCuID,
                 id: beneficiarioCuID};
     }
@@ -534,6 +731,9 @@ export class OidBuilder {
      */
     public buildOidAnexoC(anexoCuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(anexoCuIdentificador)) {
+            return null;
+        }
         return {identificador: anexoCuIdentificador};
     }
     /**
@@ -544,6 +744,9 @@ export class OidBuilder {
     public buildOidPregCuesMedC(pregCuesMedCuID: number, pregCuesMedCuCodPregunta: number): {
         id: number,
         codpregunta: number} {
+        if (this.isNull(pregCuesMedCuID) || this.isNull(pregCuesMedCuCodPregunta)) {
+            return null;
+        }
         return {id: pregCuesMedCuID,
                 codpregunta: pregCuesMedCuCodPregunta};
     }
@@ -553,6 +756,9 @@ export class OidBuilder {
      */
     public buildOidDirSucursalC(dirSucursalCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(dirSucursalCuCodigo)) {
+            return null;
+        }
         return {codigo: dirSucursalCuCodigo};
     }
     /**
@@ -563,6 +769,9 @@ export class OidBuilder {
     public buildOidFamiliaC(familiaCuContratoCuID: number, familiaCuID: number): {
         contratoc_id: number,
         id: number} {
+        if (this.isNull(familiaCuContratoCuID) || this.isNull(familiaCuID)) {
+            return null;
+        }
         return {contratoc_id: familiaCuContratoCuID,
                 id: familiaCuID};
     }
@@ -574,6 +783,9 @@ export class OidBuilder {
     public buildOidUsuarioReg(usuarioReguidusolicitud: number, usuarioReguIdentificador: number): {
         id_solicitud: number,
         identificador: number} {
+        if (this.isNull(usuarioReguidusolicitud) || this.isNull(usuarioReguIdentificador)) {
+            return null;
+        }
         return {id_solicitud: usuarioReguidusolicitud,
                 identificador: usuarioReguIdentificador};
     }
@@ -583,6 +795,9 @@ export class OidBuilder {
      */
     public buildOidTitular(titularuidusolicitud: number): {
         id_solicitud: number} {
+        if (this.isNull(titularuidusolicitud)) {
+            return null;
+        }
         return {id_solicitud: titularuidusolicitud};
     }
     /**
@@ -593,6 +808,9 @@ export class OidBuilder {
     public buildOidPreexistenciaC(preexistenciaCuID: number, preexistenciaCuIdentificador: number): {
         id: number,
         identificador: number} {
+        if (this.isNull(preexistenciaCuID) || this.isNull(preexistenciaCuIdentificador)) {
+            return null;
+        }
         return {id: preexistenciaCuID,
                 identificador: preexistenciaCuIdentificador};
     }
@@ -607,6 +825,10 @@ export class OidBuilder {
         id_solicitud: number,
         usuario_identificador: number,
         identificador: number} {
+        if (this.isNull(preexistenciauidusolicitud) || this.isNull(preexistenciauUsuariouIdentificador)
+             || this.isNull(preexistenciauIdentificador)) {
+            return null;
+        }
         return {id_solicitud: preexistenciauidusolicitud,
                 usuario_identificador: preexistenciauUsuariouIdentificador,
                 identificador: preexistenciauIdentificador};
@@ -617,6 +839,9 @@ export class OidBuilder {
      */
     public buildOidDocumentoG(documentoGuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(documentoGuIdentificador)) {
+            return null;
+        }
         return {identificador: documentoGuIdentificador};
     }
     /**
@@ -627,6 +852,9 @@ export class OidBuilder {
     public buildOidObsEstado(obsEstadouIdentificador: number, obsEstadouId: number): {
         identificador: number,
         id: number} {
+        if (this.isNull(obsEstadouIdentificador) || this.isNull(obsEstadouId)) {
+            return null;
+        }
         return {identificador: obsEstadouIdentificador,
                 id: obsEstadouId};
     }
@@ -636,6 +864,9 @@ export class OidBuilder {
      */
     public buildOidErrorWS(errorWSuIdentificador: number): {
         identificador: number} {
+        if (this.isNull(errorWSuIdentificador)) {
+            return null;
+        }
         return {identificador: errorWSuIdentificador};
     }
     /**
@@ -646,6 +877,9 @@ export class OidBuilder {
     public buildOidParentescoDom(parentescoDomuNumero: number, parentescoDomuIdentificador: number): {
         numero: number,
         identificador: number} {
+        if (this.isNull(parentescoDomuNumero) || this.isNull(parentescoDomuIdentificador)) {
+            return null;
+        }
         return {numero: parentescoDomuNumero,
                 identificador: parentescoDomuIdentificador};
     }
@@ -660,6 +894,10 @@ export class OidBuilder {
         id: number,
         producto: number,
         codigo: string} {
+        if (this.isNull(marcaMedicaCuID) || this.isNull(marcaMedicaCuProducto)
+             || this.isNull(marcaMedicaCuCodigo)) {
+            return null;
+        }
         return {id: marcaMedicaCuID,
                 producto: marcaMedicaCuProducto,
                 codigo: marcaMedicaCuCodigo};
@@ -670,6 +908,9 @@ export class OidBuilder {
      */
     public buildOidTipoSucursalC(tipoSucursalCuCodigo: number): {
         codigo: number} {
+        if (this.isNull(tipoSucursalCuCodigo)) {
+            return null;
+        }
         return {codigo: tipoSucursalCuCodigo};
     }
     /**
@@ -678,6 +919,9 @@ export class OidBuilder {
      */
     public buildOidConceptoC(conceptoCuIdConcepto: number): {
         idconcepto: number} {
+        if (this.isNull(conceptoCuIdConcepto)) {
+            return null;
+        }
         return {idconcepto: conceptoCuIdConcepto};
     }
     /**
@@ -686,6 +930,9 @@ export class OidBuilder {
      */
     public buildOidDetalleTarifa(detalleTarifauiduDetalleTarifa: number): {
         id_detalletarifa: number} {
+        if (this.isNull(detalleTarifauiduDetalleTarifa)) {
+            return null;
+        }
         return {id_detalletarifa: detalleTarifauiduDetalleTarifa};
     }
     /**
@@ -696,6 +943,9 @@ export class OidBuilder {
     public buildOidAgentexProducto(agentexProductouAsesoruId: number, agentexProductouId: number): {
         asesor_id: number,
         id: number} {
+        if (this.isNull(agentexProductouAsesoruId) || this.isNull(agentexProductouId)) {
+            return null;
+        }
         return {asesor_id: agentexProductouAsesoruId,
                 id: agentexProductouId};
     }
@@ -705,6 +955,9 @@ export class OidBuilder {
      */
     public buildOidInstitucionMatNeo(institucionMatNeouCodigo: string): {
         codigo: string} {
+        if (this.isNull(institucionMatNeouCodigo)) {
+            return null;
+        }
         return {codigo: institucionMatNeouCodigo};
     }
     /**
@@ -713,6 +966,9 @@ export class OidBuilder {
      */
     public buildOidLogEstado(logEstadouId: number): {
         id: number} {
+        if (this.isNull(logEstadouId)) {
+            return null;
+        }
         return {id: logEstadouId};
     }
     /**
@@ -721,6 +977,9 @@ export class OidBuilder {
      */
     public buildOidMotDevAreaMedica(motDevAreaMedicauId: number): {
         id: number} {
+        if (this.isNull(motDevAreaMedicauId)) {
+            return null;
+        }
         return {id: motDevAreaMedicauId};
     }
     /**
@@ -729,6 +988,9 @@ export class OidBuilder {
      */
     public buildOidContSinDocSol(contSinDocSoluiduContSinDocSol: number): {
         id_contsindocsol: number} {
+        if (this.isNull(contSinDocSoluiduContSinDocSol)) {
+            return null;
+        }
         return {id_contsindocsol: contSinDocSoluiduContSinDocSol};
     }
     /**
@@ -737,6 +999,9 @@ export class OidBuilder {
      */
     public buildOidLogContSinDocSol(logContSinDocSoluiduLogContSinDocSol: number): {
         id_logcontsindocsol: number} {
+        if (this.isNull(logContSinDocSoluiduLogContSinDocSol)) {
+            return null;
+        }
         return {id_logcontsindocsol: logContSinDocSoluiduLogContSinDocSol};
     }
     /**
@@ -745,6 +1010,9 @@ export class OidBuilder {
      */
     public buildOidLogAsignaciones(logAsignacionesuiduLogAsignaciones: number): {
         id_logasignaciones: number} {
+        if (this.isNull(logAsignacionesuiduLogAsignaciones)) {
+            return null;
+        }
         return {id_logasignaciones: logAsignacionesuiduLogAsignaciones};
     }
     /**
@@ -753,6 +1021,9 @@ export class OidBuilder {
      */
     public buildOidReportesProcAlm(reportesProcAlmuiduReporte: number): {
         id_reporte: number} {
+        if (this.isNull(reportesProcAlmuiduReporte)) {
+            return null;
+        }
         return {id_reporte: reportesProcAlmuiduReporte};
     }
     /**
@@ -763,6 +1034,9 @@ export class OidBuilder {
     public buildOidProrrateo(prorrateouNumero: number, prorrateouiduProrrateo: number): {
         numero: number,
         id_prorrateo: number} {
+        if (this.isNull(prorrateouNumero) || this.isNull(prorrateouiduProrrateo)) {
+            return null;
+        }
         return {numero: prorrateouNumero,
                 id_prorrateo: prorrateouiduProrrateo};
     }
@@ -772,6 +1046,9 @@ export class OidBuilder {
      */
     public buildOidTipoFactura(tipoFacturauCodigo: string): {
         codigo: string} {
+        if (this.isNull(tipoFacturauCodigo)) {
+            return null;
+        }
         return {codigo: tipoFacturauCodigo};
     }
     /**
@@ -780,6 +1057,9 @@ export class OidBuilder {
      */
     public buildOidParamReporte(paramReporteuiduParamReporte: number): {
         id_paramreporte: number} {
+        if (this.isNull(paramReporteuiduParamReporte)) {
+            return null;
+        }
         return {id_paramreporte: paramReporteuiduParamReporte};
     }
     /**
@@ -788,6 +1068,9 @@ export class OidBuilder {
      */
     public buildOidTipoNovedad(tipoNovedaduTipo: number): {
         tipo: number} {
+        if (this.isNull(tipoNovedaduTipo)) {
+            return null;
+        }
         return {tipo: tipoNovedaduTipo};
     }
     /**
@@ -796,6 +1079,9 @@ export class OidBuilder {
      */
     public buildOidNovedad(novedaduiduNovedad: number): {
         id_novedad: number} {
+        if (this.isNull(novedaduiduNovedad)) {
+            return null;
+        }
         return {id_novedad: novedaduiduNovedad};
     }
     /**
@@ -804,6 +1090,9 @@ export class OidBuilder {
      */
     public buildOidCausal(causaluiduCausal: number): {
         id_causal: number} {
+        if (this.isNull(causaluiduCausal)) {
+            return null;
+        }
         return {id_causal: causaluiduCausal};
     }
     /**
@@ -812,6 +1101,9 @@ export class OidBuilder {
      */
     public buildOidSolicitudNovedad(solicitudNovedaduId: number): {
         id: number} {
+        if (this.isNull(solicitudNovedaduId)) {
+            return null;
+        }
         return {id: solicitudNovedaduId};
     }
     /**
@@ -820,6 +1112,9 @@ export class OidBuilder {
      */
     public buildOidFamiliaNovedad(familiaNovedaduiduFamiliaNovedad: number): {
         id_familianovedad: number} {
+        if (this.isNull(familiaNovedaduiduFamiliaNovedad)) {
+            return null;
+        }
         return {id_familianovedad: familiaNovedaduiduFamiliaNovedad};
     }
     /**
@@ -828,6 +1123,9 @@ export class OidBuilder {
      */
     public buildOidUsuarioNovedad(usuarioNovedaduiduUsuarioNovedad: number): {
         id_usuarionovedad: number} {
+        if (this.isNull(usuarioNovedaduiduUsuarioNovedad)) {
+            return null;
+        }
         return {id_usuarionovedad: usuarioNovedaduiduUsuarioNovedad};
     }
     /**
@@ -836,6 +1134,9 @@ export class OidBuilder {
      */
     public buildOidCausaExclusion(causaExclusionuiduCausaExclusion: number): {
         id_causaexclusion: number} {
+        if (this.isNull(causaExclusionuiduCausaExclusion)) {
+            return null;
+        }
         return {id_causaexclusion: causaExclusionuiduCausaExclusion};
     }
     /**
@@ -844,6 +1145,9 @@ export class OidBuilder {
      */
     public buildOidNovedadCT(novedadCTuiduNovedadCT: number): {
         id_novedadct: number} {
+        if (this.isNull(novedadCTuiduNovedadCT)) {
+            return null;
+        }
         return {id_novedadct: novedadCTuiduNovedadCT};
     }
     /**
@@ -852,6 +1156,9 @@ export class OidBuilder {
      */
     public buildOidDocumentoNovedad(documentoNovedaduIdDocumento: number): {
         iddocumento: number} {
+        if (this.isNull(documentoNovedaduIdDocumento)) {
+            return null;
+        }
         return {iddocumento: documentoNovedaduIdDocumento};
     }
     /**
@@ -860,6 +1167,9 @@ export class OidBuilder {
      */
     public buildOidNovedadMD(novedadMDuiduNovedadMD: number): {
         id_novedadmd: number} {
+        if (this.isNull(novedadMDuiduNovedadMD)) {
+            return null;
+        }
         return {id_novedadmd: novedadMDuiduNovedadMD};
     }
     /**
@@ -868,6 +1178,9 @@ export class OidBuilder {
      */
     public buildOidLogEstadoSN(logEstadoSNuId: number): {
         id: number} {
+        if (this.isNull(logEstadoSNuId)) {
+            return null;
+        }
         return {id: logEstadoSNuId};
     }
     /**
@@ -876,6 +1189,9 @@ export class OidBuilder {
      */
     public buildOidMotivoExcepcionSolNov(motivoExcepcionSolNovuId: number): {
         id: number} {
+        if (this.isNull(motivoExcepcionSolNovuId)) {
+            return null;
+        }
         return {id: motivoExcepcionSolNovuId};
     }
     /**
@@ -886,6 +1202,9 @@ export class OidBuilder {
     public buildOidPriorizacionSolicitudes(priorizacionSolicitudesuEstadoSolicitud: number, priorizacionSolicitudesuEstadoDoc: number): {
         estadosolicitud: number,
         estadodoc: number} {
+        if (this.isNull(priorizacionSolicitudesuEstadoSolicitud) || this.isNull(priorizacionSolicitudesuEstadoDoc)) {
+            return null;
+        }
         return {estadosolicitud: priorizacionSolicitudesuEstadoSolicitud,
                 estadodoc: priorizacionSolicitudesuEstadoDoc};
     }
@@ -895,6 +1214,9 @@ export class OidBuilder {
      */
     public buildOidLogPriorizacionSol(logPriorizacionSoluId: number): {
         id: number} {
+        if (this.isNull(logPriorizacionSoluId)) {
+            return null;
+        }
         return {id: logPriorizacionSoluId};
     }
     /**
@@ -903,6 +1225,9 @@ export class OidBuilder {
      */
     public buildOidGrupoAsignacion(grupoAsignacionuId: number): {
         id: number} {
+        if (this.isNull(grupoAsignacionuId)) {
+            return null;
+        }
         return {id: grupoAsignacionuId};
     }
     /**
@@ -911,6 +1236,9 @@ export class OidBuilder {
      */
     public buildOidLogGrupoAsignacion(logGrupoAsignacionuId: number): {
         id: number} {
+        if (this.isNull(logGrupoAsignacionuId)) {
+            return null;
+        }
         return {id: logGrupoAsignacionuId};
     }
     /**
@@ -919,6 +1247,9 @@ export class OidBuilder {
      */
     public buildOidLogGruposUsuarios(logGruposUsuariosuId: number): {
         id: number} {
+        if (this.isNull(logGruposUsuariosuId)) {
+            return null;
+        }
         return {id: logGruposUsuariosuId};
     }
     /**
@@ -927,6 +1258,9 @@ export class OidBuilder {
      */
     public buildOidGrupoAsignacionNovedad(grupoAsignacionNovedaduId: number): {
         id: number} {
+        if (this.isNull(grupoAsignacionNovedaduId)) {
+            return null;
+        }
         return {id: grupoAsignacionNovedaduId};
     }
     /**
@@ -935,6 +1269,9 @@ export class OidBuilder {
      */
     public buildOidLogFuncionario(logFuncionariouId: number): {
         id: number} {
+        if (this.isNull(logFuncionariouId)) {
+            return null;
+        }
         return {id: logFuncionariouId};
     }
     /**
@@ -943,6 +1280,9 @@ export class OidBuilder {
      */
     public buildOidLogUsrSolNov(logUsrSolNovuId: number): {
         id: number} {
+        if (this.isNull(logUsrSolNovuId)) {
+            return null;
+        }
         return {id: logUsrSolNovuId};
     }
     /**
@@ -951,6 +1291,9 @@ export class OidBuilder {
      */
     public buildOidContratoCombo(contratoCombouId: number): {
         id: number} {
+        if (this.isNull(contratoCombouId)) {
+            return null;
+        }
         return {id: contratoCombouId};
     }
     /**
@@ -959,6 +1302,9 @@ export class OidBuilder {
      */
     public buildOidLogContratoCombo(logContratoCombouId: number): {
         id: number} {
+        if (this.isNull(logContratoCombouId)) {
+            return null;
+        }
         return {id: logContratoCombouId};
     }
     /**
@@ -967,6 +1313,9 @@ export class OidBuilder {
      */
     public buildOidConfiguracionANS(configuracionANSuId: number): {
         id: number} {
+        if (this.isNull(configuracionANSuId)) {
+            return null;
+        }
         return {id: configuracionANSuId};
     }
     /**
@@ -975,6 +1324,9 @@ export class OidBuilder {
      */
     public buildOidLogConfiguracionANS(logConfiguracionANSuId: number): {
         id: number} {
+        if (this.isNull(logConfiguracionANSuId)) {
+            return null;
+        }
         return {id: logConfiguracionANSuId};
     }
     /**
@@ -983,6 +1335,9 @@ export class OidBuilder {
      */
     public buildOidConfiguracionFestivos(configuracionFestivosuId: number): {
         id: number} {
+        if (this.isNull(configuracionFestivosuId)) {
+            return null;
+        }
         return {id: configuracionFestivosuId};
     }
     /**
@@ -991,6 +1346,9 @@ export class OidBuilder {
      */
     public buildOidLogEstadoDocNov(logEstadoDocNovuId: number): {
         id: number} {
+        if (this.isNull(logEstadoDocNovuId)) {
+            return null;
+        }
         return {id: logEstadoDocNovuId};
     }
     /**
@@ -999,6 +1357,9 @@ export class OidBuilder {
      */
     public buildOidPlantillaReporte(plantillaReporteuiduPlantillaReporte: number): {
         id_plantillareporte: number} {
+        if (this.isNull(plantillaReporteuiduPlantillaReporte)) {
+            return null;
+        }
         return {id_plantillareporte: plantillaReporteuiduPlantillaReporte};
     }
     /**
@@ -1009,6 +1370,9 @@ export class OidBuilder {
     public buildOidReportesDominio(reportesDominiouNumero: number, reportesDominiouiduPlantillaReporte: number): {
         numero: number,
         id_plantillareporte: number} {
+        if (this.isNull(reportesDominiouNumero) || this.isNull(reportesDominiouiduPlantillaReporte)) {
+            return null;
+        }
         return {numero: reportesDominiouNumero,
                 id_plantillareporte: reportesDominiouiduPlantillaReporte};
     }
@@ -1018,6 +1382,9 @@ export class OidBuilder {
      */
     public buildOidLogInformacionAsesor(logInformacionAsesoruiduLogInformacionAsesor: number): {
         id_loginformacionasesor: number} {
+        if (this.isNull(logInformacionAsesoruiduLogInformacionAsesor)) {
+            return null;
+        }
         return {id_loginformacionasesor: logInformacionAsesoruiduLogInformacionAsesor};
     }
     /**
@@ -1026,6 +1393,9 @@ export class OidBuilder {
      */
     public buildOidLogHistoricoPlanes(logHistoricoPlanesuiduLogHistoricoPlanes: number): {
         id_loghistoricoplanes: number} {
+        if (this.isNull(logHistoricoPlanesuiduLogHistoricoPlanes)) {
+            return null;
+        }
         return {id_loghistoricoplanes: logHistoricoPlanesuiduLogHistoricoPlanes};
     }
     /**
@@ -1034,6 +1404,9 @@ export class OidBuilder {
      */
     public buildOidLogLlamadasAE(logLlamadasAEuID: number): {
         id: number} {
+        if (this.isNull(logLlamadasAEuID)) {
+            return null;
+        }
         return {id: logLlamadasAEuID};
     }
     /**
@@ -1042,6 +1415,9 @@ export class OidBuilder {
      */
     public buildOidLogLlamadasBH(logLlamadasBHuID: number): {
         id: number} {
+        if (this.isNull(logLlamadasBHuID)) {
+            return null;
+        }
         return {id: logLlamadasBHuID};
     }
     /**
@@ -1050,6 +1426,9 @@ export class OidBuilder {
      */
     public buildOidFechaIniEPS(fechaIniEPSuId: number): {
         id: number} {
+        if (this.isNull(fechaIniEPSuId)) {
+            return null;
+        }
         return {id: fechaIniEPSuId};
     }
     /**
@@ -1058,6 +1437,9 @@ export class OidBuilder {
      */
     public buildOidLogIncompatibilidades(logIncompatibilidadesuiduLogIncompatibilidades: number): {
         id_logincompatibilidades: number} {
+        if (this.isNull(logIncompatibilidadesuiduLogIncompatibilidades)) {
+            return null;
+        }
         return {id_logincompatibilidades: logIncompatibilidadesuiduLogIncompatibilidades};
     }
     /**
@@ -1066,6 +1448,9 @@ export class OidBuilder {
      */
     public buildOidLogDatosDominio(logDatosDominiouiduLogDatosDominio: number): {
         id_logdatosdominio: number} {
+        if (this.isNull(logDatosDominiouiduLogDatosDominio)) {
+            return null;
+        }
         return {id_logdatosdominio: logDatosDominiouiduLogDatosDominio};
     }
     /**
@@ -1074,6 +1459,9 @@ export class OidBuilder {
      */
     public buildOidContratosExentosFIngreso(contratosExentosFIngresouiduContratosExentosFIngreso: number): {
         id_contratosexentosfingreso: number} {
+        if (this.isNull(contratosExentosFIngresouiduContratosExentosFIngreso)) {
+            return null;
+        }
         return {id_contratosexentosfingreso: contratosExentosFIngresouiduContratosExentosFIngreso};
     }
     /**
@@ -1082,6 +1470,9 @@ export class OidBuilder {
      */
     public buildOidLogContratosExentosFIngreso(logContratosExentosFIngresouiduLogContratosExentosFIngreso: number): {
         id_logcontratosexentosfingreso: number} {
+        if (this.isNull(logContratosExentosFIngresouiduLogContratosExentosFIngreso)) {
+            return null;
+        }
         return {id_logcontratosexentosfingreso: logContratosExentosFIngresouiduLogContratosExentosFIngreso};
     }
     /**
@@ -1090,6 +1481,9 @@ export class OidBuilder {
      */
     public buildOidTextoAviso(textoAvisouIdentificador: string): {
         identificador: string} {
+        if (this.isNull(textoAvisouIdentificador)) {
+            return null;
+        }
         return {identificador: textoAvisouIdentificador};
     }
     /**
@@ -1098,6 +1492,9 @@ export class OidBuilder {
      */
     public buildOidUsuarioSistemaExterno(usuarioSistemaExternouLogin: string): {
         login: string} {
+        if (this.isNull(usuarioSistemaExternouLogin)) {
+            return null;
+        }
         return {login: usuarioSistemaExternouLogin};
     }
 

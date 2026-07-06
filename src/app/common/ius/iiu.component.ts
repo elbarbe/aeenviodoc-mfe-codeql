@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { AbstractIIU } from '../abstractIIU';
 import { Field, FieldBlob, FieldDefinedSelection, FieldOVLense, FieldOVLenseSearch } from '../baseIUElements';
 
+/**
+ * « Instance interaction unit component »
+ */
 @Component({
     selector: 'imes-iiu',
     templateUrl: './iiu.component.html',

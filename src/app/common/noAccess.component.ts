@@ -3,6 +3,9 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { LanguageMng } from '../common/languageMng';
 import { Util } from './app.utils';
 
+/**
+ * « No access component »
+ */
 @Component({
     selector: 'noaccess',
     template: `

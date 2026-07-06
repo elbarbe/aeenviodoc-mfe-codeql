@@ -9,6 +9,7 @@ import { WrongVersionComponent } from './common/wrongVersion.component';
 import { LoginGuard } from './common/loginGuard';
 import { PopStateNavigationGuard } from './common/popStateNavigationGuard';
 import { GenericSiuComponent } from './common/genericSiu.component';
+import { ProcessNewWindowComponent } from './common/processNewWindow.component';
 import { EmptyRouteComponent } from './empty-route/empty-route.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { environment } from 'src/environments/environment';
@@ -25,6 +26,7 @@ const routes: Routes = [
         canActivate: [LoginGuard], canDeactivate: [PopStateNavigationGuard] },
     { path: environment.prefix + '/classServiceLog', component: ClassServiceLogComponent,
         canActivate: [LoginGuard], canDeactivate: [PopStateNavigationGuard] },
+    { path: environment.prefix + '/processnw', component: ProcessNewWindowComponent},
     { path: environment.prefix + '/persona',
       loadChildren: () => import('./persona/persona.module').then(m => m.PersonaModule) },
     { path: environment.prefix + '/solicitud',

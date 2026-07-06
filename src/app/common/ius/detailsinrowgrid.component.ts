@@ -7,6 +7,9 @@ import { AppGlobalInfo } from '../../app.appglobalinfo';
 import { AbstractPIU } from '../abstractPIU';
 import { AbstractIIU } from '../abstractIIU';
 
+/**
+ * « Detail in a grid row component »
+ */
 @Component({
     selector: 'imes-details-in-row-grid',
     templateUrl: './detailsinrowgrid.component.html',
@@ -76,11 +79,11 @@ export class DetailsInRowGridComponent  {
         if (this.intMDIU.loadDetailsOnDemand) {
             const actDetail = this.details.find((detail) => detail.order === this.activeDetail);
             if (actDetail) {
-                actDetail.refresh();
+                actDetail.refresh(1);
             }
         } else {
             for (const detail of this.details) {
-                detail.refresh();
+                detail.refresh(1);
             }
         }
     }

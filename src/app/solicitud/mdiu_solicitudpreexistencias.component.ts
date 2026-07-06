@@ -58,7 +58,7 @@ export class SolicitudMDIUuSolicitudPreexistenciasComponent extends AbstractMDIU
         this.master.masterDetailContainer = this;
         this.masterAbstract = this.master;
         this.d0Visible = this.appGlobalInfo.getLoggedUserInfo().isDetailVisible(this.idXML, 'Clas_1431957012480960UIMaDet_9Det_1',
-            ['Admin', 'SuperAdmin', 'Asesor', 'AreaMedica', 'Gestor', 'MesaDeApoyo']);
+            ['Admin', 'SuperAdmin', 'Asesor', 'AreaMedica', 'Afiliaciones', 'Gestor', 'MesaDeApoyo']);
         this.d0 = new PreexistenciaPIUuPreexistenciaComponent(appGlobalInfo, util, changeDetectorRef, langMng, stdFun,
             condNavMng, usrFunc);
         this.d0.masterDetailContainer = this;

@@ -3,7 +3,7 @@ import { Util } from './app.utils';
 import { LogicError, RequestError, QueryResponse } from './answerRequestInformation';
 
 /**
- * Abstract class for wrapper classes
+ * « Abstract class for wrapper classes »
  */
 export abstract class AbstractServices {
 

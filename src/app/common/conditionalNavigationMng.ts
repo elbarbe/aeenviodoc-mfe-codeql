@@ -36,8 +36,8 @@ export class ConditionalNavigationMng {
 
         this.appGlobalInfo.appExchangeInfo.clearConditionalNavigation();
 
-        switch (className) {
-            case 'Solicitud':
+        switch (className.toLowerCase()) {
+            case 'Solicitud'.toLowerCase():
                 return this.processCondNavsolicitud(serviceName, request, response, previousContext, comeBackContext);
         }
         return false;

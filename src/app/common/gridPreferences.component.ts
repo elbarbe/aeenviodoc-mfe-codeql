@@ -2,6 +2,9 @@
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { LanguageMng } from './languageMng';
 
+/**
+ * « Grid Preferences component »
+ */
 @Component({
     selector: 'gridPreferences',
     templateUrl: './gridPreferences.component.html',

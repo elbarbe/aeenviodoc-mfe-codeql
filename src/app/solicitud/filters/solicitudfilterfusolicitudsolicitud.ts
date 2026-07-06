@@ -9,7 +9,7 @@ import { UserFunctions } from '../../common/userFunctions';
 import { AbstractPIU } from '../../common/abstractPIU';
 
 /**
- * Manages the filter F_SolicitudSolicitud of class Solicitud
+ * « Manages the filter F_SolicitudSolicitud of class Solicitud »
  */
 export class SolicitudFilterFuSolicitudSolicitud extends AbstractFilter {
 

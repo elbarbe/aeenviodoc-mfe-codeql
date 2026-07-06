@@ -1,6 +1,9 @@
 ﻿import { Component, Input } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 
+/**
+ * « Wait backend response component »
+ */
 @Component({
     selector: 'waitDialog',
     template: `

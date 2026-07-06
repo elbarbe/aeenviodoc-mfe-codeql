@@ -4,7 +4,7 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 
 /**
- * Component for breadcrumb management
+ * « Component for breadcrumb management »
  */
 @Component({
     selector: 'breadcrumb',

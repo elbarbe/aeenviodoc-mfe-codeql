@@ -27,8 +27,8 @@ import { NoAccessComponent } from './common/noAccess.component';
 import { WrongVersionComponent } from './common/wrongVersion.component';
 import { ConditionalNavigationComponent } from './common/conditionalNavigation.component';
 import { ClassServiceLogComponent } from './common/classServiceLog.component';
-import { ModalForIUModule } from './common/modalforiu/modalforiu.module';
 import { UserFunctions } from './common/userFunctions';
+import { ModalForIUModule } from './common/modalforiu/modalforiu.module';
 import { EmptyRouteComponent } from './empty-route/empty-route.component';
 import { environment } from '../environments/environment';
 

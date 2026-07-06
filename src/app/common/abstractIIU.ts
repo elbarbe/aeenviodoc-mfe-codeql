@@ -7,7 +7,7 @@ import { ConditionalNavigationMng } from './conditionalNavigationMng';
 import { AbstractQueryIU } from './queryIUElements';
 
 /**
- * Base class for an instance interaction scenario
+ * « Base class for an instance interaction scenario »
  */
 export abstract class AbstractIIU extends AbstractQueryIU {
 
@@ -101,7 +101,7 @@ export abstract class AbstractIIU extends AbstractQueryIU {
             this.setShowWait(false);
             this.changeDetectorRef.markForCheck();
         } else {
-            this.refresh();
+            this.refresh(1);
         }
     }
 
@@ -236,7 +236,7 @@ export abstract class AbstractIIU extends AbstractQueryIU {
      * Update the data in the screen. Launch the proper query and retieve the data
      * @param nextInstance Next instance to be retrieve from the server
      */
-    public override refresh(pageNumber = 1): void {
+    public override refresh(pageNumber = -1): void {
 
         // Related filtering. Related instance is required
         if (!this.selectedOid) {

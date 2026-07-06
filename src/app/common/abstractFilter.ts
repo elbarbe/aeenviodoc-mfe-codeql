@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { Field, FieldOVLenseSearch, FieldOVPreload } from './baseIUElements';
@@ -9,7 +9,7 @@ import { AbstractPIU } from './abstractPIU';
 import { AbstractFilterIU } from './abstractFIU';
 
 /**
- * Abstract class for Filter components
+ * « Abstract class for Filter components »
  */
 export abstract class AbstractFilter {
 
@@ -362,3 +362,4 @@ export abstract class AbstractFilter {
     }
 
 }
+

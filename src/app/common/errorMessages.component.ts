@@ -3,7 +3,7 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { LanguageMng } from './languageMng';
 
 /**
- * Appñlication error messages component
+ * « Application error messages component »
  */
 @Component({
     selector: 'errorMessages',

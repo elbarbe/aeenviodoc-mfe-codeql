@@ -1,4 +1,4 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { CacheDependencyRules, InstanceCache } from './app.cachedependencyrules';
 import { ExchangeInfo } from './app.exchangeinfo';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { ErrorInformation } from './answerRequestInformation';
 
 /**
- * Abstract class for Service components
+ * « Abstract class for Service components »
  */
 export abstract class AbstractServiceIU extends AbstractIU {
 
@@ -58,6 +58,8 @@ export abstract class AbstractServiceIU extends AbstractIU {
     private serviceRequests: any[] = [];
     /** Progress bar subscription to manage the cancel */
     protected progressBarSubscription: Subscription | null = null;
+    /** Indicates service request has been performed and answer is pending */
+    public waitingServiceResponse = false;
 
     constructor(protected override appGlobalInfo: AppGlobalInfo,
         protected override util: Util,
@@ -135,19 +137,22 @@ export abstract class AbstractServiceIU extends AbstractIU {
      */
     public override initialize(): void {
         // Get the exchange information
-        const exchInfo: ExchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
+        const exchangeInfo = this.appGlobalInfo.appExchangeInfo.getExchangeInfoForScenario(this.className, this.iuName);
+        
         // Scenario context information
-        // Check Selection Backward case
         this.initializeComponents();
-        if (exchInfo.exchangeType === 'SelectionBackward') {
+        // Check Selection Backward case
+        if (exchangeInfo.exchangeType === 'SelectionBackward') {
             // Set the original context to the controller
-            this.context = exchInfo.previous;
+            this.context = exchangeInfo.previous;
             this.loadFromContext();
             this.setShowWait(false);
-            this.processSelectionBackward(exchInfo);
-            this.appGlobalInfo.appExchangeInfo.save(exchInfo.previous.exchangeInfo)
+            this.processSelectionBackward(exchangeInfo);
+            if (!exchangeInfo.isInModal) {
+                this.appGlobalInfo.appExchangeInfo.save(exchangeInfo.previous.exchangeInfo)
+            }
         } else {
-            this.initializeFromExchangeInfo(exchInfo);
+            this.initializeFromExchangeInfo(exchangeInfo);
         }
     }
 
@@ -511,12 +516,18 @@ export abstract class AbstractServiceIU extends AbstractIU {
      * Process the service execution
      */
     public saveChanges(): void {
+        if (this.waitingServiceResponse) {
+            return;
+        }
+
         this.serviceRequests = [];
         if (!this.validateInputFields()) {
             this.setShowWait(false);
             this.visible = true;
             return;
         }
+
+        this.waitingServiceResponse = true;
 
         this.executionsCount = 0;
         this.totalExecutions = 1;
@@ -563,6 +574,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
                         this.util.hideProgressBar();
                         this.processOutArgumentAndCondNavigation(request, response);
                         this.visible = true;
+                        this.waitingServiceResponse = false;
                     }
                     if (this.totalExecutions > 1 && !this.executeMultiSelectionInParallel && this.serviceRequests.length > 0) {
                         this.executeService(this.serviceRequests.shift());
@@ -578,6 +590,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
                         this.util.hideProgressBar();
                         this.util.addErrorMessageList(this.errorList);
                         this.visible = true;
+                        this.waitingServiceResponse = false;
                         if (this.appGlobalInfo.errorCET) {
                             this.processCancel();
                         }
@@ -591,7 +604,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
 
     /**
      * Service has been executed, process outbound arguments and conditional navigation
-     * @param request Service requiest
+     * @param request Service request
      * @param response Service response
      */
     private processOutArgumentAndCondNavigation(request: any, response: any): void {
@@ -785,3 +798,4 @@ export abstract class AbstractServiceIU extends AbstractIU {
     }
 
 }
+

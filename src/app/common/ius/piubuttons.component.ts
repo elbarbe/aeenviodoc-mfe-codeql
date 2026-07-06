@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LanguageMng } from '../languageMng';
 import { AbstractPIU } from '../abstractPIU';
 
+/**
+ * « Buttons for population interaction unit component »
+ */
 @Component({
     selector: 'imes-piubuttons',
     templateUrl: './piubuttons.component.html',

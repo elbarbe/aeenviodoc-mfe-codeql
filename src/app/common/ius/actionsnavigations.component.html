@@ -1,22 +1,25 @@
-<div class="btn-toolbar col-12 actionsNavigations" role="toolbar">
-    <div class="btn-group action">
-        <ng-container *ngFor="let action of queryIU.actions">
-            <ng-container *ngIf="action.visible && action.showInDefault">
+<ng-container *ngIf="anyVisible()">
+    <div class="btn-toolbar col-xs-12 col-sm-12 col-md-12 actionsNavigations" role="toolbar">
+        <div class="btn-group action">
+            <ng-container *ngFor="let action of queryIU.actions">
+                <ng-container *ngIf="action.visible && action.showInDefault">
                     <button type="button" class="btn btn-primary btn-sm pi pi-circle-on"
-                    [ngClass]="action.styleClass"
-                    [disabled]="!queryIU.isActionEnabled(action.id)"
-                    (click)="queryIU.doAction(action.id)">{{action.alias}}</button>
+                        [ngClass]="action.styleClass"
+                        [disabled]="!queryIU.isActionEnabled(action.id)"
+                        (click)="queryIU.doAction(action.id)">{{action.alias}}</button>
+                </ng-container>
             </ng-container>
-        </ng-container>
-    </div>
-    <div class="btn-group navigation">
-        <ng-container *ngFor="let navigation of queryIU.navigations">
-            <ng-container *ngIf="navigation.visible && navigation.showInDefault">
+        </div>
+        <div class="btn-group navigation">
+            <ng-container *ngFor="let navigation of queryIU.navigations">
+                <ng-container *ngIf="navigation.visible && navigation.showInDefault">
                     <button type="button" class="btn btn-primary btn-sm pi pi-circle-on"
-                    [ngClass]="navigation.styleClass"
-                    [disabled]="!queryIU.isNavigationEnabled(navigation.id)"
-                    (click)="queryIU.doNavigation(navigation.id)">{{navigation.alias}}</button>
+                        [ngClass]="navigation.styleClass"
+                        [disabled]="!queryIU.isNavigationEnabled(navigation.id)"
+                        (click)="queryIU.doNavigation(navigation.id)">{{navigation.alias}}</button>
+                </ng-container>
             </ng-container>
-        </ng-container>
+        </div>
     </div>
-</div>
+</ng-container>
+

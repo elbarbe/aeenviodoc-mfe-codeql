@@ -49,6 +49,7 @@ export class Util {
         private confirmationService: ConfirmationService,
         private langMng: LanguageMng
     ) { }
+
     /**
      * Returns the router current navigation
      */
@@ -85,7 +86,7 @@ export class Util {
     public applyDefaultFormat(value: any, datatype: string): string {
         let valueString = '';
         let dateValue: Date | null = null;
-        if (!value) {
+        if (this.isNull(value)) {
             return valueString;
         }
         valueString = value;
@@ -216,23 +217,23 @@ export class Util {
         return valueTyped;
     }
 
-    public getInt(value: any): number {
-        let valueTyped = 0;
+    public getInt(value: any): number | null {
+        let valueTyped = null;
         if (!this.isNull(value)) {
             valueTyped = parseInt(value, 10);
             if (isNaN(valueTyped)) {
-                return 0;
+                return null;
             }
         }
         return valueTyped;
     }
 
-    public getReal(value: any): number {
-        let valueTyped = 0;
+    public getReal(value: any): number | null {
+        let valueTyped = null;
         if (!this.isNull(value)) {
             valueTyped = parseFloat(value);
             if (isNaN(valueTyped)) {
-                return 0;
+                return null;
             }
         }
         return valueTyped;
@@ -404,7 +405,6 @@ export class Util {
     private navigateToNavKey(navKey: string, navExtras: NavigationExtras | undefined): void {
         // Close IU modal popup
         this.processCancelInPopup(false);
-
         if (navKey) {
             let finalNavKey = environment.prefix + navKey;
             if (!navKey.startsWith('/')) {
@@ -547,7 +547,6 @@ export class Util {
      */
     public createExchangeInfoFromCondNavigation(targetClassName: string, targetIUName: string, previousContext: any,
                                                 comeBackContext: any): ExchangeInfo {
-        // Create the exchange information from conditional navigation
         return this.createBasicExchangeInfo(targetClassName, targetIUName, previousContext, comeBackContext, 'Action');
     }
 
@@ -671,6 +670,7 @@ export class Util {
         this.navigateToClassIu(targetClassName, targetIUName);
     }
 
+
     /**
      * Returns to the previous scenario
      * @param originalContext Scenario original context
@@ -771,6 +771,23 @@ export class Util {
         this.navigateToClassIu(targetClassName, targetIUName);
     }
 
+    /**
+     * Process the cancel button in the modal popup for interaction units
+     * @param lastExecutionSuccess Success in the last execution or not, in order to refresh the data
+     */
+    public processCancelInPopup(lastExecutionSuccess = false): boolean {
+        let returnvalue = false;
+        if (this.modalForIUResponse.observers.length > 1) {
+            const eventResult = {result: 0};
+            if (!lastExecutionSuccess) {
+                eventResult.result = 1;
+            }
+            this.modalForIUResponse.next(eventResult);
+            returnvalue = true;
+        }
+        return returnvalue;
+    }
+
     public navigateToClassServiceLog(className: string, comeBackContext: any): void {
         const exchInfo = new ExchangeInfo();
         exchInfo.exchangeType = 'ClassServiceLog';
@@ -796,22 +813,6 @@ export class Util {
         this.router.navigate(['/classServiceLog']);
     }
 
-    /**
-     * Process the cancel button in the modal popup for interaction units
-     * @param lastExecutionSuccess Success in the last execution or not, in order to refresh the data
-     */
-    public processCancelInPopup(lastExecutionSuccess = false): boolean {
-        let returnvalue = false;
-        if (this.modalForIUResponse.observers.length > 1) {
-            const eventResult = {result: 0};
-            if (!lastExecutionSuccess) {
-                eventResult.result = 1;
-            }
-            this.modalForIUResponse.next(eventResult);
-            returnvalue = true;
-        }
-        return returnvalue;
-    }
 
 
 

@@ -2,7 +2,7 @@
 import { Util } from './app.utils';
 
 /**
- * Keeps information about an attribute
+ * « Keeps information about an attribute »
  */
 class AttributeCache {
     /** Attribute name */

@@ -7,6 +7,9 @@ import { Field, FieldDefinedSelection } from '../common/baseIUElements';
 import { ModelConstants } from '../common/model.constants';
 import { ErrorInformation } from '../common/answerRequestInformation';
 
+/**
+ * « Implements LogIn functionality »
+ */
 @Component({
     selector: 'app-content',
     templateUrl: './login.component.html',

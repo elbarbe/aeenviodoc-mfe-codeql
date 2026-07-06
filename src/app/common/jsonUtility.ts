@@ -1,5 +1,5 @@
 /**
- * Utility class to manage Json formats
+ * « Utility class to manage Json formats »
  */
 export class JsonUtility {
 

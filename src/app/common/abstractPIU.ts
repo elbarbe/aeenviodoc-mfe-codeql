@@ -1,9 +1,9 @@
-﻿import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { ExchangeInfo } from './app.exchangeinfo';
 import { Util } from './app.utils';
 import { ConditionalNavigationMng } from './conditionalNavigationMng';
-import { AbstractQueryIU, DisplaySetItem } from './queryIUElements';
+import { AbstractQueryIU, DisplaySetItem, OpenScenarioType, ScenarioType } from './queryIUElements';
 import { Subscription, Subject } from 'rxjs';
 import { AbstractFilter } from './abstractFilter';
 import { LanguageMng } from './languageMng';
@@ -19,7 +19,7 @@ export enum GridColumnType {
 }
 
 /**
- * Base class for Population Interaction scenario
+ * « Base class for Population Interaction scenario »
  */
 export abstract class AbstractPIU extends AbstractQueryIU {
 
@@ -430,7 +430,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
             if (dsElem.maxLength > 50) {
                 col.width = this.calculateColWidth(50);
             } else {
-                col.width = this.calculateColWidth(dsElem.maxLength);
+                col.width = this.calculateColWidth(dsElem.maxLength > 3 ? dsElem.maxLength : 3);
             }
         }
     }
@@ -642,13 +642,21 @@ export abstract class AbstractPIU extends AbstractQueryIU {
      * @param isAction Indicates if it is an action or a navigationthe associated
      * @param indexAccNav Action or navigation index
      */
-    public onGridClickCell(row: any, isAction: boolean, indexAccNav: number) {
+    public onGridClickCell(row: any, isAction: boolean, indexAccNav: number, openType: OpenScenarioType = OpenScenarioType.Default) {
         this.gridSelectedRows = [row];
         if (isAction) {
             this.doAction(indexAccNav);
         } else {
             this.doNavigation(indexAccNav);
         }
+    }
+
+    /**
+     * Manages the double click in a cell
+     * @param row Selected row
+     */
+    public onGridDblClickCell(row: any) {
+        // Empty method
     }
 
     /**
@@ -766,7 +774,11 @@ export abstract class AbstractPIU extends AbstractQueryIU {
      * Update the data in the screen. Launch the proper query and retieve the data
      * @param pageNumber Requested page number
      */
-    public override refresh(pageNumber = 1): void {
+    public override refresh(pageNumber = -1): void {
+
+        if (pageNumber === -1) {
+            pageNumber = this.lastPageNumber;
+        }
 
         if (pageNumber <= 0) {
             pageNumber = 1;
@@ -922,7 +934,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
         this.gridSelectedRows = undefined;
         this.gridExpandedRows = {};
         this.selectionChanged.next();
-        this.refresh();
+        this.refresh(1);
     }
 
     /**
@@ -1117,7 +1129,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
                 this.applyColumnsPreferences(data.cols);
                 this.saveGridPreferences();
                 this.columnsChanged.next();
-                this.refresh();
+                this.refresh(1);
                 this.changeDetectorRef.markForCheck();
             }
             if (data.result === -1) {
@@ -1405,3 +1417,4 @@ export abstract class AbstractPIU extends AbstractQueryIU {
         }
     }
 }
+

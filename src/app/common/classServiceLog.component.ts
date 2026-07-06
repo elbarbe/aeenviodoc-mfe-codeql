@@ -7,6 +7,9 @@ import { ConditionalNavigationMng } from '../common/conditionalNavigationMng';
 import { Field, FieldDefinedSelection } from './baseIUElements';
 import { JsonUtility } from './jsonUtility';
 
+/**
+ * « Class service Log comopnent »
+ */
 @Component({
     selector: 'ClassServiceLog',
     templateUrl: './classServiceLog.component.html',

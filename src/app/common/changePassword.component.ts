@@ -4,7 +4,7 @@ import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
 import { ErrorInformation } from './answerRequestInformation';
 /**
- * Generic component for change password service
+ * « Generic component for change password service »
  */
 @Component({
     selector: 'imes-changepassword',

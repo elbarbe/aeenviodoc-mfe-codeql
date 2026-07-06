@@ -3,11 +3,14 @@ import { LanguageMng } from '../languageMng';
 import { Util } from '../app.utils';
 import { AbstractPIU } from '../abstractPIU';
 import { Table } from 'primeng/table';
-import { AccNavItem } from '../queryIUElements';
+import { AccNavItem, OpenScenarioType } from '../queryIUElements';
 import { Subscription } from 'rxjs';
 
 import * as XLSX from 'xlsx';
 
+/**
+ * « Grid component »
+ */
 @Component({
     selector: 'imes-grid',
     templateUrl: './grid.component.html',
@@ -391,6 +394,27 @@ export class GridComponent implements AfterViewInit {
             this.intPIU.onGridClickCell(rowData, linkIsAction, linkIndex)
         } 
     }
+
+    public onGridClickCell(event: any): void {
+        if (this.piu.gridAllowMultiSelection && event?.shiftKey && event?.data && Array.isArray(event?.data)) {
+            this.piu.gridSelectedRows = event.data;
+        }
+        this.piu.onGridRowSelect(event);
+    }
+
+
+    public onLinkClick(event: any, rowData: any, linkIsAction: boolean, linkIndex: number): void {
+        if (event.ctrlKey) {
+            this.intPIU.onGridClickCell(rowData, linkIsAction, linkIndex, OpenScenarioType.NewWindow);
+            return; 
+        }
+        if (event.shiftKey) {
+            this.intPIU.onGridClickCell(rowData, linkIsAction, linkIndex, OpenScenarioType.Modal);
+            return; 
+        }
+        this.intPIU.onGridClickCell(rowData, linkIsAction, linkIndex, OpenScenarioType.Default);
+     }
+
 
     /**
      * Process the saving context information event

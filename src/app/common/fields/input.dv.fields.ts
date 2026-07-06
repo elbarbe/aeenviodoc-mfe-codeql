@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { Field, FieldDefinedSelection, FieldBlob } from '../baseIUElements';
 import { Util } from '../app.utils';
 
+/**
+ * « String input field »
+ */
 @Component({
     selector: 'imes-input-string',
     templateUrl: './inputstring.component.html',
@@ -138,12 +141,18 @@ export class InputStringComponent {
     }    
 }
 
+/**
+ * « Numeric input field »
+ */
 @Component({
     selector: 'imes-input-numeric',
     templateUrl: './inputnumeric.component.html',
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class InputNumericComponent extends InputStringComponent {
+
+    /** Check for autonumeric fields */
+    public checkAuto = true;
 
     @ViewChild('inputNumeric', { static: false }) inputControl: any;
 
@@ -223,8 +232,22 @@ export class InputNumericComponent extends InputStringComponent {
                 event.preventDefault();
         }
     }
+
+    /**
+     * Manages the change in the check for autonumeric
+     */
+    public onCheckAutoChange(): void {
+        if (this.checkAuto) {
+            this.field.value = -1;
+        } else {
+            this.field.value = '';
+        }
+    }
 }
 
+/**
+ * « Date, Time and Datetime input field »
+ */
 @Component({
     selector: 'imes-input-date',
     templateUrl: './inputdate.component.html',
@@ -277,6 +300,7 @@ export class InputDateComponent extends InputStringComponent {
             (!this.field.value && this.previousValue) ||
             (this.field.value && this.previousValue && this.field.value.toString() !== this.previousValue.toString())) {
             this.onFieldChange();
+            this.previousValue = this.field.value;
         }
     }
 
@@ -288,6 +312,9 @@ export class InputDateComponent extends InputStringComponent {
     }
 }
 
+/**
+ * « Boolean check input field »
+ */
 @Component({
     selector: 'imes-input-check',
     templateUrl: './inputcheck.component.html',
@@ -297,6 +324,9 @@ export class InputCheckComponent extends InputStringComponent {
 
 }
 
+/**
+ * « Defined selection input field »
+ */
 @Component({
     selector: 'imes-input-definedselection',
     templateUrl: './inputdefinedselection.component.html',
@@ -339,6 +369,9 @@ export class InputDefinedSelectionComponent {
     }    
 }
 
+/**
+ * « Defined selection radio input field »
+ */
 @Component({
     selector: 'imes-input-radio',
     templateUrl: './inputradio.component.html',
@@ -348,6 +381,9 @@ export class InputRadioComponent extends InputDefinedSelectionComponent {
 
 }
 
+/**
+ * « File input field »
+ */
 @Component({
     selector: 'imes-input-blob',
     templateUrl: './inputblob.component.html',
@@ -461,6 +497,9 @@ export class InputBlobComponent {
     }
 }
 
+/**
+ * « Image file input field »
+ */
 @Component({
     selector: 'imes-input-blob-image',
     templateUrl: './inputblobimage.component.html',
@@ -500,6 +539,9 @@ export class InputBlobImageComponent extends InputBlobComponent {
     }
 }
 
+/**
+ * « PDF Viewer field »
+ */
 @Component({
     selector: 'imes-pdf-viewer',
     templateUrl: './pdfviewer.component.html',

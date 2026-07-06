@@ -1,5 +1,5 @@
 ﻿/**
- * Information to be used to navigate to another scenario
+ * « Information to be used to navigate to another scenario »
  */
 export class ExchangeInfo {
 
@@ -44,6 +44,8 @@ export class ExchangeInfo {
     public printUIName = '';
     /* Scenario in modal form */
     public isInModal = false;
+    /* Unique Id */
+    public id = '';
 
     /**
      * Deserialize an exchange info object
@@ -59,12 +61,18 @@ export class ExchangeInfo {
         this.selectedOidsClassName = serializedExchInfo.selectedOidsClassName;
         this.customData = serializedExchInfo.customData;
         this.navigationalFilterIdentity = serializedExchInfo.navigationalFilterIdentity;
+        this.navigationalFilterVariables = serializedExchInfo.navigationalFilterVariables ? 
+            serializedExchInfo.navigationalFilterVariables : null;
         this.rolePath = serializedExchInfo.rolePath;
         this.targetScenarioTitle = serializedExchInfo.targetScenarioTitle;
         this.multiSelectionAllowed = serializedExchInfo.multiSelectionAllowed;
         this.originArgumentName = serializedExchInfo.originArgumentName;
         this.originServiceName = serializedExchInfo.originServiceName;
         this.originalContext = this.deserializeContext(serializedExchInfo.originalContext);
+        this.originIUIdentification = serializedExchInfo.originIUIdentification;
+        this.printUIName = serializedExchInfo.printUIName;
+        this.isInModal = serializedExchInfo.isInModal;
+        this.id = serializedExchInfo.id;
     }
 
     /**

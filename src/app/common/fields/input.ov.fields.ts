@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { FieldOVLense, FieldOVLenseSearch, FieldOVPreload } from '../baseIUElements';
 import { OverlayPanel } from 'primeng/overlaypanel';
 
+/**
+ * « Abstract object valued field »
+ */
 @Component({
     template: ''
   })
@@ -66,6 +69,9 @@ import { OverlayPanel } from 'primeng/overlaypanel';
     }
 }
 
+/**
+ * « Lense input field »
+ */
 @Component({
     selector: 'imes-lense',
     templateUrl: './lense.component.html',
@@ -114,8 +120,68 @@ export class LenseComponent extends AbstractLenseComponent {
     public showEye(): boolean {
         return this.field.getSelectedInstances().length > 1;
     }
+
+    /**
+     * Selected value event handler
+     * @param index Index
+     */
+    public override onInstanceSelected(index: number) {
+        if (this.checkFieldsDatatype()) {
+            super.onInstanceSelected(index);
+        }
+    }
+    
+    private checkFieldsDatatype(): boolean {
+        for (let index = 0; index < this.field.oidFieldsTypes.length; index++) {
+            if (this.field.oidFields[index]) {
+                try {
+                    this.field.oidFields[index] = this.convertoToDatatype(this.field.oidFields[index],this.field.oidFieldsTypes[index]);
+                } catch (err) {
+                    this.field.setValidationMessage('Invalid datatype');
+                    return false;
+                }
+            }
+        }
+        this.field.invalid = false;
+        return true;
+    }
+
+    private convertoToDatatype(value: any, dataType: string): any {
+
+        if (value) {
+            switch (dataType) {
+                case 'int':
+                case 'nat':
+                case 'autonumeric':
+                case 'autonumerico': {
+                    const numInt = Number.parseFloat(value);
+                    if (isNaN(numInt)) {
+                        throw new Error('Invalid datatype');
+                    }
+                    if ((numInt | 0) !== numInt) {
+                        throw new Error('Invalid datatype');
+                    }
+                    return numInt;
+                }
+                case 'real': {
+                    const num = Number.parseFloat(value);
+                    if (isNaN(num)) {
+                        throw new Error('Invalid datatype');
+                    }
+                    return num;
+                }
+                default: {
+                    return value;
+                }
+            }
+        }
+        return value;
+    }    
 }
 
+/**
+ * « LenseSearch input field »
+ */
 @Component({
     selector: 'imes-lensesearch',
     templateUrl: './lensesearch.component.html',
@@ -207,6 +273,9 @@ export class LenseSearchComponent extends AbstractLenseComponent {
     }
 }
 
+/**
+ * « Preload input field »
+ */
 @Component({
     selector: 'imes-preload',
     templateUrl: './preload.component.html',
@@ -249,6 +318,9 @@ export class PreloadComponent {
     }
 }
 
+/**
+ * « Multiselection Preload input field »
+ */
 @Component({
     selector: 'imes-preload-multiple',
     templateUrl: './preloadmultiple.component.html',
@@ -258,6 +330,9 @@ export class PreloadMultipleComponent extends PreloadComponent {
 
 }
 
+/**
+ * « Multiselection Preload as combo input field »
+ */
 @Component({
     selector: 'imes-preload-multiple-dropdown',
     templateUrl: './preloadmultipledropdown.component.html',

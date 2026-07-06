@@ -7,6 +7,9 @@ import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppGlobalInfo } from './app.appglobalinfo';
 
+/**
+ * « Application component »
+ */
 @Component({
     selector: 'aeenviodoc-root',
     templateUrl: './app.component.html'
@@ -124,7 +127,6 @@ export class AppComponent implements OnDestroy {
         this.gridColumnsToEdit = [];
         this.changeDetectorRef.markForCheck();
     }
-
 
     /**
      * Manages the event when an interaction unit must be shown in the modal popup

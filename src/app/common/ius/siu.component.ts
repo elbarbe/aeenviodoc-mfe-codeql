@@ -3,6 +3,9 @@ import { LanguageMng } from '../languageMng';
 import { AbstractServiceIU } from '../abstractSIU';
 import { FieldOVLense, FieldOVLenseSearch, Field, FieldBlob } from '../baseIUElements';
 
+/**
+ * « Service interaction unit component »
+ */
 @Component({
     selector: 'imes-siu',
     templateUrl: './siu.component.html',

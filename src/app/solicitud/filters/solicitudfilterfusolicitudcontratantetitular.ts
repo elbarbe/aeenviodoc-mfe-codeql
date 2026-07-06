@@ -11,7 +11,7 @@ import { UserFunctions } from '../../common/userFunctions';
 import { AbstractPIU } from '../../common/abstractPIU';
 
 /**
- * Manages the filter F_SolicitudContratanteTitular of class Solicitud
+ * « Manages the filter F_SolicitudContratanteTitular of class Solicitud »
  */
 export class SolicitudFilterFuSolicitudContratanteTitular extends AbstractFilter {
 

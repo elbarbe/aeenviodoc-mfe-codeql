@@ -1,8 +1,11 @@
-﻿import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { AppGlobalInfo } from '../../app.appglobalinfo';
 import { LanguageMng } from './../languageMng';
 import { Util } from './../app.utils';
 
+/**
+ * « Modal for Interaction Units component »
+ */
 @Component({
     selector: 'modalForIU',
     templateUrl: './modalforiu.component.html',
@@ -34,3 +37,4 @@ export class ModalForIUComponent {
     }
 
 }
+

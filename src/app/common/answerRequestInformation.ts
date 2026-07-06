@@ -1,5 +1,5 @@
 /**
- * Generic information about an error
+ * « Generic information about an error »
  */
 export class ErrorInformation extends Error{
     /** Error is managed by logic or is external */

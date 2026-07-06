@@ -9,7 +9,7 @@
         [(first)]="piu.gridFirstInstanceDisplayed" paginatorDropdownAppendTo="body"
         selectionMode="{{piu.gridAllowMultiSelection ? 'multiple' : 'single'}}" [(selection)]="piu.gridSelectedRows"
         [metaKeySelection]="true" [scrollable]="true" scrollDirection="both" scrollHeight="400px"
-        (onRowSelect)="piu.onGridRowSelect($event)" (onRowUnselect)="piu.onGridRowUnselect($event)"
+        (onRowSelect)="onGridClickCell($event)" (onRowUnselect)="piu.onGridRowUnselect($event)"
         (onPage)="piu.onGridPaging($event)" dataKey="oid" [lazy]="!piu.paginationInClient"
         (onLazyLoad)="piu.onGridLazyLoadData($event)" [totalRecords]="piu.gridTotalInstances"
         (onSort)="piu.onGridSortData($event)" sortMode="{{piu.paginationInClient && 'multiple'}}"
@@ -49,7 +49,7 @@
                     <th *ngIf="col.sortable && !col.hidden" scope="col" [pSortableColumn]="col.field" [ngClass]="col.styleClass"
                         [style.width]="col.applyWidth ? col.width + 'px' : ''" class="gridHeader" pResizableColumn>
                         {{col.header}}
-                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                        <p-sortIcon *ngIf="piu.paginationInClient" [field]="col.field"></p-sortIcon>
                     </th>
                     <th *ngIf="!col.sortable && !col.hidden" scope="col" [ngClass]="col.styleClass"
                         [style.width]="col.applyWidth ? col.width + 'px' : ''" class="gridHeader" pResizableColumn>
@@ -101,8 +101,9 @@
                 </tr>
             </ng-container>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-            <tr [pSelectableRow]="rowData" [ngClass]="piu.getRowCssClasses(rowData)">
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+                [ngClass]="piu.getRowCssClasses(rowData)">
 
                 <ng-container *ngIf="expandDetails">
                     <td class="gridColExpandDetails">
@@ -127,14 +128,14 @@
                         <td class="gridColAction" *ngIf="acc.visible && acc.showInGrid">
                             <button type="button" class="btn btn-sm" [ngClass]="acc.styleClass"
                                 [disabled]="!piu.isActionEnabledInGrid(acc.id, rowData)" [title]="acc.alias"
-                                (click)="piu.onGridClickCell(rowData, true, acc.id)"></button>
+                                (click)="onLinkClick($event, rowData, true, acc.id)"></button>
                         </td>
                     </ng-container>
                     <ng-container *ngFor="let nav of piu.navigations">
                         <td class="gridColNavigation" *ngIf="nav.visible && nav.showInGrid">
                             <button type="button" class="btn btn-sm" [ngClass]="nav.styleClass"
                                 [disabled]="!piu.isNavigationEnabledInGrid(nav.id, rowData)" [title]="nav.alias"
-                                (click)="piu.onGridClickCell(rowData, false, nav.id)"></button>
+                                (click)="onLinkClick($event, rowData, false, nav.id)"></button>
                         </td>
                     </ng-container>
                 </ng-container>
@@ -142,14 +143,14 @@
                 <ng-container *ngFor="let col of columns">
                     <ng-container *ngIf="(!piu.editableGrid || !col.editable) && !col.hidden">
                         <td [ngClass]="col.styleClass" [style.width]="col.applyWidth ? col.width + 'px' : ''"
-                            class="p-resizable-column">
+                            class="p-resizable-column" (dblclick)="piu.onGridDblClickCell(rowData)">
                             <span class="p-column-title">{{col.header}}</span>
                             <ng-container *ngIf="col.type === 0">
                                 <ng-container *ngIf="!col.showPopup">
                                     <ng-container *ngIf="col.linkIndex >=0">
                                         <span>
                                             <a
-                                                (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field]}}</a>
+                                                 (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field]}}</a>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="col.linkIndex < 0">
@@ -160,14 +161,14 @@
                                     <ng-container *ngIf="col.linkIndex >=0">
                                         <span class="gridTextEnlarge">
                                             <a
-                                                (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field]}}</a>
+                                                (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field]}}</a>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="col.linkIndex < 0">
                                         <span class="gridTextEnlarge">{{rowData[col.field]}}</span>
                                     </ng-container>
 
-                                    <button type="button" class="btn btn-sm pi pi-ellipsis-h"
+                                    <button *ngIf="rowData[col.field]" type="button" class="btn btn-sm pi pi-ellipsis-h"
                                         style="padding: 0px;background-color: #ffffff;float: right;"
                                         (click)="rowData['_inpopup' + col.field]=true"></button>
                                     <p-dialog [header]="col.header" [(visible)]="rowData['_inpopup' + col.field]"
@@ -187,7 +188,7 @@
                                 <ng-container *ngIf="col.linkIndex >=0">
                                     <span>
                                         <a
-                                            (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field] | number : col.mask}}</a>
+                                            (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field] | number : col.mask}}</a>
                                     </span>
                                 </ng-container>
                                 <ng-container *ngIf="col.linkIndex < 0">
@@ -198,7 +199,7 @@
                                 <ng-container *ngIf="col.linkIndex >=0">
                                     <span>
                                         <a
-                                            (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{piu.getValueFromDefinedSelection(col, rowData[col.field])}}</a>
+                                            (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{piu.getValueFromDefinedSelection(col, rowData[col.field])}}</a>
                                     </span>
                                 </ng-container>
                                 <ng-container *ngIf="col.linkIndex < 0">
@@ -209,7 +210,7 @@
                                 <ng-container *ngIf="col.linkIndex >=0">
                                     <span>
                                         <a
-                                            (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field] | date: col.mask}}</a>
+                                            (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{rowData[col.field] | date: col.mask}}</a>
                                     </span>
                                 </ng-container>
                                 <ng-container *ngIf="col.linkIndex < 0">
@@ -221,7 +222,7 @@
                             </ng-container>
                             <ng-container *ngIf="col.type === 5">
                                 <button type="button" class="btn"
-                                    (click)="piu.onGridClickCell(rowData, col.linkIsAction, col.linkIndex)">{{col.header}}</button>
+                                    (click)="onLinkClick($event, rowData, col.linkIsAction, col.linkIndex)">{{col.header}}</button>
                             </ng-container>
                         </td>
                     </ng-container>
@@ -232,11 +233,23 @@
                             <span class="p-column-title">{{col.header}}</span>
                             <p-cellEditor>
                                 <ng-container *ngIf="col.type === 0">
-                                    <ng-template pTemplate="input">
-                                        <input type="text" [(ngModel)]="rowData[col.field]" [name]="col.field"
-                                            (ngModelChange)="piu.onCellEditComplete(rowData, col.field)">
-                                    </ng-template>
-                                    <ng-template pTemplate="output">{{rowData[col.field]}}</ng-template>
+                                    <ng-container *ngIf="col.dataType === 'bool'">
+                                        <ng-template pTemplate="input">
+                                            <input type="checkbox" class="form-control" (checked)="rowData[col.field]" [(ngModel)]="rowData[col.field]"
+                                                (ngModelChange)="piu.onCellEditComplete(rowData, col.field)"/>
+                                        </ng-template>                                            
+                                        <ng-template pTemplate="output">
+                                            <input type="checkbox" class="form-control" (checked)="rowData[col.field]" [(ngModel)]="rowData[col.field]"
+                                                (ngModelChange)="piu.onCellEditComplete(rowData, col.field)"/>
+                                        </ng-template>
+                                    </ng-container>
+                                    <ng-container *ngIf="col.dataType !== 'bool'">
+                                        <ng-template pTemplate="input">
+                                            <input type="text" [(ngModel)]="rowData[col.field]" [name]="col.field"
+                                                (ngModelChange)="piu.onCellEditComplete(rowData, col.field)">
+                                        </ng-template>
+                                        <ng-template pTemplate="output">{{rowData[col.field]}}</ng-template>
+                                    </ng-container>
                                 </ng-container>
                                 <ng-container *ngIf="col.type === 1">
                                     <ng-template pTemplate="input">
@@ -283,14 +296,14 @@
                         <td class="gridColAction" *ngIf="acc.visible && acc.showInGrid">
                             <button type="button" class="btn btn-sm" [ngClass]="acc.styleClass"
                                 [disabled]="!piu.isActionEnabledInGrid(acc.id, rowData)" [title]="acc.alias"
-                                (click)="piu.onGridClickCell(rowData, true, acc.id)"></button>
+                                (click)="onLinkClick($event, rowData, true, acc.id)"></button>
                         </td>
                     </ng-container>
                     <ng-container *ngFor="let nav of piu.navigations">
                         <td class="gridColNavigation" *ngIf="nav.visible && nav.showInGrid">
                             <button type="button" class="btn btn-sm" [ngClass]="nav.styleClass"
                                 [disabled]="!piu.isNavigationEnabledInGrid(nav.id, rowData)" [title]="nav.alias"
-                                (click)="piu.onGridClickCell(rowData, false, nav.id)"></button>
+                                (click)="onLinkClick($event, rowData, false, nav.id)"></button>
                         </td>
                     </ng-container>
                 </ng-container>
