@@ -207,6 +207,7 @@ export class AppExchangeInfo {
             exInfo.targetClassName = className;
             exInfo.targetIUName = iuName;
         }
+        this.save(exInfo);
         return exInfo;
     }
 

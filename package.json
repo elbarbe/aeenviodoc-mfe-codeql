@@ -1,6 +1,6 @@
 {
   "name": "@ae/aeenviodoc",
-  "version": "39.0.0",
+  "version": "41.0.0",
   "description": "App description",
   "scripts": {
     "start": "ng serve --configuration=standalone --port 4203",

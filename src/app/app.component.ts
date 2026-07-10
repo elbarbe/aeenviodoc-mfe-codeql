@@ -45,7 +45,6 @@ export class AppComponent implements OnDestroy {
 
     ) {
         this.appGlobalInfo.getLoggedUserInfo();
-        this.appGlobalInfo.appExchangeInfo.clear();
         this.subscriptions = new Subscription();
         this.subscriptions.add(util.errorMessagesAction.subscribe(data => this.errorMessagesAction(data)));
         this.subscriptions.add(util.gridPreferencesAction.subscribe(data => this.gridPreferencesAction(data)));
