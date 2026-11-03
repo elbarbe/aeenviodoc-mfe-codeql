@@ -1,4 +1,4 @@
-import { getLocaleDateFormat, FormatWidth, getLocaleNumberSymbol, NumberSymbol, registerLocaleData} from '@angular/common';
+import { getLocaleNumberSymbol, NumberSymbol, registerLocaleData} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import { Injectable } from '@angular/core';

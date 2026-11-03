@@ -256,34 +256,6 @@ export class Util {
     }
 
     /**
-     * Like operator
-     * @param strData String data
-     * @param strLikeExpresion Text to search
-     */
-    public like(strData: string, strLikeExpresion: string): boolean {
-
-        if (this.isNull(strData) && this.isNull(strLikeExpresion)) {
-            return true;
-        }
-
-        if (this.isNull(strData) || this.isNull(strLikeExpresion)) {
-            return false;
-        }
-
-        if (strLikeExpresion.indexOf('%') < 0) {
-            return strData.toUpperCase().startsWith(strLikeExpresion.toUpperCase());
-        }
-
-        let likeExpresion = strLikeExpresion.replace(new RegExp('[.]', 'g'), '\\.');
-        likeExpresion = likeExpresion.replace(new RegExp('[*]', 'g'), '\\*');
-        likeExpresion = likeExpresion.replace(new RegExp('[%]', 'g'), '.*');
-        likeExpresion = '^' + likeExpresion + '$';
-
-        const regExp = new RegExp(likeExpresion, 'i');
-        return regExp.test(strData);
-    }
-
-    /**
      * Returns true if date 1 is greater than date2
      * @param date1 
      * @param date2 
@@ -862,6 +834,15 @@ export class Util {
      * @param fileName File name
      */
     public openInNewWindow(fileDataBase64: string, fileName: string): void {
+        // Tratamos el caso especial de generacion de reporte
+        if (fileName === '...GET...') {
+            let url = this.appGlobalInfo.APPCONSTANTS.BASE_URL;
+            url += '/api/GlobalServicesApi/ShowReporte';
+            // En el archivo ha llega el querystring a emplear
+            url += window.atob(fileDataBase64);
+            window.open(url, '_blank');
+            return;
+        }
         if (fileDataBase64) {
             // Set MIME type using the file extension
             let options = { type: 'application/octet-stream' };
@@ -1795,7 +1776,6 @@ export class Util {
             headers = headers.set('Authorization', 'Bearer ' + this.appGlobalInfo.getLoggedUserInfo().token);
         }
         headers = headers.set('API-Version', this.appGlobalInfo.apiVersion);
-        const responseType = 'json';
         const options = { headers, observe: 'response' as 'body',  responseType: 'json' as 'json', withCredentials: true };
         if (responseAsText) {
             options.responseType = 'text' as 'json';

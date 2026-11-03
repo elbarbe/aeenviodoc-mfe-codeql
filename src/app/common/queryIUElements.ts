@@ -594,7 +594,6 @@ export abstract class AbstractQueryIU extends AbstractIU {
                                        actionItem.noShowArgumentName).then(
             (data: {request: any, response: any}) => {
                 actionItem.noShowExecuteSerializedInfo.numExecutions++;
-                const request = data.request;
                 const response = data.response;
                 if (response.resultCode !== '000' && response.resultCode !== '') {
                     actionItem.noShowExecuteSerializedInfo.numErrors++;

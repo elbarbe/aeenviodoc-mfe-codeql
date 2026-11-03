@@ -65,7 +65,7 @@ export class SolicitudFilterFuSolicitudSolicitud extends AbstractFilter {
             'Desde');
         this.vuFIni.visible = true;
         this.vuFIni.enabled = true;
-        this.vuFIni.mandatory = false;
+        this.vuFIni.mandatory = true;
         this.vuFIni.dataType = Field.dtDate;
         this.vuFIni.assignCSS(this.populationContainer !== undefined);
         this.variables.push(this.vuFIni);
@@ -76,10 +76,31 @@ export class SolicitudFilterFuSolicitudSolicitud extends AbstractFilter {
             'Hasta');
         this.vuFFin.visible = true;
         this.vuFFin.enabled = true;
-        this.vuFFin.mandatory = false;
+        this.vuFFin.mandatory = true;
         this.vuFFin.dataType = Field.dtDate;
         this.vuFFin.assignCSS(this.populationContainer !== undefined);
         this.variables.push(this.vuFFin);
+    }
+
+    public override canBeExecuted(): boolean {
+        if (!super.canBeExecuted()) {
+            return false;
+        }
+
+        // Comprobamos que el periodo entre las fechas indicadas o supera el limite
+        let canExe = true;
+        const diferencia = this.stdFun.daysDifferenceFromDate(this.vuFIni.value, this.vuFFin.value);
+        let periodo = 30;
+        if (this.appGlobalInfo.getLoggedUserInfo().userCache?.periodoConsultaSolicitudes) {
+            periodo = this.appGlobalInfo.getLoggedUserInfo().userCache?.periodoConsultaSolicitudes;
+        }
+        canExe = diferencia <= periodo;
+
+        if (!canExe) {
+            this.util.addErrorMessage('Las fechas introducidas superan el periodo máximo de ' + 
+                periodo + ' días permitido. Modifique las fechas para ajustarse al periodo indicado');
+        }
+        return canExe;
     }
 
     /**

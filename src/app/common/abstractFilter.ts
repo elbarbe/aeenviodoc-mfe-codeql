@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { Field, FieldOVLenseSearch, FieldOVPreload } from './baseIUElements';
 import { CacheDependencyRules } from './app.cachedependencyrules';
 import { ExchangeInfo } from './app.exchangeinfo';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AbstractPIU } from './abstractPIU';
 import { AbstractFilterIU } from './abstractFIU';
 

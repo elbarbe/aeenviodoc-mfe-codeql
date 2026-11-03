@@ -4,7 +4,7 @@ import { ExchangeInfo } from './app.exchangeinfo';
 import { Util } from './app.utils';
 import { Field } from './baseIUElements';
 import { ConditionalNavigationMng } from './conditionalNavigationMng';
-import { AbstractQueryIU } from './queryIUElements';
+import { AbstractQueryIU, ScenarioType } from './queryIUElements';
 
 /**
  * « Base class for an instance interaction scenario »
@@ -34,7 +34,7 @@ export abstract class AbstractIIU extends AbstractQueryIU {
                 protected override changeDetectorRef: ChangeDetectorRef,
                 protected override condNavMng: ConditionalNavigationMng) {
         super(appGlobalInfo, util, changeDetectorRef, condNavMng);
-        this.scenarioType = 'IIU';
+        this.scenarioType = ScenarioType.Instance;
     }
 
     /**

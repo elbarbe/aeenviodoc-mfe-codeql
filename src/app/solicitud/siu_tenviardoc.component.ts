@@ -2657,7 +2657,7 @@ export class SolicitudSIUuTENVIARDOCComponent extends AbstractServiceIU implemen
      * @param groupId Group id.
      */
     public isGroupVisible(groupId: string): boolean {
-        let isVisible = true;
+        let isVisible;
 
         if (groupId === '0') {
             isVisible = this.puPrevisualizar.visible ||

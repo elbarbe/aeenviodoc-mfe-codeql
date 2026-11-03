@@ -394,6 +394,7 @@ export class DefinedSelections {
      * Defined selection pattern DS_ServiciosBH for String data type
      */
     public static readonly DS_SERVICIOSBH = [{ key: null, value: '' }
+        , { key: 'Beneficiario', value: 'Beneficiario' }
         , { key: 'Contract', value: 'Contract' }
         , { key: 'ContratoMP', value: 'ContratoMP' }
         , { key: 'ContratoPOS', value: 'ContratoPOS' }

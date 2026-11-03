@@ -2,7 +2,6 @@ import { AbstractServices } from '../common/abstractServices';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
 import { ErrorInformation } from '../common/answerRequestInformation';
-import { JsonUtility } from '../common/jsonUtility';
 
 /**
  * « Global services »

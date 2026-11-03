@@ -811,7 +811,7 @@ abstract class FieldOV extends Field {
      * @param argumentsMultiple Multi-selecction value argument list
      */
     public override addValuesForExecution(argumentsSingleValue: any[], argumentsMultiple: any[]): number {
-        let numberOfOIDs = 1;
+        let numberOfOIDs;
         const selInstances = this.getSelectedInstances();
         const argName = this.getNameInRequest();
         if (this.isList) {
@@ -1511,7 +1511,7 @@ export class FieldOVPreload extends FieldOV {
      * @param argumentsMultiple Multi-selecction value argument list
      */
     public override addValuesForExecution(argumentsSingleValue: any[], argumentsMultiple: any[]): number {
-        let numberOfOIDs = 1;
+        let numberOfOIDs;
         const selInstances = this.getSelectedInstances();
         const argName = this.getNameInRequest();
         if (this.isList) {

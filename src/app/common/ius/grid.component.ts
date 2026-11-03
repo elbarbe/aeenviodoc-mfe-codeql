@@ -364,7 +364,7 @@ export class GridComponent implements AfterViewInit {
         const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-        const fileName = 'download.xlsx';
+        const fileName = this.piu.title ? this.piu.title + '.xlsx' : 'download.xlsx';
         const blob: Blob = new Blob([excelBuffer], {
             type: EXCEL_TYPE
         });

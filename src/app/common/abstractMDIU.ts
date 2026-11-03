@@ -2,7 +2,7 @@ import { AbstractIIU } from './abstractIIU';
 import { AbstractPIU } from './abstractPIU';
 import { ExchangeInfo } from './app.exchangeinfo';
 import { AbstractIU } from './baseIUElements';
-import { AbstractQueryIU } from './queryIUElements';
+import { AbstractQueryIU, ScenarioType } from './queryIUElements';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { ChangeDetectorRef } from '@angular/core';
@@ -39,7 +39,7 @@ export abstract class AbstractMDIU extends AbstractIU {
                 protected override util: Util,
                 protected override changeDetectorRef: ChangeDetectorRef) {
         super(appGlobalInfo, util, changeDetectorRef);
-        this.scenarioType = 'MDIU';
+        this.scenarioType = ScenarioType.MasterDetail;
     }
 
 

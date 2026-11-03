@@ -68,8 +68,8 @@ export class InputStringComponent {
         }
         if (this.intField.dataType === Field.dtText) {
             this.numRows = window.innerWidth < InputStringComponent.sizeSmallScreen ?
-                this.numRows = InputStringComponent.maxNumberRowsTextAreaSmallScreen :
-                this.numRows = InputStringComponent.maxNumberRowsTextArea;
+                InputStringComponent.maxNumberRowsTextAreaSmallScreen :
+                InputStringComponent.maxNumberRowsTextArea;
             this.usePopupEditor = true;
             this.textAreaStyle = {width: 'calc(100% - 26px)', float: 'left'};
         }

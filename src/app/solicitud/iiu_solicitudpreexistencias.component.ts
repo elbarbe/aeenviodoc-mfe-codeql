@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from '../common/app.utils';
-import { AccNavItem, ScenarioType, OpenScenarioType} from '../common/queryIUElements';
+import { AccNavItem, ScenarioType} from '../common/queryIUElements';
 import { ModelConstants } from '../common/model.constants';
 import { AbstractIIU } from '../common/abstractIIU';
 import { Field } from '../common/baseIUElements';

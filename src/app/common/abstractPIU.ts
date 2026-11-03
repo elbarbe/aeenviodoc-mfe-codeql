@@ -100,7 +100,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
                 protected langMng: LanguageMng,
                 protected override condNavMng: ConditionalNavigationMng) {
         super(appGlobalInfo, util, changeDetectorRef, condNavMng);
-        this.scenarioType = 'PIU';
+        this.scenarioType = ScenarioType.Population;
     }
 
     /**
@@ -711,7 +711,7 @@ export abstract class AbstractPIU extends AbstractQueryIU {
         this.context.gridExpandedRows = this.gridExpandedRows;
         this.context.gridBuiltInFilterFields = this.gridBuiltInFilterFields;
         this.context.gridSortInformation = this.gridSortInformation;
-        this.savingContextInformation.next(this.context)
+        this.savingContextInformation.next(this.context);
     }
 
     /**
@@ -1148,7 +1148,6 @@ export abstract class AbstractPIU extends AbstractQueryIU {
     private applyColumnsPreferences(cols: any[]): void {
         const arrayCols = [];
         let column: any;
-        let lastVisibleColumn: any;
         for (const colMod of cols) {
             column = this.gridColumns.find((col) => col.field === colMod.field);
             if (column) {
@@ -1156,9 +1155,6 @@ export abstract class AbstractPIU extends AbstractQueryIU {
                 column.hidden = !colMod.visible;
                 column.header = colMod.header;
                 arrayCols.push(column);
-                if (!column.hidden) {
-                    lastVisibleColumn = column;
-                }
             }
         }
         this.gridColumns = arrayCols;

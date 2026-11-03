@@ -5,7 +5,7 @@ import { ExchangeInfo } from './app.exchangeinfo';
 import { Util } from './app.utils';
 import { AbstractIU, Field, FieldOVLense, FieldOVLenseSearch, FieldOVPreload } from './baseIUElements';
 import { ConditionalNavigationMng } from './conditionalNavigationMng';
-import { AbstractQueryIU } from './queryIUElements';
+import { AbstractQueryIU, ScenarioType } from './queryIUElements';
 import { Subscription } from 'rxjs';
 import { ErrorInformation } from './answerRequestInformation';
 
@@ -67,7 +67,7 @@ export abstract class AbstractServiceIU extends AbstractIU {
         protected condNavMng: ConditionalNavigationMng) {
         super(appGlobalInfo, util, changeDetectorRef);
         this.cacheDependencyRules = new CacheDependencyRules(this.appGlobalInfo, this.util);
-        this.scenarioType = 'SIU';
+        this.scenarioType = ScenarioType.Normal;
     }
 
     /**
