@@ -93,13 +93,12 @@ export class SolicitudFilterFuSolicitudContratanteTitular extends AbstractFilter
         }
 
         // Comprobamos que el periodo entre las fechas indicadas o supera el limite
-        let canExe = true;
         const diferencia = this.stdFun.daysDifferenceFromDate(this.vuFIni.value, this.vuFFin.value);
         let periodo = 30;
         if (this.appGlobalInfo.getLoggedUserInfo().userCache?.periodoConsultaSolicitudes) {
             periodo = this.appGlobalInfo.getLoggedUserInfo().userCache?.periodoConsultaSolicitudes;
         }
-        canExe = diferencia <= periodo;
+        const canExe = diferencia <= periodo;
 
         if (!canExe) {
             this.util.addErrorMessage('Las fechas introducidas superan el periodo máximo de ' + 

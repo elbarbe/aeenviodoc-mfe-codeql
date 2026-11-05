@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router, Navigation, NavigationExtras } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';

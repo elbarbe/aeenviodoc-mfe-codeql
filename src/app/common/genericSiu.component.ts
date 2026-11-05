@@ -3,9 +3,7 @@ import { AppGlobalInfo } from '../app.appglobalinfo';
 import { Util } from './app.utils';
 import { LanguageMng } from './languageMng';
 import { ExchangeInfo } from './app.exchangeinfo';
-import { ModelConstants } from './model.constants';
 import { ConditionalNavigationMng } from './conditionalNavigationMng';
-import { Field } from './baseIUElements';
 import { Subscription } from 'rxjs';
 /**
  * « Generic component for services under specific conditions »

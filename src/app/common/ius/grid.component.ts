@@ -219,7 +219,7 @@ export class GridComponent implements AfterViewInit {
         newData = data.filter((item: any) => {
             let dataValue = item[col.field];
             // If data has some value ...
-            if (dataValue != null && dataValue !== undefined && dataValue !== '') {
+            if (dataValue != null && dataValue !== '') {
                 dataValue = this.getValueToCompare(item, col);
                 dataValue = dataValue.toString().toLowerCase();
                 // Contains comparator
