@@ -9,7 +9,7 @@ module.exports = (config, options) => {
     systemjsModuleName: "@ae/aeenviodoc"
   }));
 
-  singleSpaWebpackConfig.output.filename = 'aeenviodoc.53.0.0.js';
+  singleSpaWebpackConfig.output.filename = 'aeenviodoc.56.0.0.js';
 
   // Feel free to modify this webpack config however you'd like to
   return singleSpaWebpackConfig;
